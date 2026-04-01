@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "MadU Svadba",
+    "slug": "madu-wedding",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FDFAF5"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "sk.madu.wedding"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FDFAF5"
+      },
+      "package": "sk.madu.wedding",
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro",
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "expo-secure-store",
+      "expo-web-browser"
+    ],
+    "scheme": "madu-wedding",
+    "extra": {
+      "apiUrl": "http://localhost:5000/api/v1",
+      "signalrUrl": "http://localhost:5000"
+    }
+  }
+}
