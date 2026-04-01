@@ -1,0 +1,62 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: wedding_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: weddingapp
+      POSTGRES_USER: wedding
+      POSTGRES_PASSWORD: wedding123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wedding -d weddingapp"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: wedding_pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@wedding.local
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    ports:
+      - "5050:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: wedding_api
+    restart: unless-stopped
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:5000
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=weddingapp;Username=wedding;Password=wedding123"
+      Jwt__Secret: "local-dev-secret-minimum-32-chars-long!"
+      Jwt__Issuer: "WeddingApp"
+      Jwt__Audience: "WeddingAppUsers"
+      Cors__AllowedOrigins__0: "http://localhost:8081"
+      Cors__AllowedOrigins__1: "http://localhost:19006"
+      Cors__AllowedOrigins__2: "exp://localhost:8081"
+    ports:
+      - "5000:5000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  pgadmin_data:

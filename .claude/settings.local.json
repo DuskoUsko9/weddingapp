@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet add:*)",
+      "Bash(find \"D:/WeddingApp/backend/WeddingApp.Api\" -name \"WeatherForecast*\" -delete)",
+      "Bash(dotnet build:*)",
+      "Bash(dotnet ef:*)"
+    ]
+  }
+}
