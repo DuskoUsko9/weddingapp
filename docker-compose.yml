@@ -75,7 +75,7 @@ services:
       EXPO_PUBLIC_SIGNALR_URL: "http://localhost:5000"
     ports:
       - "3000:3000"
-    command: sh -c "npm install --legacy-peer-deps && npx expo start --web --port 3000 --host lan"
+    command: sh -c "npm install --legacy-peer-deps && npx expo install react-native-safe-area-context react-native-screens react-native-gesture-handler react-native-reanimated --silent && npx expo start --web --port 3000 --host lan"
     depends_on:
       api:
         condition: service_healthy
