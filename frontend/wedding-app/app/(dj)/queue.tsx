@@ -3,14 +3,13 @@ import {
   View, Text, FlatList, TouchableOpacity, StyleSheet, ActivityIndicator,
 } from 'react-native';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import Constants from 'expo-constants';
 import { useAuth } from '../../store/AuthContext';
 import { apiClient } from '../../services/api';
 import { Colors, Typography, Spacing, Radius, Shadow } from '../../constants/theme';
 import { Copy } from '../../constants/copy';
 import type { SongRequest } from '../../types/api';
 
-const SIGNALR_URL = (Constants.expoConfig?.extra?.signalrUrl as string) ?? 'http://localhost:5000';
+const SIGNALR_URL = process.env.EXPO_PUBLIC_SIGNALR_URL ?? 'http://localhost:5000';
 
 export default function DjQueueScreen() {
   const { user, logout } = useAuth();

@@ -27,8 +27,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.png",
-      "bundler": "metro",
-      "output": "static"
+      "bundler": "metro"
     },
     "plugins": [
       "expo-router",
@@ -38,8 +37,8 @@
     ],
     "scheme": "madu-wedding",
     "extra": {
-      "apiUrl": "http://localhost:5000/api/v1",
-      "signalrUrl": "http://localhost:5000"
+      "apiUrl": "http://localhost:5030/api/v1",
+      "signalrUrl": "http://localhost:5030"
     }
   }
 }

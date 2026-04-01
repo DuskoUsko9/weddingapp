@@ -1,9 +1,9 @@
 import axios from 'axios';
-import Constants from 'expo-constants';
 import { getToken } from '../store/auth';
 import type { ApiResponse } from '../types/api';
 
-const BASE_URL = (Constants.expoConfig?.extra?.apiUrl as string) ?? 'http://localhost:5000/api/v1';
+const BASE_URL =
+  process.env.EXPO_PUBLIC_API_URL ?? 'http://localhost:5000/api/v1';
 
 export const apiClient = axios.create({
   baseURL: BASE_URL,

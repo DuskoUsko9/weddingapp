@@ -4,7 +4,16 @@
       "Bash(dotnet add:*)",
       "Bash(find \"D:/WeddingApp/backend/WeddingApp.Api\" -name \"WeatherForecast*\" -delete)",
       "Bash(dotnet build:*)",
-      "Bash(dotnet ef:*)"
+      "Bash(dotnet ef:*)",
+      "Bash(npx expo:*)",
+      "Bash(npm install:*)",
+      "Bash(claude mcp:*)",
+      "Bash(docker info:*)",
+      "Bash(docker compose:*)",
+      "Bash(netstat -ano)",
+      "Bash(findstr \":8081\")",
+      "Bash(taskkill:*)",
+      "Bash(cmd /c \"netstat -aon | findstr LISTEN | findstr 8081\" 2>&1)"
     ]
   }
 }
