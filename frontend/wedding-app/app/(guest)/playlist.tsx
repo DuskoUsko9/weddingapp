@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import {
   View, Text, TextInput, TouchableOpacity, FlatList,
-  StyleSheet, ActivityIndicator,
+  ScrollView, StyleSheet, ActivityIndicator,
 } from 'react-native';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { Feather } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { apiClient } from '../../services/api';
 import { Colors, Typography, Spacing, Radius, Shadow } from '../../constants/theme';
 import { Copy } from '../../constants/copy';
@@ -36,134 +38,207 @@ export default function PlaylistScreen() {
     },
   });
 
-  const statusLabel = (s: SongRequest['status']) =>
-    Copy.playlist.statuses[s] ?? s;
-
-  const statusColor = (s: SongRequest['status']) => {
-    if (s === 'Played') return Colors.accent;
-    if (s === 'Skipped') return Colors.textSecondary;
+  const statusColor = (st: SongRequest['status']) => {
+    if (st === 'Played') return Colors.secondary;
+    if (st === 'Skipped') return Colors.onSurfaceVariant;
     return Colors.primary;
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.screenTitle}>{Copy.playlist.title}</Text>
+    <ScrollView style={s.scroll} contentContainerStyle={s.content}>
 
-      {/* Add form */}
-      <View style={styles.form}>
-        <TextInput
-          style={styles.input}
-          placeholder={Copy.playlist.songNamePlaceholder}
-          placeholderTextColor={Colors.textSecondary}
-          value={songName}
-          onChangeText={setSongName}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder={Copy.playlist.artistPlaceholder}
-          placeholderTextColor={Colors.textSecondary}
-          value={artist}
-          onChangeText={setArtist}
-        />
-        <TextInput
-          style={[styles.input, styles.multiline]}
-          placeholder={Copy.playlist.dedicationPlaceholder}
-          placeholderTextColor={Colors.textSecondary}
-          value={dedication}
-          onChangeText={setDedication}
-          multiline
-          numberOfLines={3}
-        />
-        {success && <Text style={styles.success}>{Copy.playlist.sent}</Text>}
+      {/* ── Hero header ───────────────────────────────────────── */}
+      <View style={s.hero}>
+        <Text style={s.title}>{Copy.playlist.title}</Text>
+        <Text style={s.subtitle}>{Copy.playlist.addSong}</Text>
+      </View>
+
+      {/* ── Request form ─────────────────────────────────────── */}
+      <View style={s.card}>
+        <View style={s.inputGroup}>
+          <Feather name="music" size={16} color={Colors.onSurfaceVariant} style={s.inputIcon} />
+          <TextInput
+            style={s.input}
+            placeholder={Copy.playlist.songNamePlaceholder}
+            placeholderTextColor={Colors.onSurfaceVariant}
+            value={songName}
+            onChangeText={setSongName}
+          />
+        </View>
+        <View style={s.inputGroup}>
+          <Feather name="user" size={16} color={Colors.onSurfaceVariant} style={s.inputIcon} />
+          <TextInput
+            style={s.input}
+            placeholder={Copy.playlist.artistPlaceholder}
+            placeholderTextColor={Colors.onSurfaceVariant}
+            value={artist}
+            onChangeText={setArtist}
+          />
+        </View>
+        <View style={[s.inputGroup, { alignItems: 'flex-start', paddingTop: Spacing.sm }]}>
+          <Feather name="message-square" size={16} color={Colors.onSurfaceVariant} style={[s.inputIcon, { marginTop: 2 }]} />
+          <TextInput
+            style={[s.input, s.multiline]}
+            placeholder={Copy.playlist.dedicationPlaceholder}
+            placeholderTextColor={Colors.onSurfaceVariant}
+            value={dedication}
+            onChangeText={setDedication}
+            multiline
+            numberOfLines={3}
+          />
+        </View>
+
+        {success && (
+          <View style={s.successBanner}>
+            <Feather name="check-circle" size={14} color={Colors.secondary} />
+            <Text style={s.successText}>{Copy.playlist.sent}</Text>
+          </View>
+        )}
+
         <TouchableOpacity
-          style={[styles.button, (!songName.trim() || isPending) && styles.buttonDisabled]}
+          activeOpacity={(!songName.trim() || isPending) ? 1 : 0.85}
           onPress={() => mutate()}
           disabled={!songName.trim() || isPending}
+          style={(!songName.trim() || isPending) ? { opacity: 0.45 } : undefined}
         >
-          {isPending
-            ? <ActivityIndicator color={Colors.surface} />
-            : <Text style={styles.buttonText}>{Copy.playlist.send}</Text>
-          }
+          <LinearGradient
+            colors={[Colors.primary, Colors.primaryContainer]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={s.submitBtn}
+          >
+            {isPending
+              ? <ActivityIndicator color="#fff" />
+              : (
+                <>
+                  <Feather name="send" size={16} color="#fff" />
+                  <Text style={s.submitBtnText}>{Copy.playlist.send}</Text>
+                </>
+              )
+            }
+          </LinearGradient>
         </TouchableOpacity>
       </View>
 
-      {/* My requests */}
-      <Text style={styles.sectionTitle}>{Copy.playlist.myRequests}</Text>
-      {isLoading
-        ? <ActivityIndicator color={Colors.primary} />
-        : (
-          <FlatList
-            data={myRequests}
-            keyExtractor={(i) => i.id}
-            scrollEnabled={false}
-            renderItem={({ item }) => (
-              <View style={styles.requestCard}>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.songName}>{item.songName}</Text>
-                  {item.artist && <Text style={styles.songMeta}>{item.artist}</Text>}
+      {/* ── My requests ──────────────────────────────────────── */}
+      {myRequests.length > 0 && (
+        <View style={s.section}>
+          <Text style={s.sectionTitle}>{Copy.playlist.myRequests}</Text>
+          {isLoading
+            ? <ActivityIndicator color={Colors.primary} />
+            : myRequests.map((item) => (
+              <View key={item.id} style={s.requestCard}>
+                <View style={s.requestIconWrap}>
+                  <Feather name="music" size={16} color={Colors.primary} />
                 </View>
-                <Text style={[styles.status, { color: statusColor(item.status) }]}>
-                  {statusLabel(item.status)}
-                </Text>
+                <View style={{ flex: 1 }}>
+                  <Text style={s.songName}>{item.songName}</Text>
+                  {item.artist && <Text style={s.songMeta}>{item.artist}</Text>}
+                </View>
+                <View style={[s.statusChip, { backgroundColor: `${statusColor(item.status)}18` }]}>
+                  <Text style={[s.statusText, { color: statusColor(item.status) }]}>
+                    {Copy.playlist.statuses[item.status] ?? item.status}
+                  </Text>
+                </View>
               </View>
-            )}
-          />
-        )
-      }
-    </View>
+            ))
+          }
+        </View>
+      )}
+
+    </ScrollView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.background, padding: Spacing.md },
-  screenTitle: {
-    fontFamily: Typography.heading,
-    fontSize: 24,
-    color: Colors.textPrimary,
-    marginBottom: Spacing.lg,
+const s = StyleSheet.create({
+  scroll: { flex: 1, backgroundColor: Colors.background },
+  content: { paddingBottom: Spacing.xxl },
+
+  // Hero
+  hero: {
+    paddingTop: Spacing.gallery,
+    paddingHorizontal: Spacing.md,
+    paddingBottom: Spacing.md,
   },
-  form: {
+  title: {
+    fontFamily: Typography.heading,
+    fontSize: 32,
+    color: Colors.onSurface,
+    letterSpacing: 0.2,
+  },
+  subtitle: {
+    fontFamily: Typography.body,
+    fontSize: 15,
+    color: Colors.onSurfaceVariant,
+    marginTop: 4,
+  },
+
+  // Form card — no borders
+  card: {
     backgroundColor: Colors.surface,
     borderRadius: Radius.card,
     padding: Spacing.md,
-    marginBottom: Spacing.lg,
+    marginHorizontal: Spacing.md,
+    marginBottom: Spacing.md,
+    gap: Spacing.sm,
     ...Shadow.card,
   },
-  input: {
-    borderWidth: 1,
-    borderColor: Colors.border,
+  inputGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: Colors.surfaceContainerHigh,
     borderRadius: Radius.md,
-    padding: Spacing.md,
+    paddingHorizontal: Spacing.md,
+    minHeight: 52,
+  },
+  inputIcon: { marginRight: Spacing.sm },
+  input: {
+    flex: 1,
     fontFamily: Typography.body,
     fontSize: 15,
-    color: Colors.textPrimary,
-    marginBottom: Spacing.sm,
+    color: Colors.onSurface,
+    paddingVertical: Spacing.sm,
   },
   multiline: { minHeight: 72, textAlignVertical: 'top' },
-  success: {
-    fontFamily: Typography.body,
-    fontSize: 14,
-    color: Colors.accent,
-    marginBottom: Spacing.sm,
-    textAlign: 'center',
-  },
-  button: {
-    backgroundColor: Colors.primary,
-    borderRadius: Radius.button,
-    paddingVertical: Spacing.md,
+
+  successBanner: {
+    flexDirection: 'row',
     alignItems: 'center',
+    gap: Spacing.sm,
+    backgroundColor: Colors.secondaryContainer,
+    borderRadius: Radius.md,
+    padding: Spacing.md,
   },
-  buttonDisabled: { opacity: 0.5 },
-  buttonText: {
+  successText: {
     fontFamily: Typography.bodyMedium,
-    fontSize: 15,
-    color: Colors.surface,
+    fontSize: 13,
+    color: Colors.secondary,
   },
+
+  submitBtn: {
+    borderRadius: Radius.button,
+    height: 52,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: Spacing.sm,
+    ...Shadow.card,
+  },
+  submitBtnText: {
+    fontFamily: Typography.bodySemiBold,
+    fontSize: 15,
+    color: '#fff',
+    letterSpacing: 0.3,
+  },
+
+  // Section
+  section: { paddingHorizontal: Spacing.md },
   sectionTitle: {
     fontFamily: Typography.heading,
-    fontSize: 18,
-    color: Colors.textPrimary,
+    fontSize: 20,
+    color: Colors.onSurface,
     marginBottom: Spacing.md,
+    letterSpacing: 0.2,
   },
   requestCard: {
     backgroundColor: Colors.surface,
@@ -172,21 +247,37 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.sm,
     flexDirection: 'row',
     alignItems: 'center',
+    gap: Spacing.sm,
     ...Shadow.card,
+  },
+  requestIconWrap: {
+    width: 36,
+    height: 36,
+    borderRadius: Radius.lg,
+    backgroundColor: Colors.primaryFixed,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   songName: {
     fontFamily: Typography.bodyMedium,
     fontSize: 15,
-    color: Colors.textPrimary,
+    color: Colors.onSurface,
   },
   songMeta: {
     fontFamily: Typography.body,
     fontSize: 13,
-    color: Colors.textSecondary,
+    color: Colors.onSurfaceVariant,
     marginTop: 2,
   },
-  status: {
+  statusChip: {
+    borderRadius: Radius.sm,
+    paddingHorizontal: Spacing.sm,
+    paddingVertical: 4,
+  },
+  statusText: {
     fontFamily: Typography.bodyMedium,
-    fontSize: 13,
+    fontSize: 11,
+    textTransform: 'uppercase',
+    letterSpacing: 0.8,
   },
 });

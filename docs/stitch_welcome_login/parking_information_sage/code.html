@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html class="light" lang="sk"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#5e4c46",
+              "on-surface-variant": "#434842",
+              "primary-container": "#b4c8b2",
+              "surface-dim": "#dddad0",
+              "secondary-fixed-dim": "#e9c176",
+              "on-secondary-container": "#785a1a",
+              "on-background": "#1c1c16",
+              "surface-bright": "#fdf9ef",
+              "outline": "#747872",
+              "on-error-container": "#93000a",
+              "primary": "#516351",
+              "on-tertiary": "#ffffff",
+              "surface-variant": "#e6e2d8",
+              "surface-tint": "#516351",
+              "inverse-surface": "#31312a",
+              "on-surface": "#1c1c16",
+              "surface-container-high": "#ece8de",
+              "secondary": "#775a19",
+              "outline-variant": "#c3c8c0",
+              "on-secondary-fixed-variant": "#5d4201",
+              "tertiary-container": "#d6beb6",
+              "secondary-container": "#fed488",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#b8ccb6",
+              "on-secondary-fixed": "#261900",
+              "secondary-fixed": "#ffdea5",
+              "surface-container-low": "#f7f3e9",
+              "on-error": "#ffffff",
+              "primary-fixed-dim": "#b8ccb6",
+              "on-primary-fixed": "#0f1f11",
+              "surface-container-highest": "#e6e2d8",
+              "error": "#ba1a1a",
+              "tertiary-fixed": "#f7ddd5",
+              "surface": "#fdf9ef",
+              "primary-fixed": "#d4e8d1",
+              "inverse-on-surface": "#f4f0e6",
+              "tertiary-fixed-dim": "#dac1ba",
+              "tertiary": "#6d5a54",
+              "surface-container": "#f1eee4",
+              "surface-container-lowest": "#ffffff",
+              "background": "#fdf9ef",
+              "on-tertiary-fixed-variant": "#54433d",
+              "error-container": "#ffdad6",
+              "on-primary-fixed-variant": "#3a4b3a",
+              "on-tertiary-fixed": "#261814",
+              "on-secondary": "#ffffff",
+              "on-primary-container": "#435443"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3 { font-family: 'Noto Serif', serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+<!-- TopAppBar Section -->
+<header class="bg-[#fdf9ef]/80 dark:bg-stone-900/80 backdrop-blur-md text-[#516351] dark:text-[#b4c8b2] docked full-width top-0 sticky z-50 no-border tonal-shift shadow-sm shadow-[#1c1c16]/5 flex items-center justify-between px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:opacity-80 transition-opacity">menu</span>
+<h1 class="font-serif tracking-widest text-2xl">Maťka &amp; Dušan</h1>
+</div>
+<div class="hidden md:flex gap-8 items-center font-sans text-[11px] uppercase tracking-[0.05em] font-medium">
+<a class="text-[#516351]/70 hover:opacity-80 transition-opacity" href="#">Domov</a>
+<a class="text-[#516351]/70 hover:opacity-80 transition-opacity" href="#">Program</a>
+<a class="text-[#516351]/70 hover:opacity-80 transition-opacity" href="#">Fotky</a>
+<a class="text-[#516351]/70 hover:opacity-80 transition-opacity" href="#">Profil</a>
+</div>
+</header>
+<main class="px-6 pt-12 max-w-2xl mx-auto">
+<!-- Hero Section -->
+<section class="mb-12">
+<span class="text-secondary font-label text-[11px] uppercase tracking-[0.2em] mb-3 block">Príchod na svadbu</span>
+<h2 class="text-4xl font-headline text-primary mb-6 leading-tight">Informácie o parkovaní</h2>
+<div class="w-full aspect-video rounded-xl overflow-hidden mb-8 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Scenic aerial view of a rustic wooden manor house Zemiansky dvor surrounded by lush green trees and gravel pathways in soft daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB43ZztJN63lJUgNeCzXsOPpg_E72QPxiT2BRFWCYEOzHT3DOnr9nueoe1wUA-mHUo3BFQCKalgPUvYWNbFPLHVcxEHrcxIr9K1Wme_yKswRonDbMRTccObUUriaA6DLYG8RE_zTFIKs3wmvYZv7WohCZacprD_o2GAUHW4OYwVi_pIVrsKLeX_bCpgcrbVIBdD0FxOpyHigBcd3WX26HnwOwGfMOroDIM8S7okkCP9PTiVBR2pT6kKubMZNexORCYpGbL0Y_F_3s8"/>
+</div>
+</section>
+<!-- Contextual Card 1: Main Location -->
+<section class="mb-10">
+<div class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">local_parking</span>
+</div>
+<h3 class="text-2xl mb-4 text-primary">Areál Zemiansky dvor</h3>
+<p class="text-on-surface-variant leading-relaxed mb-6">
+                    Pre hostí prichádzajúcich vlastnou dopravou je k dispozícii bezplatné parkovisko priamo v uzavretom areáli svadobného priestoru.
+                </p>
+<div class="flex flex-col gap-4">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary mt-1">location_on</span>
+<div>
+<p class="font-bold text-sm">Adresa</p>
+<p class="text-on-surface-variant text-sm">Zemiansky dvor, Šúrovce 919 25</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Map Preview -->
+<section class="mb-10">
+<h3 class="text-xl mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">map</span>
+                Mapa parkovacích zón
+            </h3>
+<div class="grid grid-cols-1 gap-6">
+<!-- Map Placeholder with data-location -->
+<div class="bg-surface-container-highest rounded-xl h-64 relative flex items-center justify-center overflow-hidden border border-outline-variant/15">
+<img class="w-full h-full object-cover opacity-60" data-alt="Minimalist top-down map illustration of a countryside estate with designated green zones for parking and soft cream backgrounds" data-location="Šúrovce, Slovakia" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAU_NaUiUz42Uovko4RZy9bGtOqX6qJWvHKkvChBBqTKe7DVBZ7jXiV_7XnaZX6JmJaTmwa6VlYbWibyUqQJUEXz7baTy0SyzWOkHcx8kxGI6cB4q21q7Vb426MvWvvIjgxNblyvNHZ9XDnlR0S1AtF1Jktymz-F5nTXwBXSqRpMSNnCpKp22E4ER_5x_sBNHgd1HRM9GinKwlnKB8SJoiIlhDwTvXi5vu7AdC4si1RTCc8ZolLpLboy3Lh220Op9dsAwU4p3vKIw4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-highest/80 to-transparent"></div>
+<button class="absolute bottom-6 bg-primary text-on-primary px-6 py-3 rounded-xl font-label text-sm flex items-center gap-2 shadow-lg">
+<span class="material-symbols-outlined text-sm">directions</span>
+                        NAVIGOVAŤ SEM
+                    </button>
+</div>
+<!-- Parking Zones List -->
+<div class="space-y-4">
+<div class="flex items-center p-4 bg-surface rounded-lg border border-outline-variant/15">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container mr-4">
+<span class="font-bold">P1</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-sm">Hlavné parkovisko</p>
+<p class="text-xs text-on-surface-variant">Priamo pri vstupe do sály (25 miest)</p>
+</div>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex items-center p-4 bg-surface rounded-lg border border-outline-variant/15">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary mr-4">
+<span class="font-bold">P2</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-sm">Záložná zóna</p>
+<p class="text-xs text-on-surface-variant">Za ubytovacou časťou (15 miest)</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Instructions Card -->
+<section class="mb-10">
+<div class="bg-tertiary-fixed p-8 rounded-xl border-l-4 border-tertiary">
+<h3 class="text-xl mb-4 text-on-tertiary-fixed flex items-center gap-2 font-headline">
+<span class="material-symbols-outlined">info</span>
+                    Dôležité inštrukcie
+                </h3>
+<ul class="space-y-4 text-on-tertiary-fixed-variant text-sm">
+<li class="flex gap-3">
+<span class="text-tertiary font-bold">•</span>
+<span>Brána areálu sa otvára pre hostí 30 minút pred začiatkom obradu.</span>
+</li>
+<li class="flex gap-3">
+<span class="text-tertiary font-bold">•</span>
+<span>Prosíme o neparkovanie na príjazdovej ceste, aby sme umožnili prejazd svadobným autám.</span>
+</li>
+<li class="flex gap-3">
+<span class="text-tertiary font-bold">•</span>
+<span>Ak plánujete nechať auto cez noc, parkovisko je strážené kamerovým systémom.</span>
+</li>
+</ul>
+</div>
+</section>
+<!-- Taxi Section -->
+<section class="mb-20">
+<h3 class="text-xl mb-6 text-primary">Alternatívna doprava</h3>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-4 rounded-xl text-center">
+<span class="material-symbols-outlined text-secondary text-3xl mb-2">local_taxi</span>
+<p class="font-bold text-xs uppercase tracking-wider mb-1">Taxi Trnava</p>
+<p class="text-primary font-bold">090X 123 456</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl text-center">
+<span class="material-symbols-outlined text-secondary text-3xl mb-2">directions_bus</span>
+<p class="font-bold text-xs uppercase tracking-wider mb-1">Svadobný Bus</p>
+<p class="text-primary font-bold">Odchod 03:00</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar Section -->
+<nav class="bg-[#fdf9ef]/90 dark:bg-stone-900/90 backdrop-blur-xl text-[#516351] dark:text-[#b4c8b2] docked full-width bottom-0 rounded-t-3xl no-border shadow-inner-soft shadow-[0_-4px_20px_rgba(28,28,22,0.04)] fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 md:hidden">
+<div class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors">
+<span class="material-symbols-outlined">home</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium mt-1">Domov</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors">
+<span class="material-symbols-outlined">event</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium mt-1">Program</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors">
+<span class="material-symbols-outlined">photo_library</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium mt-1">Fotky</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors">
+<span class="material-symbols-outlined">person</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium mt-1">Profil</span>
+</div>
+</nav>
+</body></html>

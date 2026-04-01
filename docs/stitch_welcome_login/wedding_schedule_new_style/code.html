@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html class="light" lang="sk"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Madu &amp; Jakub | Svadobný Program</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface": "#FAF9F6",
+              "background": "#FAF9F6",
+              "primary": "#725B28", // Gold accent
+              "secondary": "#8A9A8A", // Soft Sage
+              "tertiary": "#D9B4B4", // Blush
+              "on-surface": "#1A1C1A",
+              "on-surface-variant": "#4D4638",
+              "surface-container-lowest": "#FFFFFF",
+              "surface-container-low": "#F4F3F1",
+              "surface-container": "#EFEEEB",
+              "outline-variant": "#D0C5B3",
+            },
+            fontFamily: {
+              "headline": ["Noto Serif", "serif"],
+              "body": ["Manrope", "sans-serif"],
+              "label": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        font-family: 'Manrope', sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      h1, h2, h3 {
+        font-family: 'Noto Serif', serif;
+      }
+      .timeline-line::before {
+        content: '';
+        position: absolute;
+        left: 7px;
+        top: 24px;
+        bottom: 0;
+        width: 2px;
+        background: #E3E2E0;
+        z-index: 0;
+      }
+      .timeline-item:last-child .timeline-line::before {
+        display: none;
+      }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#faf9f6]/90 backdrop-blur-md border-b border-outline-variant/30">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-screen-xl mx-auto">
+<button class="text-primary hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline text-2xl tracking-wide italic text-primary">Madu</h1>
+<div class="w-6"></div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-2xl mx-auto">
+<!-- Hero Section -->
+<div class="mb-12 text-center">
+<h2 class="text-4xl md:text-5xl font-bold mb-3 tracking-tight text-on-surface">Časová os</h2>
+<p class="text-on-surface-variant font-body text-base italic">24. augusta 2024 • Kaštieľ Gbeľany</p>
+</div>
+<!-- Timeline Container -->
+<div class="relative">
+<!-- Event 1: Svadobný obrad -->
+<div class="relative pl-12 mb-12 timeline-item">
+<div class="timeline-line"></div>
+<!-- Timeline Dot -->
+<div class="absolute left-0 top-1.5 w-4 h-4 rounded-full bg-secondary border-4 border-surface z-10 shadow-sm"></div>
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-outline-variant/20 group hover:border-secondary/40 transition-all duration-300">
+<div class="flex justify-between items-center mb-4">
+<span class="bg-secondary/10 text-secondary font-bold px-4 py-1.5 rounded-full text-xs tracking-widest uppercase">15:00</span>
+<span class="material-symbols-outlined text-secondary/60">church</span>
+</div>
+<h3 class="text-2xl font-bold mb-2 text-on-surface">Svadobný obrad</h3>
+<p class="text-on-surface-variant font-body text-[15px] leading-relaxed mb-5">Oficiálne spečatenie našej lásky v zámockej záhrade pod holým nebom.</p>
+<div class="w-full h-52 rounded-lg overflow-hidden ring-1 ring-black/5">
+<img alt="elegant outdoor wedding ceremony setup" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD868jErsYEzPOIsZ0kc5Mcpqbu6_eTUDoVA-qx1b-nRnWWX2e8zvE2l2c4cT3Xs66DA354YqkRXeW7WKXKxs6pGGtV1L9JpdpMdCoStG5OKagyuIkwtauVcCh3Oi9XWwgBJX-z7ovpf2eBNae131VxhuD0kDetx6aWLMHedB-p4pLHukxN4ecqXRSfCEQDEAHHFetiqhPdTNMDcQQ4kUWcA1g9P0qV7dCtFQ_aEGJElfPdZ5feG94HHFZ9oU_pUgd1Nh3rMENL_-g"/>
+</div>
+</div>
+</div>
+<!-- Event 2: Gratulácie -->
+<div class="relative pl-12 mb-12 timeline-item">
+<div class="timeline-line"></div>
+<div class="absolute left-0 top-1.5 w-4 h-4 rounded-full bg-tertiary border-4 border-surface z-10 shadow-sm"></div>
+<div class="bg-surface-container-low/50 rounded-xl p-6 border border-outline-variant/10 transition-all">
+<div class="flex justify-between items-center mb-3">
+<span class="text-tertiary font-bold text-xs tracking-widest uppercase">16:00</span>
+<span class="material-symbols-outlined text-tertiary/60">favorite</span>
+</div>
+<h3 class="text-2xl font-bold mb-1 text-on-surface">Gratulácie</h3>
+<p class="text-on-surface-variant font-body text-[15px] leading-relaxed">Spoločné prípitky, objatia a prvé spoločné fotografie s hosťami pri drobnom občerstvení.</p>
+</div>
+</div>
+<!-- Event 3: Slávnostná večera -->
+<div class="relative pl-12 mb-12 timeline-item">
+<div class="timeline-line"></div>
+<div class="absolute left-0 top-1.5 w-4 h-4 rounded-full bg-primary border-4 border-surface z-10 shadow-sm"></div>
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-outline-variant/20 group hover:border-primary/40 transition-all duration-300">
+<div class="flex justify-between items-center mb-4">
+<span class="bg-primary/10 text-primary font-bold px-4 py-1.5 rounded-full text-xs tracking-widest uppercase">17:30</span>
+<span class="material-symbols-outlined text-primary/60">restaurant</span>
+</div>
+<h3 class="text-2xl font-bold mb-2 text-on-surface">Slávnostná večera</h3>
+<p class="text-on-surface-variant font-body text-[15px] leading-relaxed mb-5">Tradičné svadobné menu podávané v hlavnej sále s hudobným sprievodom.</p>
+<div class="w-full h-52 rounded-lg overflow-hidden ring-1 ring-black/5">
+<img alt="luxurious wedding dinner table setting" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCJMl1-vxEvYPWHODD7WPcpevMcMycwB4_YHbTaeQNF2bLr9BID4SWeoGdAqK59I51n1NEqq4wWHnUDqoTCLEVxRF_0tkrXZghcFvOtcpmMijL4OxtN0Mkd8gvPCLMyye4fAl34LGdnsglWs-G8prIPXxTihCy8HxMHQPXeUV1R9c90MOXzpuL80fyC85kosUvinzteG7MEaM6OGFV-lqfPtll-erSLHgzkc-4KqkXIrD7xO1TWbEF1iHN6pxM0ZT57Ki75-7RTGQ"/>
+</div>
+</div>
+</div>
+<!-- Event 4: Prvý tanec -->
+<div class="relative pl-12 mb-12 timeline-item">
+<div class="timeline-line"></div>
+<div class="absolute left-0 top-1.5 w-4 h-4 rounded-full bg-secondary border-4 border-surface z-10 shadow-sm"></div>
+<div class="bg-surface-container-low/50 rounded-xl p-6 border border-outline-variant/10 transition-all">
+<div class="flex justify-between items-center mb-3">
+<span class="text-secondary font-bold text-xs tracking-widest uppercase">19:30</span>
+<span class="material-symbols-outlined text-secondary/60">music_note</span>
+</div>
+<h3 class="text-2xl font-bold mb-1 text-on-surface">Prvý tanec</h3>
+<p class="text-on-surface-variant font-body text-[15px] leading-relaxed">Otvorenie tanečného parketu a začiatok večernej zábavy pre všetkých hostí.</p>
+</div>
+</div>
+<!-- Event 5: Krájanie torty -->
+<div class="relative pl-12 mb-12 timeline-item">
+<div class="timeline-line"></div>
+<div class="absolute left-0 top-1.5 w-4 h-4 rounded-full bg-tertiary border-4 border-surface z-10 shadow-sm"></div>
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-outline-variant/20 group hover:border-tertiary/40 transition-all duration-300">
+<div class="flex justify-between items-center mb-4">
+<span class="bg-tertiary/10 text-tertiary font-bold px-4 py-1.5 rounded-full text-xs tracking-widest uppercase">22:00</span>
+<span class="material-symbols-outlined text-tertiary/60">cake</span>
+</div>
+<h3 class="text-2xl font-bold mb-2 text-on-surface">Krájanie torty</h3>
+<p class="text-on-surface-variant font-body text-[15px] leading-relaxed mb-5">Sladká bodka za oficiálnou časťou večera a polnočné prekvapenie.</p>
+<div class="w-full h-52 rounded-lg overflow-hidden ring-1 ring-black/5">
+<img alt="magnificent white wedding cake" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_f89miL9_CedRpz_8F8Nx42RqMpBlCDJyTgJFRCYns7TIuxmL8Wc5QPavK764bYcCz3KNPAKzBffy-4pS_E5rw_QuBcOmx-guNVttpYhoX1HuLTzuiZFcrUw4OC1j8_Wr7Ga_zgav7anANwCA8ht2s4aZE230wX6Ys4AbQecaZmR6vg3xv92VRVAN4XJiz7IwwhnBASRm1dLxXOXQeX2Du4VQFJausDMEmS-proOC6KJVDaPr0UkqgLwBnwrq7ZyjClk8ELIBlZ0"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Call to Action -->
+<div class="mt-8 text-center px-4">
+<p class="text-on-surface-variant font-body mb-6 text-[15px]">Máte nejaké špeciálne hudobné prianie?</p>
+<button class="inline-flex items-center justify-center gap-2 text-primary font-bold text-lg hover:text-primary/80 transition-colors border-b-2 border-primary/20 pb-1">
+                Poslať hudobné prianie
+                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-md border-t border-outline-variant/30">
+<div class="flex justify-around items-center h-20 w-full px-4 max-w-lg mx-auto">
+<a class="flex flex-col items-center justify-center text-on-surface/40 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label text-[10px] uppercase tracking-[0.15em] font-bold mt-1">Domov</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<span class="font-label text-[10px] uppercase tracking-[0.15em] font-bold mt-1">Program</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface/40 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">photo_library</span>
+<span class="font-label text-[10px] uppercase tracking-[0.15em] font-bold mt-1">Fotky</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface/40 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label text-[10px] uppercase tracking-[0.15em] font-bold mt-1">Profil</span>
+</a>
+</div>
+</nav>
+</body></html>

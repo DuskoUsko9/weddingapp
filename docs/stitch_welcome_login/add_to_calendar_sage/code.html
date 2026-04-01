@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html lang="sk"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#5e4c46",
+              "on-surface-variant": "#434842",
+              "primary-container": "#b4c8b2",
+              "surface-dim": "#dddad0",
+              "secondary-fixed-dim": "#e9c176",
+              "on-secondary-container": "#785a1a",
+              "on-background": "#1c1c16",
+              "surface-bright": "#fdf9ef",
+              "outline": "#747872",
+              "on-error-container": "#93000a",
+              "primary": "#516351",
+              "on-tertiary": "#ffffff",
+              "surface-variant": "#e6e2d8",
+              "surface-tint": "#516351",
+              "inverse-surface": "#31312a",
+              "on-surface": "#1c1c16",
+              "surface-container-high": "#ece8de",
+              "secondary": "#775a19",
+              "outline-variant": "#c3c8c0",
+              "on-secondary-fixed-variant": "#5d4201",
+              "tertiary-container": "#d6beb6",
+              "secondary-container": "#fed488",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#b8ccb6",
+              "on-secondary-fixed": "#261900",
+              "secondary-fixed": "#ffdea5",
+              "surface-container-low": "#f7f3e9",
+              "on-error": "#ffffff",
+              "primary-fixed-dim": "#b8ccb6",
+              "on-primary-fixed": "#0f1f11",
+              "surface-container-highest": "#e6e2d8",
+              "error": "#ba1a1a",
+              "tertiary-fixed": "#f7ddd5",
+              "surface": "#fdf9ef",
+              "primary-fixed": "#d4e8d1",
+              "inverse-on-surface": "#f4f0e6",
+              "tertiary-fixed-dim": "#dac1ba",
+              "tertiary": "#6d5a54",
+              "surface-container": "#f1eee4",
+              "surface-container-lowest": "#ffffff",
+              "background": "#fdf9ef",
+              "on-tertiary-fixed-variant": "#54433d",
+              "error-container": "#ffdad6",
+              "on-primary-fixed-variant": "#3a4b3a",
+              "on-tertiary-fixed": "#261814",
+              "on-secondary": "#ffffff",
+              "on-primary-container": "#435443"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #fdf9ef;
+            color: #1c1c16;
+        }
+        h1, h2, h3 {
+            font-family: 'Noto Serif', serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-[#fdf9ef]/80 dark:bg-stone-900/80 backdrop-blur-md text-[#516351] dark:text-[#b4c8b2] docked full-width top-0 sticky z-50 shadow-sm shadow-[#1c1c16]/5 flex items-center justify-between px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined hover:opacity-80 transition-opacity cursor-pointer">close</span>
+</div>
+<h1 class="font-serif tracking-widest text-2xl text-[#516351] dark:text-[#b4c8b2]">Maťka &amp; Dušan</h1>
+<div class="w-6"></div> <!-- Spacer for symmetry -->
+</header>
+<main class="flex-grow flex flex-col items-center justify-center px-6 py-12">
+<div class="max-w-md w-full space-y-12">
+<!-- Hero Aesthetic Segment -->
+<div class="text-center space-y-4">
+<span class="font-label text-[11px] uppercase tracking-[0.2em] text-secondary">Svadobný deň</span>
+<h2 class="text-4xl md:text-5xl font-serif text-primary leading-tight">Uložiť dátum</h2>
+<div class="w-12 h-px bg-outline-variant/30 mx-auto mt-6"></div>
+</div>
+<!-- Event Summary Card -->
+<div class="bg-surface-container-low rounded-xl p-8 space-y-6 relative overflow-hidden">
+<!-- Decorative background detail -->
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
+<div class="relative z-10 flex flex-col gap-6">
+<div class="flex items-start gap-5">
+<div class="bg-surface-container-highest p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+</div>
+<div>
+<p class="font-label text-xs text-secondary uppercase tracking-wider mb-1">Dátum</p>
+<p class="text-xl font-body font-semibold text-on-surface">24. August 2024</p>
+<p class="text-sm text-on-surface-variant italic">Sobota, Celý deň</p>
+</div>
+</div>
+<div class="flex items-start gap-5">
+<div class="bg-surface-container-highest p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+</div>
+<div>
+<p class="font-label text-xs text-secondary uppercase tracking-wider mb-1">Miesto</p>
+<p class="text-xl font-body font-semibold text-on-surface">Zemiansky dvor</p>
+<p class="text-sm text-on-surface-variant">Šúrovce, Slovensko</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="space-y-4">
+<p class="text-center font-body text-sm text-on-surface-variant/80 mb-6">Pridajte si udalosť do svojho kalendára, aby ste na nás nezabudli.</p>
+<div class="grid grid-cols-1 gap-4">
+<!-- Apple Calendar Button -->
+<button class="group flex items-center justify-between w-full bg-primary text-on-primary py-5 px-6 rounded-xl hover:opacity-90 transition-all duration-300 transform active:scale-95 shadow-sm">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-2xl" data-icon="calendar_add_on">calendar_add_on</span>
+<span class="font-body font-medium tracking-wide">Apple Calendar</span>
+</div>
+<span class="material-symbols-outlined text-on-primary/50 group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<!-- Google Calendar Button -->
+<button class="group flex items-center justify-between w-full bg-surface-container-highest text-primary py-5 px-6 rounded-xl hover:bg-surface-container-high transition-all duration-300 transform active:scale-95">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-2xl" data-icon="event">event</span>
+<span class="font-body font-medium tracking-wide">Google Calendar</span>
+</div>
+<span class="material-symbols-outlined text-primary/50 group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Footer Quote -->
+<div class="pt-8 text-center italic text-on-surface-variant font-serif opacity-60">
+                "Láska nie je o tom, koľko dní strávite spolu, ale o tom, koľko spoločných okamihov si zapamätáte."
+            </div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#fdf9ef]/90 dark:bg-stone-900/90 backdrop-blur-xl shadow-[0_-4px_20px_rgba(28,28,22,0.04)] rounded-t-3xl">
+<div class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors cursor-pointer">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium mt-1">Domov</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#516351] text-[#fdf9ef] rounded-2xl px-5 py-2 cursor-pointer shadow-md">
+<span class="material-symbols-outlined" data-icon="event">event</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium mt-1">Program</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors cursor-pointer">
+<span class="material-symbols-outlined" data-icon="photo_library">photo_library</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium mt-1">Fotky</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors cursor-pointer">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium mt-1">Profil</span>
+</div>
+</nav>
+<!-- Visual Anchor - Background Treatment -->
+<div class="fixed inset-0 pointer-events-none z-[-1] opacity-40">
+<div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-container/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+<div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-tertiary-container/20 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
+</div>
+</body></html>

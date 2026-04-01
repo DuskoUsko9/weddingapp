@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html class="light" lang="sk"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#5e4c46",
+              "on-surface-variant": "#434842",
+              "primary-container": "#b4c8b2",
+              "surface-dim": "#dddad0",
+              "secondary-fixed-dim": "#e9c176",
+              "on-secondary-container": "#785a1a",
+              "on-background": "#1c1c16",
+              "surface-bright": "#fdf9ef",
+              "outline": "#747872",
+              "on-error-container": "#93000a",
+              "primary": "#516351",
+              "on-tertiary": "#ffffff",
+              "surface-variant": "#e6e2d8",
+              "surface-tint": "#516351",
+              "inverse-surface": "#31312a",
+              "on-surface": "#1c1c16",
+              "surface-container-high": "#ece8de",
+              "secondary": "#775a19",
+              "outline-variant": "#c3c8c0",
+              "on-secondary-fixed-variant": "#5d4201",
+              "tertiary-container": "#d6beb6",
+              "secondary-container": "#fed488",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#b8ccb6",
+              "on-secondary-fixed": "#261900",
+              "secondary-fixed": "#ffdea5",
+              "surface-container-low": "#f7f3e9",
+              "on-error": "#ffffff",
+              "primary-fixed-dim": "#b8ccb6",
+              "on-primary-fixed": "#0f1f11",
+              "surface-container-highest": "#e6e2d8",
+              "error": "#ba1a1a",
+              "tertiary-fixed": "#f7ddd5",
+              "surface": "#fdf9ef",
+              "primary-fixed": "#d4e8d1",
+              "inverse-on-surface": "#f4f0e6",
+              "tertiary-fixed-dim": "#dac1ba",
+              "tertiary": "#6d5a54",
+              "surface-container": "#f1eee4",
+              "surface-container-lowest": "#ffffff",
+              "background": "#fdf9ef",
+              "on-tertiary-fixed-variant": "#54433d",
+              "error-container": "#ffdad6",
+              "on-primary-fixed-variant": "#3a4b3a",
+              "on-tertiary-fixed": "#261814",
+              "on-secondary": "#ffffff",
+              "on-primary-container": "#435443"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body { font-family: 'Manrope', sans-serif; }
+      h1, h2, .font-serif { font-family: 'Noto Serif', serif; }
+      .glass-effect {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex items-center justify-center p-4">
+<!-- Mobile Frame Simulation -->
+<div class="w-full max-w-[400px] h-[844px] bg-background rounded-[3rem] border-[8px] border-inverse-surface shadow-2xl overflow-hidden relative flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-[#fdf9ef]/80 dark:bg-stone-900/80 backdrop-blur-md text-[#516351] dark:text-[#b4c8b2] docked full-width top-0 sticky z-50 shadow-sm shadow-[#1c1c16]/5 flex items-center justify-between px-6 py-4 w-full">
+<span class="material-symbols-outlined hover:opacity-80 transition-opacity cursor-pointer">menu</span>
+<h1 class="font-serif tracking-wide text-lg font-bold">Konzola pre DJa</h1>
+<div class="w-6"></div> <!-- Spacer for center alignment -->
+</header>
+<!-- Main Content (Scrollable Canvas) -->
+<main class="flex-1 overflow-y-auto px-6 pt-8 pb-32 space-y-8 bg-surface-container-low">
+<!-- Hero Stats Section -->
+<section class="space-y-4">
+<div class="flex items-end justify-between">
+<div>
+<p class="text-[11px] uppercase tracking-[0.1em] font-bold text-secondary mb-1">Aktuálne hrá</p>
+<h2 class="text-2xl font-serif text-primary leading-tight">Dancing Queen</h2>
+<p class="text-sm text-tertiary">ABBA (Želanie od: Maťka)</p>
+</div>
+<div class="w-12 h-12 rounded-full border-2 border-primary-container p-1 animate-spin-slow">
+<img alt="Vinyl record spinning on a turntable in a warm dimly lit wedding venue" class="w-full h-full rounded-full object-cover" data-alt="Vinyl record spinning on a turntable in a warm dimly lit wedding venue" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMfjy8uD52PDChnJZW_KcXYk-9HV8IYjvRvpT5jU3awbvR22-qIvd8pFsdPdXk6xwxiMjIbypc_-M7j5C4osbcw34nrP07LSPvOAudgoJrLf0oDorjePjU1fiy_92q2oT4LLN0KB-K40QXfKkWhJ7icvZy-rHvMh4dRQ3GjTFO0H3exVwxOO3RHFd9Cu_RTafAEiZUTelFyY1NnFOCJIXZjT-nI3hhFGZTW92chZ7l2HlXtxhlvOnpMJzJELFygYx0K9mYJUt6k4Y"/>
+</div>
+</div>
+<div class="h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-2/3"></div>
+</div>
+</section>
+<!-- Filters / Status Overview -->
+<nav class="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-primary text-on-primary text-sm font-medium">Všetky</button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-surface-container-highest text-primary text-sm font-medium hover:opacity-80 transition-opacity">Nové (4)</button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-surface-container-highest text-primary text-sm font-medium hover:opacity-80 transition-opacity">Prijaté</button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-surface-container-highest text-primary text-sm font-medium hover:opacity-80 transition-opacity">Zahrané</button>
+</nav>
+<!-- Song Queue -->
+<div class="space-y-6">
+<h3 class="font-serif text-xl text-on-surface">Fronta skladieb</h3>
+<div class="space-y-4">
+<!-- Queue Item 1: New -->
+<div class="bg-surface p-5 rounded-xl shadow-sm border-l-4 border-secondary-fixed transition-transform active:scale-95 duration-200">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] px-2 py-1 rounded-md bg-secondary-fixed text-on-secondary-fixed font-bold uppercase tracking-wider">Nové</span>
+<span class="text-[11px] text-outline">14:22</span>
+</div>
+<h4 class="font-bold text-primary tracking-tight">Vypijeme si!</h4>
+<p class="text-sm text-tertiary">Karol Konárik</p>
+<div class="mt-4 flex items-center gap-3">
+<span class="text-xs italic text-outline-variant">"Pre ženícha od krstného otca"</span>
+</div>
+</div>
+<!-- Queue Item 2: Accepted -->
+<div class="bg-surface p-5 rounded-xl shadow-sm border-l-4 border-primary-container transition-transform active:scale-95 duration-200">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] px-2 py-1 rounded-md bg-primary-container text-on-primary-container font-bold uppercase tracking-wider">Prijaté</span>
+<span class="text-[11px] text-outline">14:15</span>
+</div>
+<h4 class="font-bold text-primary tracking-tight">Flowers</h4>
+<p class="text-sm text-tertiary">Miley Cyrus</p>
+<div class="mt-4 flex gap-2">
+<button class="flex-1 py-2 rounded-lg bg-primary text-on-primary text-xs font-bold">Hrať teraz</button>
+<button class="px-3 py-2 rounded-lg bg-surface-container-highest text-primary"><span class="material-symbols-outlined text-sm">more_horiz</span></button>
+</div>
+</div>
+<!-- Queue Item 3: Played -->
+<div class="bg-surface/60 p-5 rounded-xl border-l-4 border-outline-variant opacity-70">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] px-2 py-1 rounded-md bg-surface-container-highest text-outline font-bold uppercase tracking-wider">Zahrané</span>
+<span class="text-[11px] text-outline">14:02</span>
+</div>
+<h4 class="font-bold text-outline tracking-tight">Perfect</h4>
+<p class="text-sm text-outline-variant">Ed Sheeran</p>
+</div>
+<!-- Queue Item 4: New -->
+<div class="bg-surface p-5 rounded-xl shadow-sm border-l-4 border-secondary-fixed transition-transform active:scale-95 duration-200">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] px-2 py-1 rounded-md bg-secondary-fixed text-on-secondary-fixed font-bold uppercase tracking-wider">Nové</span>
+<span class="text-[11px] text-outline">13:58</span>
+</div>
+<h4 class="font-bold text-primary tracking-tight">YMCA</h4>
+<p class="text-sm text-tertiary">Village People</p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#fdf9ef]/90 dark:bg-stone-900/90 backdrop-blur-xl shadow-[0_-4px_20px_rgba(28,28,22,0.04)] rounded-t-3xl">
+<div class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors cursor-pointer">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium">Domov</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#516351] text-[#fdf9ef] rounded-2xl px-5 py-2 cursor-pointer active:scale-90 duration-300">
+<span class="material-symbols-outlined" data-icon="event">event</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium">Program</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors cursor-pointer">
+<span class="material-symbols-outlined" data-icon="photo_library">photo_library</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium">Fotky</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors cursor-pointer">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium">Profil</span>
+</div>
+</nav>
+<!-- Floating Action Button (FAB) - Suppression logic check: DJ screen needs quick add song? Or just primary control -->
+<div class="absolute bottom-28 right-6 z-40">
+<button class="w-14 h-14 bg-secondary rounded-full flex items-center justify-center shadow-lg text-on-secondary active:scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</div>
+</div>
+</body></html>

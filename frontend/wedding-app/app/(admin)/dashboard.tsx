@@ -44,8 +44,8 @@ export default function AdminDashboardScreen() {
       <Text style={styles.sectionTitle}>Správa</Text>
       {[
         { label: '👥 ' + Copy.admin.guests, route: '/(admin)/guests' },
-        { label: '🚩 ' + Copy.admin.featureFlags, route: '/(admin)/feature-flags' },
-        { label: '📝 Dotazníky', route: '/(admin)/questionnaires' },
+        { label: '🚩 ' + Copy.admin.featureFlags, route: '/(admin)/feature-toggles' },
+        { label: '📝 Dotazníky', route: '/(admin)/questionnaire-responses' },
         { label: '🎵 Hudobné priania', route: '/(admin)/song-requests' },
       ].map(({ label, route }) => (
         <TouchableOpacity

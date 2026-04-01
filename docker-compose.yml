@@ -38,7 +38,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: wedding_api
-    restart: unless-stopped
+    restart: always
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: http://+:5000
@@ -46,9 +46,10 @@ services:
       Jwt__Secret: "local-dev-secret-minimum-32-chars-long!"
       Jwt__Issuer: "WeddingApp"
       Jwt__Audience: "WeddingAppUsers"
-      Cors__AllowedOrigins__0: "http://localhost:8081"
-      Cors__AllowedOrigins__1: "http://localhost:19006"
-      Cors__AllowedOrigins__2: "exp://localhost:8081"
+      Cors__AllowedOrigins__0: "http://localhost:3000"
+      Cors__AllowedOrigins__1: "http://localhost:8081"
+      Cors__AllowedOrigins__2: "http://localhost:19006"
+      Cors__AllowedOrigins__3: "exp://localhost:8081"
     ports:
       - "5000:5000"
     depends_on:
@@ -64,6 +65,7 @@ services:
   frontend:
     image: node:22-alpine
     container_name: wedding_frontend
+    restart: always
     working_dir: /app
     volumes:
       - ./frontend/wedding-app:/app
@@ -75,7 +77,7 @@ services:
       EXPO_PUBLIC_SIGNALR_URL: "http://localhost:5000"
     ports:
       - "3000:3000"
-    command: sh -c "npm install --legacy-peer-deps && npx expo install react-native-safe-area-context react-native-screens react-native-gesture-handler react-native-reanimated --silent && npx expo start --web --port 3000 --host lan"
+    command: sh -c "npm install --legacy-peer-deps && npx expo install react-native-safe-area-context react-native-screens react-native-gesture-handler react-native-reanimated && npx expo start --web --port 3000 --host lan"
     depends_on:
       api:
         condition: service_healthy

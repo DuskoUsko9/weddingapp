@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -10,12 +10,14 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Feather } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useAuth } from '../../store/AuthContext';
 import { apiClient } from '../../services/api';
-import { Colors, Typography, Spacing, Radius } from '../../constants/theme';
+import { Colors, Typography, Spacing, Radius, Shadow } from '../../constants/theme';
 import { Copy } from '../../constants/copy';
-import type { LoginResponse, GuestMatch, AuthUser } from '../../types/api';
+import type { LoginResponse, GuestMatch } from '../../types/api';
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -30,19 +32,16 @@ export default function LoginScreen() {
     if (!name.trim()) return;
     setLoading(true);
     setError(null);
-
     try {
       const res = await apiClient.post<LoginResponse>('/auth/login', { name: name.trim() });
       const result = res.data;
-
       if (result.type === 'token') {
-        const user: AuthUser = {
+        await login({
           token: result.token!,
           role: result.role!,
           guestId: result.guestId ?? null,
           guestName: result.guestName!,
-        };
-        await login(user);
+        });
       } else if (result.type === 'disambiguation') {
         setMatches(result.matches ?? []);
       }
@@ -56,17 +55,15 @@ export default function LoginScreen() {
   const handleConfirm = async (guestId: string) => {
     setLoading(true);
     setError(null);
-
     try {
       const res = await apiClient.post<LoginResponse>('/auth/confirm', { guestId });
       const result = res.data;
-      const user: AuthUser = {
+      await login({
         token: result.token!,
         role: result.role!,
         guestId: result.guestId ?? null,
         guestName: result.guestName!,
-      };
-      await login(user);
+      });
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : Copy.common.error);
     } finally {
@@ -74,160 +71,338 @@ export default function LoginScreen() {
     }
   };
 
+  // ── Disambiguation view ──────────────────────────────────────
   if (matches) {
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>{Copy.auth.disambiguationTitle}</Text>
-        <Text style={styles.subtitle}>{Copy.auth.disambiguationSubtitle}</Text>
+      <ScrollView contentContainerStyle={s.disambig}>
+        <Text style={s.disambigTitle}>{Copy.auth.disambiguationTitle}</Text>
+        <Text style={s.disambigSub}>{Copy.auth.disambiguationSubtitle}</Text>
         {matches.map((m) => (
           <TouchableOpacity
             key={m.guestId}
-            style={styles.matchCard}
+            style={s.matchCard}
+            activeOpacity={0.75}
             onPress={() => handleConfirm(m.guestId)}
             disabled={loading}
           >
-            <Text style={styles.matchName}>{m.fullName}</Text>
-            <Text style={styles.matchMeta}>{m.category} · {m.side}</Text>
+            <View style={{ flex: 1 }}>
+              <Text style={s.matchName}>{m.fullName}</Text>
+              <Text style={s.matchMeta}>{m.category} · {m.side}</Text>
+            </View>
+            <Feather name="chevron-right" size={18} color={Colors.primary} />
           </TouchableOpacity>
         ))}
-        <TouchableOpacity onPress={() => setMatches(null)}>
-          <Text style={styles.backLink}>{Copy.common.back}</Text>
+        {error && <Text style={s.error}>{error}</Text>}
+        <TouchableOpacity onPress={() => setMatches(null)} style={s.backBtn}>
+          <Feather name="arrow-left" size={16} color={Colors.primary} />
+          <Text style={s.backText}>{Copy.common.back}</Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     );
   }
 
+  // ── Login view ───────────────────────────────────────────────
+  const Wrapper: React.ComponentType<any> = Platform.OS === 'web' ? View : KeyboardAvoidingView;
   return (
-    <KeyboardAvoidingView
+    <Wrapper
       style={{ flex: 1 }}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      {...(Platform.OS !== 'web' ? { behavior: Platform.OS === 'ios' ? 'padding' : undefined } : {})}
     >
-      <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
-        <Text style={styles.title}>{Copy.auth.title}</Text>
-        <Text style={styles.subtitle}>{Copy.auth.subtitle}</Text>
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={s.container} keyboardShouldPersistTaps="handled">
 
-        <TextInput
-          style={styles.input}
-          placeholder={Copy.auth.namePlaceholder}
-          placeholderTextColor={Colors.textSecondary}
-          value={name}
-          onChangeText={setName}
-          autoCapitalize="words"
-          autoCorrect={false}
-          returnKeyType="done"
-          onSubmitEditing={handleLogin}
-        />
-
-        {error && <Text style={styles.error}>{error}</Text>}
-
-        <TouchableOpacity
-          style={[styles.button, loading && styles.buttonDisabled]}
-          onPress={handleLogin}
-          disabled={loading || !name.trim()}
+        {/* ── Hero ────────────────────────────────────────────── */}
+        <LinearGradient
+          colors={[Colors.surfaceContainerLow, Colors.background]}
+          style={s.hero}
         >
-          {loading
-            ? <ActivityIndicator color={Colors.surface} />
-            : <Text style={styles.buttonText}>{Copy.auth.loginButton}</Text>
-          }
-        </TouchableOpacity>
+          <View style={s.monogramRing}>
+            <Text style={s.monogramInner}>M&D</Text>
+          </View>
+          <Text style={s.brand}>{Copy.auth.brand}</Text>
+          <Text style={s.couple}>Maťka {'&'} Dušan</Text>
+          <Text style={s.heroDate}>5. september 2026</Text>
+        </LinearGradient>
 
-        <Text style={styles.hint}>{Copy.auth.loginHint}</Text>
+        {/* ── Form ────────────────────────────────────────────── */}
+        <View style={s.form}>
+          <Text style={s.welcomeTitle}>{Copy.auth.welcomeTitle}</Text>
+          <Text style={s.welcomeSub}>{Copy.auth.welcomeSubtitle}</Text>
+
+          {/* Input */}
+          <Text style={s.inputLabel}>{Copy.auth.nameLabel.toUpperCase()}</Text>
+          <View style={s.inputWrap}>
+            <Feather name="user" size={18} color={Colors.onSurfaceVariant} style={s.inputIcon} />
+            <TextInput
+              style={s.input}
+              placeholder={Copy.auth.namePlaceholder}
+              placeholderTextColor={Colors.onSurfaceVariant}
+              value={name}
+              onChangeText={setName}
+              autoCapitalize="words"
+              autoCorrect={false}
+              returnKeyType="done"
+              onSubmitEditing={handleLogin}
+            />
+          </View>
+
+          {error && <Text style={s.error}>{error}</Text>}
+
+          {/* Primary CTA */}
+          <TouchableOpacity
+            activeOpacity={0.85}
+            onPress={handleLogin}
+            disabled={loading || !name.trim()}
+            style={(!name.trim() || loading) ? s.btnDisabledWrap : undefined}
+          >
+            <LinearGradient
+              colors={[Colors.primary, Colors.primaryContainer]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={s.button}
+            >
+              {loading
+                ? <ActivityIndicator color="#ffffff" />
+                : (
+                  <>
+                    <Text style={s.buttonText}>{Copy.auth.loginButton}</Text>
+                    <Feather name="arrow-right" size={18} color="#ffffff" />
+                  </>
+                )
+              }
+            </LinearGradient>
+          </TouchableOpacity>
+
+          <Text style={s.hint}>{Copy.auth.loginHint}</Text>
+        </View>
+
+        {/* ── Special roles ────────────────────────────────────── */}
+        <View style={s.roles}>
+          <View style={s.rolesDivider}>
+            <View style={s.dividerLine} />
+            <Text style={s.dividerLabel}>{Copy.auth.specialRolesLabel.toUpperCase()}</Text>
+            <View style={s.dividerLine} />
+          </View>
+          <Text style={s.rolesHint}>{Copy.auth.specialRolesHint}</Text>
+        </View>
+
       </ScrollView>
-    </KeyboardAvoidingView>
+    </Wrapper>
   );
 }
 
-const styles = StyleSheet.create({
+const s = StyleSheet.create({
   container: {
     flexGrow: 1,
     backgroundColor: Colors.background,
+  },
+
+  // Hero
+  hero: {
+    alignItems: 'center',
+    paddingTop: Spacing.gallery,
+    paddingBottom: Spacing.xl,
+    paddingHorizontal: Spacing.xl,
+  },
+  monogramRing: {
+    width: 64,
+    height: 64,
+    borderRadius: Radius.full,
+    backgroundColor: Colors.primaryFixed,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: Spacing.xl,
-  },
-  title: {
-    fontFamily: Typography.heading,
-    fontSize: 36,
-    color: Colors.textPrimary,
-    marginBottom: Spacing.sm,
-    textAlign: 'center',
-  },
-  subtitle: {
-    fontFamily: Typography.body,
-    fontSize: 16,
-    color: Colors.textSecondary,
-    textAlign: 'center',
-    marginBottom: Spacing.xxl,
-    lineHeight: 24,
-  },
-  input: {
-    width: '100%',
-    backgroundColor: Colors.surface,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: Radius.md,
-    paddingHorizontal: Spacing.md,
-    paddingVertical: Spacing.md,
-    fontFamily: Typography.body,
-    fontSize: 16,
-    color: Colors.textPrimary,
     marginBottom: Spacing.md,
   },
-  error: {
+  monogramInner: {
+    fontFamily: Typography.heading,
+    fontSize: 16,
+    color: Colors.primary,
+  },
+  brand: {
+    fontFamily: Typography.headingItalic,
+    fontSize: 52,
+    color: Colors.primary,
+    letterSpacing: 2,
+    lineHeight: 60,
+  },
+  couple: {
+    fontFamily: Typography.headingRegular,
+    fontSize: 18,
+    color: Colors.onSurface,
+    marginTop: Spacing.xs,
+    letterSpacing: 0.5,
+  },
+  heroDate: {
+    fontFamily: Typography.body,
+    fontSize: 13,
+    color: Colors.onSurfaceVariant,
+    marginTop: 4,
+    letterSpacing: 0.3,
+  },
+
+  // Form
+  form: {
+    paddingHorizontal: Spacing.xl,
+    paddingTop: Spacing.lg,
+    paddingBottom: Spacing.lg,
+  },
+  welcomeTitle: {
+    fontFamily: Typography.heading,
+    fontSize: 24,
+    color: Colors.onSurface,
+    marginBottom: Spacing.sm,
+    letterSpacing: 0.2,
+  },
+  welcomeSub: {
     fontFamily: Typography.body,
     fontSize: 14,
+    color: Colors.onSurfaceVariant,
+    lineHeight: 22,
+    marginBottom: Spacing.lg,
+  },
+
+  inputLabel: {
+    fontFamily: Typography.bodyMedium,
+    fontSize: 10,
+    color: Colors.outline,
+    letterSpacing: 2,
+    marginBottom: Spacing.sm,
+    paddingHorizontal: 2,
+  },
+  inputWrap: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: Colors.surfaceContainerHigh,
+    borderRadius: Radius.md,
+    height: 56,
+    paddingHorizontal: Spacing.md,
+    marginBottom: Spacing.md,
+  },
+  inputIcon: { marginRight: Spacing.sm },
+  input: {
+    flex: 1,
+    fontFamily: Typography.body,
+    fontSize: 17,
+    color: Colors.onSurface,
+  },
+
+  error: {
+    fontFamily: Typography.body,
+    fontSize: 13,
     color: Colors.error,
     marginBottom: Spacing.md,
     textAlign: 'center',
   },
+
+  btnDisabledWrap: { opacity: 0.45 },
   button: {
-    width: '100%',
-    backgroundColor: Colors.primary,
     borderRadius: Radius.button,
-    paddingVertical: Spacing.md,
+    height: 56,
+    flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: Spacing.md,
-  },
-  buttonDisabled: {
-    opacity: 0.6,
+    justifyContent: 'center',
+    gap: Spacing.sm,
+    marginBottom: Spacing.sm,
+    ...Shadow.card,
   },
   buttonText: {
-    fontFamily: Typography.bodyMedium,
+    fontFamily: Typography.bodySemiBold,
     fontSize: 16,
-    color: Colors.surface,
-    letterSpacing: 0.5,
+    color: '#ffffff',
+    letterSpacing: 0.3,
   },
+
   hint: {
     fontFamily: Typography.body,
-    fontSize: 13,
-    color: Colors.textSecondary,
+    fontSize: 12,
+    color: Colors.onSurfaceVariant,
     textAlign: 'center',
-    marginTop: Spacing.sm,
+    lineHeight: 18,
+    paddingHorizontal: Spacing.sm,
+  },
+
+  // Special roles
+  roles: {
+    paddingHorizontal: Spacing.xl,
+    paddingBottom: Spacing.xxl,
+    alignItems: 'center',
+  },
+  rolesDivider: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.sm,
+    marginBottom: Spacing.sm,
+  },
+  dividerLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: Colors.outlineVariant,
+  },
+  dividerLabel: {
+    fontFamily: Typography.bodyMedium,
+    fontSize: 9,
+    color: Colors.outline,
+    letterSpacing: 2,
+  },
+  rolesHint: {
+    fontFamily: Typography.body,
+    fontSize: 11,
+    color: Colors.outline,
+    textAlign: 'center',
+    lineHeight: 18,
+    maxWidth: 260,
+  },
+
+  // Disambiguation
+  disambig: {
+    flexGrow: 1,
+    backgroundColor: Colors.background,
+    padding: Spacing.xl,
+    paddingTop: Spacing.gallery,
+  },
+  disambigTitle: {
+    fontFamily: Typography.heading,
+    fontSize: 28,
+    color: Colors.onSurface,
+    marginBottom: Spacing.sm,
+    letterSpacing: 0.2,
+  },
+  disambigSub: {
+    fontFamily: Typography.body,
+    fontSize: 15,
+    color: Colors.onSurfaceVariant,
+    marginBottom: Spacing.lg,
+    lineHeight: 22,
   },
   matchCard: {
-    width: '100%',
     backgroundColor: Colors.surface,
     borderRadius: Radius.card,
     padding: Spacing.md,
     marginBottom: Spacing.sm,
-    borderWidth: 1,
-    borderColor: Colors.border,
+    flexDirection: 'row',
+    alignItems: 'center',
+    ...Shadow.card,
   },
   matchName: {
-    fontFamily: Typography.bodyMedium,
+    fontFamily: Typography.bodySemiBold,
     fontSize: 16,
-    color: Colors.textPrimary,
+    color: Colors.onSurface,
   },
   matchMeta: {
     fontFamily: Typography.body,
     fontSize: 13,
-    color: Colors.textSecondary,
+    color: Colors.onSurfaceVariant,
     marginTop: 2,
   },
-  backLink: {
-    fontFamily: Typography.body,
+  backBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.sm,
+    paddingVertical: Spacing.md,
+    alignSelf: 'center',
+  },
+  backText: {
+    fontFamily: Typography.bodyMedium,
     fontSize: 14,
     color: Colors.primary,
-    marginTop: Spacing.md,
   },
 });

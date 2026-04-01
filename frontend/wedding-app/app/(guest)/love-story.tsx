@@ -5,6 +5,18 @@ import { Colors, Typography, Spacing, Radius, Shadow } from '../../constants/the
 import { Copy } from '../../constants/copy';
 import type { LoveStoryEvent } from '../../types/api';
 
+const DOT_COLORS = [Colors.secondary, Colors.primary, Colors.tertiary, Colors.secondary, Colors.primary];
+
+function formatEventDate(dateStr: string): string {
+  // dateStr expected as ISO date "2017-09-09" or similar
+  try {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('sk-SK', { year: 'numeric', month: 'long' });
+  } catch {
+    return dateStr;
+  }
+}
+
 export default function LoveStoryScreen() {
   const { data: events = [], isLoading } = useQuery<LoveStoryEvent[]>({
     queryKey: ['love-story'],
@@ -12,91 +24,125 @@ export default function LoveStoryScreen() {
   });
 
   if (isLoading) {
-    return (
-      <View style={styles.center}>
-        <ActivityIndicator color={Colors.primary} />
-      </View>
-    );
+    return <View style={s.center}><ActivityIndicator color={Colors.primary} /></View>;
   }
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      <Text style={styles.title}>{Copy.loveStory.title}</Text>
-      <View style={styles.timeline}>
-        {events.map((event, idx) => (
-          <View key={event.id} style={styles.eventRow}>
-            <View style={styles.lineCol}>
-              <View style={styles.dot} />
-              {idx < events.length - 1 && <View style={styles.line} />}
-            </View>
-            <View style={styles.eventCard}>
-              <Text style={styles.eventDate}>{event.eventDate}</Text>
-              <Text style={styles.eventTitle}>{event.title}</Text>
-              {event.description && (
-                <Text style={styles.eventDescription}>{event.description}</Text>
-              )}
-            </View>
-          </View>
-        ))}
+    <ScrollView style={s.scroll} contentContainerStyle={s.content}>
+
+      {/* ── Hero header ───────────────────────────────────────── */}
+      <View style={s.hero}>
+        <Text style={s.heroTitle}>{Copy.loveStory.title}</Text>
+        <View style={s.heroDivider} />
+        <Text style={s.heroSub}>{Copy.loveStory.subtitle}</Text>
       </View>
+
+      {/* ── Timeline — NO connecting line ──────────────────── */}
+      <View style={s.timeline}>
+        {events.map((event, idx) => {
+          const dotColor = DOT_COLORS[idx % DOT_COLORS.length];
+          return (
+            <View key={event.id} style={s.eventRow}>
+              {/* Dot */}
+              <View style={[s.dot, { backgroundColor: dotColor }]} />
+
+              {/* Card */}
+              <View style={[s.card, idx === events.length - 1 && s.cardLast]}>
+                <Text style={[s.eventDate, { color: dotColor }]}>
+                  {formatEventDate(event.eventDate)}
+                </Text>
+                <Text style={s.eventTitle}>{event.title}</Text>
+                {event.description ? (
+                  <Text style={s.eventDesc}>{event.description}</Text>
+                ) : null}
+              </View>
+            </View>
+          );
+        })}
+      </View>
+
     </ScrollView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.background },
-  content: { padding: Spacing.md, paddingBottom: Spacing.xxl },
+const s = StyleSheet.create({
+  scroll: { flex: 1, backgroundColor: Colors.background },
+  content: { paddingBottom: Spacing.xxl },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  title: {
+
+  hero: {
+    paddingTop: Spacing.gallery,
+    paddingHorizontal: Spacing.md,
+    paddingBottom: Spacing.xl,
+    alignItems: 'center',
+  },
+  heroTitle: {
     fontFamily: Typography.heading,
-    fontSize: 24,
-    color: Colors.textPrimary,
-    marginBottom: Spacing.lg,
+    fontSize: 36,
+    color: Colors.onSurface,
+    textAlign: 'center',
+    letterSpacing: 0.2,
   },
-  timeline: {},
-  eventRow: { flexDirection: 'row', marginBottom: Spacing.sm },
-  lineCol: { width: 24, alignItems: 'center' },
+  heroDivider: {
+    width: 32,
+    height: 1,
+    backgroundColor: Colors.outlineVariant,
+    marginVertical: Spacing.md,
+  },
+  heroSub: {
+    fontFamily: Typography.body,
+    fontSize: 14,
+    color: Colors.onSurfaceVariant,
+    textAlign: 'center',
+    fontStyle: 'italic',
+    lineHeight: 22,
+  },
+
+  // Timeline — NO connecting line
+  timeline: {
+    paddingHorizontal: Spacing.md,
+  },
+  eventRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: Spacing.xl,
+    gap: Spacing.md,
+  },
   dot: {
-    width: 12,
-    height: 12,
-    borderRadius: 6,
-    backgroundColor: Colors.primary,
-    marginTop: 6,
+    width: 14,
+    height: 14,
+    borderRadius: Radius.full,
+    marginTop: 20,
+    flexShrink: 0,
   },
-  line: {
-    width: 2,
+  card: {
     flex: 1,
-    backgroundColor: Colors.border,
-    marginTop: 4,
-    minHeight: 24,
-  },
-  eventCard: {
-    flex: 1,
-    marginLeft: Spacing.sm,
     backgroundColor: Colors.surface,
-    borderRadius: Radius.card,
+    borderRadius: Radius.md,
     padding: Spacing.md,
-    marginBottom: Spacing.xs,
     ...Shadow.card,
   },
+  cardLast: {
+    backgroundColor: Colors.primaryFixed,
+  },
   eventDate: {
-    fontFamily: Typography.body,
-    fontSize: 12,
-    color: Colors.primary,
-    marginBottom: 4,
+    fontFamily: Typography.bodyMedium,
+    fontSize: 11,
     textTransform: 'uppercase',
-    letterSpacing: 0.5,
+    letterSpacing: 1.5,
+    marginBottom: Spacing.xs,
   },
   eventTitle: {
     fontFamily: Typography.heading,
-    fontSize: 16,
-    color: Colors.textPrimary,
+    fontSize: 18,
+    color: Colors.onSurface,
+    lineHeight: 26,
     marginBottom: 4,
   },
-  eventDescription: {
+  eventDesc: {
     fontFamily: Typography.body,
     fontSize: 14,
-    color: Colors.textSecondary,
+    color: Colors.onSurfaceVariant,
     lineHeight: 22,
   },
 });

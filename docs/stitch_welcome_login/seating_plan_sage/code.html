@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html lang="sk"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#5e4c46",
+              "on-surface-variant": "#434842",
+              "primary-container": "#b4c8b2",
+              "surface-dim": "#dddad0",
+              "secondary-fixed-dim": "#e9c176",
+              "on-secondary-container": "#785a1a",
+              "on-background": "#1c1c16",
+              "surface-bright": "#fdf9ef",
+              "outline": "#747872",
+              "on-error-container": "#93000a",
+              "primary": "#516351",
+              "on-tertiary": "#ffffff",
+              "surface-variant": "#e6e2d8",
+              "surface-tint": "#516351",
+              "inverse-surface": "#31312a",
+              "on-surface": "#1c1c16",
+              "surface-container-high": "#ece8de",
+              "secondary": "#775a19",
+              "outline-variant": "#c3c8c0",
+              "on-secondary-fixed-variant": "#5d4201",
+              "tertiary-container": "#d6beb6",
+              "secondary-container": "#fed488",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#b8ccb6",
+              "on-secondary-fixed": "#261900",
+              "secondary-fixed": "#ffdea5",
+              "surface-container-low": "#f7f3e9",
+              "on-error": "#ffffff",
+              "primary-fixed-dim": "#b8ccb6",
+              "on-primary-fixed": "#0f1f11",
+              "surface-container-highest": "#e6e2d8",
+              "error": "#ba1a1a",
+              "tertiary-fixed": "#f7ddd5",
+              "surface": "#fdf9ef",
+              "primary-fixed": "#d4e8d1",
+              "inverse-on-surface": "#f4f0e6",
+              "tertiary-fixed-dim": "#dac1ba",
+              "tertiary": "#6d5a54",
+              "surface-container": "#f1eee4",
+              "surface-container-lowest": "#ffffff",
+              "background": "#fdf9ef",
+              "on-tertiary-fixed-variant": "#54433d",
+              "error-container": "#ffdad6",
+              "on-primary-fixed-variant": "#3a4b3a",
+              "on-tertiary-fixed": "#261814",
+              "on-secondary": "#ffffff",
+              "on-primary-container": "#435443"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container">
+<!-- TopAppBar -->
+<header class="bg-[#fdf9ef]/80 dark:bg-stone-900/80 backdrop-blur-md text-[#516351] dark:text-[#b4c8b2] docked full-width top-0 sticky z-50 no-border tonal-shift shadow-sm shadow-[#1c1c16]/5 flex items-center justify-between px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:opacity-80 transition-opacity" data-icon="menu">menu</span>
+<h1 class="text-2xl font-serif text-[#516351] dark:text-[#b4c8b2] tracking-widest">Maťka &amp; Dušan</h1>
+</div>
+<div class="hidden md:flex gap-8 font-serif tracking-wide display-md">
+<a class="text-[#516351]/70 dark:text-[#b4c8b2]/70 hover:opacity-80 transition-opacity" href="#">Domov</a>
+<a class="text-[#516351]/70 dark:text-[#b4c8b2]/70 hover:opacity-80 transition-opacity" href="#">Program</a>
+<a class="text-[#516351]/70 dark:text-[#b4c8b2]/70 hover:opacity-80 transition-opacity" href="#">Fotky</a>
+<a class="text-[#775a19] dark:text-[#e8cfc7] font-bold" href="#">Zasadací poriadok</a>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-12 md:py-24">
+<!-- Editorial Header Section -->
+<section class="mb-20 text-center md:text-left">
+<div class="flex flex-col md:flex-row items-baseline gap-6 mb-8">
+<h2 class="font-headline text-5xl md:text-7xl text-primary tracking-tight">Zasadací poriadok</h2>
+<span class="font-label text-xs uppercase tracking-[0.2em] text-secondary">Est. 2024</span>
+</div>
+<p class="font-body text-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                Nájdite svoje miesto pri stole. Každé miesto bolo vybrané s láskou, aby ste si tento večer užili v tej najlepšej spoločnosti.
+            </p>
+</section>
+<!-- Search and Map Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Search & Locked State -->
+<div class="lg:col-span-5 space-y-8">
+<!-- Search Input Container -->
+<div class="bg-surface-container-low p-8 rounded-xl shadow-sm border-b-2 border-primary/10">
+<label class="font-label text-xs uppercase tracking-widest text-on-surface-variant block mb-4" for="guest-search">Hľadať podľa mena</label>
+<div class="relative group">
+<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 py-4 font-headline text-xl placeholder:text-outline-variant/60 transition-all" id="guest-search" placeholder="Zadajte svoje meno..." type="text"/>
+<span class="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 text-primary/40 group-focus-within:text-primary transition-colors" data-icon="search">search</span>
+</div>
+</div>
+<!-- Locked State / Table Card -->
+<div class="relative overflow-hidden bg-surface-container-highest p-10 rounded-xl min-h-[300px] flex flex-col justify-center items-center text-center">
+<!-- Locked Overlay Content -->
+<div class="z-10 space-y-6">
+<div class="w-16 h-16 bg-surface flex items-center justify-center rounded-full mx-auto mb-4 shadow-sm">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+<h3 class="font-headline text-2xl text-on-surface">Zasadací poriadok je zatiaľ uzamknutý</h3>
+<p class="font-body text-on-surface-variant max-w-xs mx-auto">
+                            Finálne rozloženie hostí odhalíme 24 hodín pred svadobným obradom. Tešíme sa na vás!
+                        </p>
+<div class="pt-4">
+<span class="inline-block px-6 py-2 bg-primary text-on-primary rounded-full font-label text-xs tracking-widest uppercase">Odomkne sa o 3 dni</span>
+</div>
+</div>
+<!-- Subtle Decorative Background Pattern for Card -->
+<div class="absolute inset-0 opacity-5 pointer-events-none">
+<img class="w-full h-full object-cover grayscale" data-alt="faded botanical line art of eucalyptus leaves and flowers on a textured paper background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5_p0UL3uKz4iDSsuO9xfdbAp3nL_av8VnVcH4H8jPoLm4kUljRW2GNG_IggqCI8zzXZstXPQhVJEIm5uNw-TM5EZ7Jmn0Vc_bs2GqxMbryMmd-utdjQRXNknfwjNF_YJhkWlOGGw7k3i-_ow-eiutpNw3BgORtLCqZZSuRr6gTi9CMNRVh9vhWHpGHkJy__T9iolm_b5FDlTmhgnhxUg_B5tHHZN-V129Ch4m8eDJQS6fWV-aBX27PF9h7Wa6jvMJwAXYrlGqUU4"/>
+</div>
+</div>
+<!-- Guest Legend -->
+<div class="p-6 border-l-2 border-secondary/20">
+<h4 class="font-label text-xs uppercase tracking-widest text-secondary mb-4">Legenda stolov</h4>
+<ul class="space-y-4">
+<li class="flex items-center gap-4">
+<span class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold text-xs italic">H</span>
+<span class="font-body text-sm">Hlavný stôl (Novomanželia &amp; Rodičia)</span>
+</li>
+<li class="flex items-center gap-4">
+<span class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-primary font-bold text-xs">1-8</span>
+<span class="font-body text-sm">Okrúhle stoly pre hostí</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Right Column: Interactive Hall Map -->
+<div class="lg:col-span-7">
+<div class="bg-surface-container-low rounded-xl overflow-hidden shadow-sm relative aspect-[4/5] md:aspect-[16/10] lg:aspect-auto lg:h-[700px]">
+<!-- Header of Map -->
+<div class="absolute top-0 left-0 right-0 p-8 flex justify-between items-center z-20">
+<h3 class="font-headline text-2xl text-primary italic">Mapa sály</h3>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full bg-white/80 glass-effect shadow-sm flex items-center justify-center hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-on-surface" data-icon="zoom_in">zoom_in</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-white/80 glass-effect shadow-sm flex items-center justify-center hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-on-surface" data-icon="fullscreen">fullscreen</span>
+</button>
+</div>
+</div>
+<!-- Map Illustration Container -->
+<div class="w-full h-full flex items-center justify-center p-12 bg-[#fdf9ef]">
+<!-- Simplified Hall Layout Represented with Styled Elements -->
+<div class="relative w-full h-full max-w-2xl max-h-[500px] border border-outline-variant/20 rounded-lg p-8">
+<!-- Main Table -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-12 bg-primary rounded-lg flex items-center justify-center shadow-md">
+<span class="font-label text-[10px] text-on-primary tracking-[0.2em] uppercase">Hlavný Stôl</span>
+</div>
+<!-- Dance Floor -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border-2 border-dashed border-secondary/30 rounded-full flex items-center justify-center">
+<span class="font-headline text-secondary/40 italic">Tanečný parket</span>
+</div>
+<!-- Guest Tables Grid -->
+<div class="absolute inset-0 grid grid-cols-2 grid-rows-4 gap-8 pointer-events-none p-16">
+<div class="w-16 h-16 rounded-full border border-primary/20 bg-surface-container flex items-center justify-center pointer-events-auto cursor-pointer hover:scale-105 transition-transform"><span class="font-serif italic text-primary">1</span></div>
+<div class="w-16 h-16 rounded-full border border-primary/20 bg-surface-container flex items-center justify-center pointer-events-auto cursor-pointer hover:scale-105 transition-transform justify-self-end"><span class="font-serif italic text-primary">2</span></div>
+<div class="w-16 h-16 rounded-full border border-primary/20 bg-surface-container flex items-center justify-center pointer-events-auto cursor-pointer hover:scale-105 transition-transform"><span class="font-serif italic text-primary">3</span></div>
+<div class="w-16 h-16 rounded-full border border-primary/20 bg-surface-container flex items-center justify-center pointer-events-auto cursor-pointer hover:scale-105 transition-transform justify-self-end"><span class="font-serif italic text-primary">4</span></div>
+<div class="w-16 h-16 rounded-full border border-primary/20 bg-surface-container flex items-center justify-center pointer-events-auto cursor-pointer hover:scale-105 transition-transform"><span class="font-serif italic text-primary">5</span></div>
+<div class="w-16 h-16 rounded-full border border-primary/20 bg-surface-container flex items-center justify-center pointer-events-auto cursor-pointer hover:scale-105 transition-transform justify-self-end"><span class="font-serif italic text-primary">6</span></div>
+<div class="w-16 h-16 rounded-full border border-primary/20 bg-surface-container flex items-center justify-center pointer-events-auto cursor-pointer hover:scale-105 transition-transform"><span class="font-serif italic text-primary">7</span></div>
+<div class="w-16 h-16 rounded-full border border-primary/20 bg-surface-container flex items-center justify-center pointer-events-auto cursor-pointer hover:scale-105 transition-transform justify-self-end"><span class="font-serif italic text-primary">8</span></div>
+</div>
+<!-- Bar & Terrace labels -->
+<div class="absolute bottom-4 left-4 font-label text-[10px] tracking-widest text-on-surface-variant uppercase bg-surface-container-low px-3 py-1 rounded">Bar</div>
+<div class="absolute bottom-4 right-4 font-label text-[10px] tracking-widest text-on-surface-variant uppercase bg-surface-container-low px-3 py-1 rounded">Vstup / Terasa</div>
+</div>
+</div>
+<!-- Soft Texture Overlay -->
+<div class="absolute inset-0 pointer-events-none mix-blend-multiply opacity-[0.03]">
+<img class="w-full h-full object-cover" data-alt="extreme close-up of handmade cream-colored watercolor paper with natural fibers and subtle grain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7zksdlSD4NqF6TtArCYpflcKErh4s7jgWZ4QNwXXixcCnIx9iJBvSuHoNQ1Ns-SFXe8tBaKd8LdLWnzQbP83M1h0wwVCMe5BdQvJuPegDdtr4iUEVvD7dJE87GX7TJQEVWcGYTA_OJ_W1kEXuX8qT5qu8q_IEY7IZRUAzeEWOQGDAwZxzU1sWW9Ax6vPa3m99-VLtxwM1QOIO_Obqu0x3T50_FXO33oyGmI3X_MzjlJaZm5xfWo4cHTS7XWgbLyR5VtxKFTLXpKw"/>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-[#fdf9ef]/90 dark:bg-stone-900/90 backdrop-blur-xl text-[#516351] dark:text-[#b4c8b2] fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 md:hidden rounded-t-3xl shadow-[0_-4px_20px_rgba(28,28,22,0.04)] no-border shadow-inner-soft">
+<a class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium mt-1">Domov</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="event">event</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium mt-1">Program</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="photo_library">photo_library</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium mt-1">Fotky</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#516351] text-[#fdf9ef] rounded-2xl px-5 py-2" href="#">
+<span class="material-symbols-outlined" data-icon="event_seat" style="font-variation-settings: 'FILL' 1;">event_seat</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium mt-1">Poriadok</span>
+</a>
+</nav>
+<!-- Navigation Drawer (Hidden by default, used for larger screen secondary nav) -->
+<aside class="hidden lg:flex fixed inset-y-0 left-0 w-80 p-8 z-[60] flex-col gap-4 bg-[#f7f3e9] dark:bg-stone-800 rounded-r-3xl h-full shadow-2xl shadow-[#1c1c16]/10 -translate-x-full transition-transform duration-500">
+<div class="font-serif text-[#516351] mb-8 text-3xl">Svadobné Menu</div>
+<nav class="space-y-4">
+<a class="flex items-center gap-4 text-[#6d5a54] dark:text-[#e8cfc7] px-4 py-3 hover:bg-[#e6e2d8]/50 transition-all rounded-xl font-serif text-lg tracking-tight" href="#">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span> Timeline
+            </a>
+<a class="flex items-center gap-4 text-[#6d5a54] dark:text-[#e8cfc7] px-4 py-3 hover:bg-[#e6e2d8]/50 transition-all rounded-xl font-serif text-lg tracking-tight" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant">restaurant</span> Menu
+            </a>
+<a class="flex items-center gap-4 text-[#516351] font-bold bg-[#e6e2d8] rounded-xl px-4 py-3 font-serif text-lg tracking-tight" href="#">
+<span class="material-symbols-outlined" data-icon="event_seat">event_seat</span> Seating
+            </a>
+<a class="flex items-center gap-4 text-[#6d5a54] dark:text-[#e8cfc7] px-4 py-3 hover:bg-[#e6e2d8]/50 transition-all rounded-xl font-serif text-lg tracking-tight" href="#">
+<span class="material-symbols-outlined" data-icon="music_note">music_note</span> Music
+            </a>
+<a class="flex items-center gap-4 text-[#6d5a54] dark:text-[#e8cfc7] px-4 py-3 hover:bg-[#e6e2d8]/50 transition-all rounded-xl font-serif text-lg tracking-tight" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span> Bingo
+            </a>
+<a class="flex items-center gap-4 text-[#6d5a54] dark:text-[#e8cfc7] px-4 py-3 hover:bg-[#e6e2d8]/50 transition-all rounded-xl font-serif text-lg tracking-tight" href="#">
+<span class="material-symbols-outlined" data-icon="hotel">hotel</span> Accommodation
+            </a>
+</nav>
+</aside>
+</body></html>

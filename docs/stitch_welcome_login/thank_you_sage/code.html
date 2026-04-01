@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="sk"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#5e4c46",
+              "on-surface-variant": "#434842",
+              "primary-container": "#b4c8b2",
+              "surface-dim": "#dddad0",
+              "secondary-fixed-dim": "#e9c176",
+              "on-secondary-container": "#785a1a",
+              "on-background": "#1c1c16",
+              "surface-bright": "#fdf9ef",
+              "outline": "#747872",
+              "on-error-container": "#93000a",
+              "primary": "#516351",
+              "on-tertiary": "#ffffff",
+              "surface-variant": "#e6e2d8",
+              "surface-tint": "#516351",
+              "inverse-surface": "#31312a",
+              "on-surface": "#1c1c16",
+              "surface-container-high": "#ece8de",
+              "secondary": "#775a19",
+              "outline-variant": "#c3c8c0",
+              "on-secondary-fixed-variant": "#5d4201",
+              "tertiary-container": "#d6beb6",
+              "secondary-container": "#fed488",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#b8ccb6",
+              "on-secondary-fixed": "#261900",
+              "secondary-fixed": "#ffdea5",
+              "surface-container-low": "#f7f3e9",
+              "on-error": "#ffffff",
+              "primary-fixed-dim": "#b8ccb6",
+              "on-primary-fixed": "#0f1f11",
+              "surface-container-highest": "#e6e2d8",
+              "error": "#ba1a1a",
+              "tertiary-fixed": "#f7ddd5",
+              "surface": "#fdf9ef",
+              "primary-fixed": "#d4e8d1",
+              "inverse-on-surface": "#f4f0e6",
+              "tertiary-fixed-dim": "#dac1ba",
+              "tertiary": "#6d5a54",
+              "surface-container": "#f1eee4",
+              "surface-container-lowest": "#ffffff",
+              "background": "#fdf9ef",
+              "on-tertiary-fixed-variant": "#54433d",
+              "error-container": "#ffdad6",
+              "on-primary-fixed-variant": "#3a4b3a",
+              "on-tertiary-fixed": "#261814",
+              "on-secondary": "#ffffff",
+              "on-primary-container": "#435443"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Manrope', sans-serif; background-color: #fdf9ef; color: #1c1c16; }
+        .display-md { font-family: 'Noto Serif', serif; font-size: 2.5rem; line-height: 1.2; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="bg-[#fdf9ef]/80 dark:bg-stone-900/80 backdrop-blur-md text-[#516351] dark:text-[#b4c8b2] docked full-width top-0 sticky z-50 no-border tonal-shift shadow-sm shadow-[#1c1c16]/5 flex items-center justify-between px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:opacity-80 transition-opacity" data-icon="menu">menu</span>
+<h1 class="text-2xl font-serif text-[#516351] dark:text-[#b4c8b2] tracking-widest">Maťka &amp; Dušan</h1>
+</div>
+<div class="hidden md:flex gap-8 font-serif tracking-wide text-sm">
+<a class="text-[#516351]/70 dark:text-[#b4c8b2]/70 hover:opacity-80 transition-opacity" href="#">DOMOV</a>
+<a class="text-[#516351]/70 dark:text-[#b4c8b2]/70 hover:opacity-80 transition-opacity" href="#">PROGRAM</a>
+<a class="text-[#775a19] dark:text-[#e8cfc7] hover:opacity-80 transition-opacity border-b border-secondary/30" href="#">FOTKY</a>
+<a class="text-[#516351]/70 dark:text-[#b4c8b2]/70 hover:opacity-80 transition-opacity" href="#">PROFIL</a>
+</div>
+</header>
+<main class="min-h-screen pb-32">
+<!-- Hero Editorial Section -->
+<section class="relative px-6 pt-12 md:pt-24 max-w-6xl mx-auto flex flex-col md:grid md:grid-cols-12 gap-8 items-center">
+<div class="md:col-span-5 order-2 md:order-1 space-y-8">
+<div class="space-y-4">
+<span class="text-secondary font-label text-sm uppercase tracking-[0.2em]">Spomienky na náš deň</span>
+<h2 class="display-md text-primary font-headline">Ďakujeme!</h2>
+</div>
+<p class="font-body text-lg leading-relaxed text-on-surface-variant">
+                    Drahá rodina a priatelia, naša svadba bola vďaka vám presne taká, o akej sme snívali. Vaša prítomnosť, smiech a láska urobili tento deň nezabudnuteľným. Sme nesmierne vďační, že ste boli súčasťou začiatku nášho spoločného života.
+                </p>
+<div class="pt-4 flex flex-col gap-6">
+<div class="p-6 bg-surface-container-low rounded-xl flex items-center gap-4 border-l-4 border-primary">
+<span class="material-symbols-outlined text-primary scale-125" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<p class="font-headline italic text-xl text-primary">S láskou, Maťka &amp; Dušan</p>
+</div>
+<a class="group inline-flex items-center justify-between bg-primary text-on-primary px-8 py-5 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1" href="#">
+<span class="font-bold tracking-wide">OTVORIŤ SVADOBNÚ GALÉRIU</span>
+<span class="material-symbols-outlined ml-4 group-hover:translate-x-2 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="md:col-span-7 order-1 md:order-2 relative">
+<div class="aspect-[4/5] w-full bg-surface-container-highest rounded-lg overflow-hidden shadow-2xl relative z-10">
+<img alt="Svadobná fotografia" class="w-full h-full object-cover" data-alt="Candid romantic shot of a newlywed couple in a lush green garden at sunset, soft warm backlighting, sage and ivory wedding attire." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB67B7Z22tZPZOrXpqAJNvO_FJRw0EV_66L316LHddzbFn_oZvLOd2_1cMLA__y5E7_H9Zol-__E7S14Q5CbTOkPzArQwLokF3rXxWfzSNnTPIt1BPX6-k3rCIArS-HF54xBgSb16Kk2ekT2Kh8BG23XVeeZSBujp7SZP-FE6Jzwj1HLDWP6HEbEjlU90qF_3-tGAcwcSIJBkiQKjoyxBWA6rTaJRVH99mKqtrMwxliNAKcEbK-zSOAMwJn9j5hncIjGYKaijQsqeA"/>
+</div>
+<!-- Decorative element -->
+<div class="absolute -top-6 -right-6 w-32 h-32 bg-secondary/10 rounded-full blur-3xl -z-10"></div>
+<div class="absolute -bottom-10 -left-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+</div>
+</section>
+<!-- Bento Grid Memories -->
+<section class="mt-24 px-6 max-w-6xl mx-auto">
+<h3 class="font-headline text-3xl text-primary mb-12 text-center md:text-left">Najkrajšie momenty</h3>
+<div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 h-auto md:h-[600px]">
+<div class="md:col-span-2 md:row-span-2 rounded-xl overflow-hidden bg-surface-container shadow-sm group">
+<img alt="Obrad" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Wide shot of an outdoor wedding ceremony setup under an ancient oak tree with ivory draped fabrics and soft botanical arrangements." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7Bf3Sv4NFRSc-9muKPU3eLp-8Gq4DYg8E2RJXX0mTVNUnd11rTkjXAsn9xwLGHDsEMKdNUJd3xUyVrx9KYrTd8cw8IEgQFI5_BV7uN1H6-Kv5CSmbyWifphawdQEAjOzbVRED5xyV3FmFY5EtnDes-Y84buYxw5O_uuovHvfJMkSr_OzHFE4IJPaD4wD5-WiLFZZ-Ojuhbetk9ttpN2pVk2-_hJHhAKLBKvEPKieB6lQhD-U_3LkP_ifMEu8Yvw5-WxbT8ZA74pw"/>
+</div>
+<div class="md:col-span-1 md:row-span-1 rounded-xl overflow-hidden bg-surface-container shadow-sm group">
+<img alt="Hostina" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Elegant wedding dinner table setting with crystal glasses, sage green napkins, and gold cutlery under warm ambient string lights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYWDtQ1NHscAbdWaM14xd1lN9YhbMaCl_Vo01b1b56ifak1yKxpsCmEST53rq6hi20kfb5be7AV6ZCorXRGGPAycif5u8ZD9X0zhifZNVd5JsicuWMWgJ31WX4mCcJebOl_YJp5zLmwADPtSdiH16tQ9SY92wWWYK6CkB-vJBOizFn39n_kDyAEQswdaGTrFxl6cyNxcibW2V7lF23p6IPeeKs4LT2pWmIH2V0NAyA7AVifkBO4hjAZo3hi8XclEHM-onWpFCCr74"/>
+</div>
+<div class="md:col-span-1 md:row-span-1 rounded-xl overflow-hidden bg-surface-container shadow-sm group">
+<img alt="Detail" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Close-up of a bridal bouquet featuring white peonies, eucalyptus leaves, and dusty miller tied with a silk ivory ribbon." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT2EZfCOTHG7Mrue9giZpzF7K7KMH1puibX1-0wrkXn3EdpXsgQBZtnBXuO4FD-dCEDjhm256varXHRPxxIdbfrAs4KLuuy1qvloKaAOlb7DuFG-1xTGqDQfvSBfrpbfkGSwuWOa12pNUZdXbFlUxcoayqNj3O-zon1ierrzSLtlXqP_nCs_c3o40hRC1Xj4B7gbJ6D-kxvhdz3x2mYXsRk6X3qgQ6lgcmHU9_zK6m_MFGDiEoAZY0LyGLY2hCkiHE2F_g2tDyjmU"/>
+</div>
+<div class="md:col-span-2 md:row-span-1 rounded-xl overflow-hidden bg-surface-container shadow-sm group">
+<img alt="Tanec" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Joyful wedding guests dancing in a barn setting with golden sparklers and warm festive atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiri0A2ZKQnmI4q-jNy5wbHGqYtoLvbLZoutSWjl-o_xMzTwPhKQmssjcRa0m8evHQRzC0tY-qPtm17uvxPaImb9ttpNcEjX6nkkbsluGge7TyCBTxGQRQ0NI9J61hgvZeqqwwUYHqsr5K5P3Lt_gLdXnnagKJZTOSivF0AB-3SdJqCayltTxBV9LbvvZw3c7rKszzcmabpF4Op-uemVciNSkh4fN0rDCw_S8vtR_buc2JU1CdaSYAJqC39dm5gpjQODTQ0y8cdMc"/>
+</div>
+</div>
+</section>
+<!-- Guest Quote Section -->
+<section class="mt-24 px-6 py-20 bg-surface-container-low">
+<div class="max-w-3xl mx-auto text-center space-y-8">
+<span class="material-symbols-outlined text-secondary text-5xl" data-icon="format_quote">format_quote</span>
+<p class="font-headline italic text-2xl md:text-3xl text-on-surface leading-relaxed">
+                    "Láska nie je o tom pozerať sa na seba, ale pozerať sa spolu tým istým smerom."
+                </p>
+<div class="w-16 h-px bg-outline-variant mx-auto"></div>
+<p class="font-label uppercase tracking-widest text-on-surface-variant text-sm">Antoine de Saint-Exupéry</p>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#fdf9ef]/90 dark:bg-stone-900/90 backdrop-blur-xl docked full-width rounded-t-3xl shadow-[0_-4px_20px_rgba(28,28,22,0.04)] md:hidden">
+<a class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium">Domov</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="event">event</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium">Program</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#516351] text-[#fdf9ef] rounded-2xl px-5 py-2 Active: scale-90 duration-300" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="photo_library" style="font-variation-settings: 'FILL' 1;">photo_library</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium">Fotky</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium">Profil</span>
+</a>
+</nav>
+<!-- FAB for direct support/gift info (Contextual) -->
+<button class="fixed right-6 bottom-24 md:bottom-12 z-40 bg-secondary text-on-secondary w-14 h-14 rounded-full shadow-2xl flex items-center justify-center hover:scale-105 transition-transform">
+<span class="material-symbols-outlined" data-icon="redeem">redeem</span>
+</button>
+</body></html>

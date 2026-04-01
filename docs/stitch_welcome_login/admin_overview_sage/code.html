@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="light" lang="sk"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#5e4c46",
+              "on-surface-variant": "#434842",
+              "primary-container": "#b4c8b2",
+              "surface-dim": "#dddad0",
+              "secondary-fixed-dim": "#e9c176",
+              "on-secondary-container": "#785a1a",
+              "on-background": "#1c1c16",
+              "surface-bright": "#fdf9ef",
+              "outline": "#747872",
+              "on-error-container": "#93000a",
+              "primary": "#516351",
+              "on-tertiary": "#ffffff",
+              "surface-variant": "#e6e2d8",
+              "surface-tint": "#516351",
+              "inverse-surface": "#31312a",
+              "on-surface": "#1c1c16",
+              "surface-container-high": "#ece8de",
+              "secondary": "#775a19",
+              "outline-variant": "#c3c8c0",
+              "on-secondary-fixed-variant": "#5d4201",
+              "tertiary-container": "#d6be6",
+              "secondary-container": "#fed488",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#b8ccb6",
+              "on-secondary-fixed": "#261900",
+              "secondary-fixed": "#ffdea5",
+              "surface-container-low": "#f7f3e9",
+              "on-error": "#ffffff",
+              "primary-fixed-dim": "#b8ccb6",
+              "on-primary-fixed": "#0f1f11",
+              "surface-container-highest": "#e6e2d8",
+              "error": "#ba1a1a",
+              "tertiary-fixed": "#f7ddd5",
+              "surface": "#fdf9ef",
+              "primary-fixed": "#d4e8d1",
+              "inverse-on-surface": "#f4f0e6",
+              "tertiary-fixed-dim": "#dac1ba",
+              "tertiary": "#6d5a54",
+              "surface-container": "#f1eee4",
+              "surface-container-lowest": "#ffffff",
+              "background": "#fdf9ef",
+              "on-tertiary-fixed-variant": "#54433d",
+              "error-container": "#ffdad6",
+              "on-primary-fixed-variant": "#3a4b3a",
+              "on-tertiary-fixed": "#261814",
+              "on-secondary": "#ffffff",
+              "on-primary-container": "#435443"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        font-family: 'Manrope', sans-serif;
+        background-color: #fdf9ef;
+        color: #1c1c16;
+      }
+      .font-serif { font-family: 'Noto Serif', serif; }
+      .glass-effect {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="bg-[#fdf9ef]/80 dark:bg-stone-900/80 backdrop-blur-md text-[#516351] dark:text-[#b4c8b2] docked full-width top-0 sticky z-50 no-border tonal-shift shadow-sm shadow-[#1c1c16]/5">
+<div class="flex items-center justify-between px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:opacity-80 transition-opacity" data-icon="menu">menu</span>
+<h1 class="font-serif tracking-widest text-2xl">Maťka &amp; Dušan</h1>
+</div>
+<div class="flex items-center gap-6">
+<span class="font-serif tracking-wide text-lg hidden md:block">Administrácia</span>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary overflow-hidden border border-outline-variant/15">
+<img alt="Admin Avatar" class="w-full h-full object-cover" data-alt="close up of a sophisticated minimal logo with initials M and D in elegant serif typography on ivory background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4Ws06gO2DUT2bxGLQ5YvvA_q7oTkNQ-6So2l993Lcjrc_gPE3mzv6mRP7ONb6q_z9JNUsF9Ns_mDSAkAgWWBgUKiJYjtVFnWTttdT8cFRVFp71IRxkm9OLovdYiuMV5LwokBZtRtoC3oyYTGglzsD0T5amvzL9aF5g5FWzhj5K8UKLczJcm1ZhdKxrmBT-B6N6zUUMtxhadRWtg4P1w9ZCInnnOKyu-zCnfhXGROgFV8xSrG0w0oXmLLiNVmSbmgnB0IpO9tR8D0"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-12 pb-32">
+<!-- Header Section -->
+<section class="mb-12">
+<h2 class="font-headline text-5xl md:text-6xl text-primary mb-4 tracking-tight">Prehľad svadby</h2>
+<p class="font-body text-on-surface-variant max-w-2xl text-lg">Vitajte v ovládacom paneli vášho veľkého dňa. Tu môžete spravovať hostí, hudobné priania a časovú os.</p>
+</section>
+<!-- Stats Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+<!-- Main Stat -->
+<div class="md:col-span-2 bg-primary rounded-xl p-8 text-on-primary flex flex-col justify-between shadow-sm">
+<div>
+<span class="font-label uppercase tracking-widest text-xs opacity-80">Potvrdení Hostia</span>
+<div class="flex items-baseline gap-2 mt-4">
+<span class="font-headline text-7xl font-bold">84</span>
+<span class="font-headline text-3xl opacity-60">/ 120</span>
+</div>
+</div>
+<div class="mt-8 flex -space-x-3 overflow-hidden">
+<div class="w-10 h-10 rounded-full border-2 border-primary bg-surface-container-highest overflow-hidden">
+<img alt="Guest 1" class="w-full h-full object-cover" data-alt="portrait of a smiling woman with warm lighting and soft focus background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBM29DMEGDGPPorYJxYmfXBh_RoUTZEufXuSST5OBFOHDomKYvr9IIL-MJJ3tTtxyN-VsfwnqewtHn1IngUVpKT1gJq4Ks1i5sPCT_GwyYlfZlzFHp0hgf-Dq3Mj8IBXTR804KJxMvZd5MrH_jTfyPhep7qKAZ8YvUEasoOEKGAivjNzRkLCqPIHIhM9sIvyNmyccvploMvb_PyeFMPaiu5JDg-nPAf1PboSlB4ycmPh25Qad_5-um73LpWWZquIDy-_sy9vBZnz7E"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary bg-surface-container-highest overflow-hidden">
+<img alt="Guest 2" class="w-full h-full object-cover" data-alt="portrait of a young man in a linen shirt laughing softly in natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQRsPbNMQRckW3NdTS6bLJ1x1vnu8zKopxyPoZfqBPm_UH6mR0Gb5kAt_DEddhydSLxzwvSFEWk9V9tYw104wXV7EEE_kWCQIHNxEk8sXt7r-t2LLYoL0uD_qpo37d5-BOCKh4A3KF2eXHggtHQa8YWeTnwAcA5aeMn0wFikIivOtwcQZVbCWSGAjlI3wE8tuuJ1Ou6A4Eji4LYXcnxc4L_0fssE09Y-jwgc_pZSsL2Tc-SO1WRJ71aNghg75vWRo-XYek-yKUz28"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary bg-surface-container-highest overflow-hidden">
+<img alt="Guest 3" class="w-full h-full object-cover" data-alt="elegant elderly couple smiling warmly at the camera in a garden setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaOoNGQg3e5_i7jiE-EQx-SZqltd9fVidZcdIJUCAzdH7BaQaccnIn3kaGUhiUr2UGgV2BFUtSw6W5882sS8_GYeGeVVgBcPWNtzcmeG-v3DSWNk78_0I7vUZsLbL-iz6xWWnb34tUJJLIKpwg1cNSjmYRXIbaRJkL7ppff4D-7ETKEIYs7JzNUZHe3TP_xrv0vJg5U6tNkUs7OK0qxXpeFMgKBLqVxX5zMDgQIFPKSUuMBce_GAw6ZeXYJU7XkpAfKFDM1tYPuAs"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary bg-surface-container-low flex items-center justify-center text-primary text-xs font-bold">+81</div>
+</div>
+</div>
+<!-- Song Requests -->
+<div class="bg-surface-container-low rounded-xl p-8 flex flex-col justify-between border-outline-variant/10">
+<div>
+<span class="font-label uppercase tracking-widest text-xs text-on-surface-variant">Hudobné priania</span>
+<div class="font-headline text-5xl mt-4 text-secondary">42</div>
+</div>
+<div class="flex items-center gap-2 text-primary mt-6">
+<span class="material-symbols-outlined" data-icon="music_note">music_note</span>
+<span class="text-sm font-medium italic">Zoznam rastie...</span>
+</div>
+</div>
+<!-- Days Left -->
+<div class="bg-tertiary-container rounded-xl p-8 flex flex-col justify-between">
+<div>
+<span class="font-label uppercase tracking-widest text-xs text-on-tertiary-container">Dní do svadby</span>
+<div class="font-headline text-5xl mt-4 text-on-tertiary-container">12</div>
+</div>
+<div class="text-on-tertiary-container/70 text-sm font-medium">15. Jún 2024</div>
+</div>
+</div>
+<!-- Management Sections -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+<!-- Features Toggle -->
+<div class="lg:col-span-1 space-y-8">
+<div class="bg-surface-container-highest rounded-xl p-6">
+<h3 class="font-headline text-xl mb-6 flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                        Funkcie Webstránky
+                    </h3>
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<div>
+<p class="font-bold text-on-surface">RSVP Modul</p>
+<p class="text-xs text-on-surface-variant">Umožniť hosťom potvrdzovať účasť</p>
+</div>
+<button class="w-12 h-6 rounded-full bg-primary flex items-center px-1">
+<div class="w-4 h-4 rounded-full bg-white ml-auto"></div>
+</button>
+</div>
+<div class="flex items-center justify-between opacity-60">
+<div>
+<p class="font-bold text-on-surface text-sm">Zdieľanie Fotiek</p>
+<p class="text-xs text-on-surface-variant">Spustí sa automaticky po obrade</p>
+</div>
+<button class="w-12 h-6 rounded-full bg-outline-variant flex items-center px-1">
+<div class="w-4 h-4 rounded-full bg-white"></div>
+</button>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="font-bold text-on-surface text-sm">Svadobné Bingo</p>
+<p class="text-xs text-on-surface-variant">Viditeľné počas hostiny</p>
+</div>
+<button class="w-12 h-6 rounded-full bg-primary flex items-center px-1">
+<div class="w-4 h-4 rounded-full bg-white ml-auto"></div>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-6 border-outline-variant/10">
+<h3 class="font-headline text-xl mb-4 text-primary">Rýchle Akcie</h3>
+<div class="grid grid-cols-1 gap-3">
+<button class="w-full py-3 bg-primary text-white rounded-lg font-medium flex items-center justify-center gap-2 hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span> Nový Hosť
+                        </button>
+<button class="w-full py-3 bg-surface-container-highest text-primary rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-outline-variant/20 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span> Export Zoznamu
+                        </button>
+</div>
+</div>
+</div>
+<!-- Content Management / Recent Activity -->
+<div class="lg:col-span-2">
+<div class="bg-white rounded-xl shadow-sm overflow-hidden border border-surface-container-highest">
+<div class="px-8 py-6 border-b border-surface-container-highest flex justify-between items-center bg-surface-container-low/30">
+<h3 class="font-headline text-2xl text-primary italic">Posledné aktivity</h3>
+<button class="text-secondary text-sm font-bold tracking-widest uppercase hover:underline">Zobraziť všetko</button>
+</div>
+<div class="divide-y divide-surface-container-highest">
+<!-- Activity Item -->
+<div class="px-8 py-6 flex gap-6 items-start hover:bg-surface-container-low/20 transition-colors">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex-shrink-0 flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between mb-1">
+<h4 class="font-bold text-on-surface">Janka &amp; Michal S.</h4>
+<span class="text-xs text-on-surface-variant">Pred 2 hodinami</span>
+</div>
+<p class="text-on-surface-variant text-sm mb-3">Potvrdili účasť (2 osoby) a pridali poznámku o bezlepkovej diéte.</p>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface-container-highest rounded-full text-[10px] font-bold uppercase tracking-tighter text-on-surface-variant">Menu: 2x Klasik</span>
+<span class="px-3 py-1 bg-tertiary-container/30 rounded-full text-[10px] font-bold uppercase tracking-tighter text-on-tertiary-container">Doprava: Áno</span>
+</div>
+</div>
+</div>
+<!-- Activity Item -->
+<div class="px-8 py-6 flex gap-6 items-start hover:bg-surface-container-low/20 transition-colors">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex-shrink-0 flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="music_note">music_note</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between mb-1">
+<h4 class="font-bold text-on-surface">Peter H.</h4>
+<span class="text-xs text-on-surface-variant">Pred 5 hodinami</span>
+</div>
+<p class="text-on-surface-variant text-sm italic">"Chceme počuť - Karola Duchoňa - Šmýkame sa!"</p>
+</div>
+</div>
+<!-- Activity Item -->
+<div class="px-8 py-6 flex gap-6 items-start hover:bg-surface-container-low/20 transition-colors">
+<div class="w-12 h-12 rounded-full bg-primary-container flex-shrink-0 flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between mb-1">
+<h4 class="font-bold text-on-surface">Zmena v programe</h4>
+<span class="text-xs text-on-surface-variant">Včera</span>
+</div>
+<p class="text-on-surface-variant text-sm">Dušan upravil čas "Krájania torty" z 21:00 na 21:30.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Navigation Shell (BottomNavBar) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#fdf9ef]/90 dark:bg-stone-900/90 backdrop-blur-xl docked full-width rounded-t-3xl no-border shadow-inner-soft shadow-[0_-4px_20px_rgba(28,28,22,0.04)]">
+<a class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium mt-1">Domov</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="event">event</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium mt-1">Program</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="photo_library">photo_library</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium mt-1">Fotky</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#516351] text-[#fdf9ef] rounded-2xl px-5 py-2" href="#">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium mt-1">Profil</span>
+</a>
+</nav>
+<!-- FAB for quick management -->
+<button class="fixed bottom-24 right-8 w-14 h-14 bg-secondary text-on-primary rounded-full shadow-[0_32px_64px_rgba(28,28,22,0.08)] flex items-center justify-center z-40 transition-transform active:scale-90 duration-300">
+<span class="material-symbols-outlined" data-icon="message">message</span>
+</button>
+</body></html>

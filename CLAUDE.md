@@ -231,21 +231,27 @@ Infrastructure → Application → Domain
 ## Design System Quick Reference
 
 See `docs/design-system.md` for full details.
+Source: Stitch project `4401616869883670187` (Sage/Editorial Elegance, updated 2026-04-01)
+
+**Core rule: NO 1px solid borders — use background color shifts for boundaries.**
 
 | Token | Value |
 |---|---|
-| Background | `#FDFAF5` (ivory) |
-| Surface | `#FFFFFF` |
-| Primary (gold) | `#C9A96E` |
-| Primary dark | `#A8854A` |
-| Text primary | `#2C2423` |
-| Text secondary | `#8C7B6B` |
-| Accent (sage) | `#A8B5A0` |
-| Error | `#C0666B` |
-| Border radius card | `16px` |
-| Border radius button | `28px` |
-| Font heading | Playfair Display |
-| Font body | DM Sans |
+| Background (ivory) | `#faf9f6` |
+| Surface / Card | `#ffffff` (surface-container-lowest) |
+| Surface section | `#f4f3f1` (surface-container-low) |
+| Primary (gold) | `#725b28` |
+| Primary container | `#c0a469` |
+| Secondary (sage) | `#516351` |
+| Secondary container | `#d4e8d1` |
+| Text primary | `#1a1c1a` (on-surface, warm charcoal) |
+| Text secondary | `#4d4638` (on-surface-variant) |
+| Error | `#ba1a1a` |
+| Border radius card | `24px` (xl) |
+| Border radius button | `24px` (xl) |
+| Font heading | Noto Serif |
+| Font body | Manrope |
+| Nav backdrop | `rgba(250,249,246,0.80)` + blur 20px |
 
 ---
 

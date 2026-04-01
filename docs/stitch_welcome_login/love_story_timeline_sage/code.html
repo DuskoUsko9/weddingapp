@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html lang="sk"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#5e4c46",
+              "on-surface-variant": "#434842",
+              "primary-container": "#b4c8b2",
+              "surface-dim": "#dddad0",
+              "secondary-fixed-dim": "#e9c176",
+              "on-secondary-container": "#785a1a",
+              "on-background": "#1c1c16",
+              "surface-bright": "#fdf9ef",
+              "outline": "#747872",
+              "on-error-container": "#93000a",
+              "primary": "#516351",
+              "on-tertiary": "#ffffff",
+              "surface-variant": "#e6e2d8",
+              "surface-tint": "#516351",
+              "inverse-surface": "#31312a",
+              "on-surface": "#1c1c16",
+              "surface-container-high": "#ece8de",
+              "secondary": "#775a19",
+              "outline-variant": "#c3c8c0",
+              "on-secondary-fixed-variant": "#5d4201",
+              "tertiary-container": "#d6beb6",
+              "secondary-container": "#fed488",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#b8ccb6",
+              "on-secondary-fixed": "#261900",
+              "secondary-fixed": "#ffdea5",
+              "surface-container-low": "#f7f3e9",
+              "on-error": "#ffffff",
+              "primary-fixed-dim": "#b8ccb6",
+              "on-primary-fixed": "#0f1f11",
+              "surface-container-highest": "#e6e2d8",
+              "error": "#ba1a1a",
+              "tertiary-fixed": "#f7ddd5",
+              "surface": "#fdf9ef",
+              "primary-fixed": "#d4e8d1",
+              "inverse-on-surface": "#f4f0e6",
+              "tertiary-fixed-dim": "#dac1ba",
+              "tertiary": "#6d5a54",
+              "surface-container": "#f1eee4",
+              "surface-container-lowest": "#ffffff",
+              "background": "#fdf9ef",
+              "on-tertiary-fixed-variant": "#54433d",
+              "error-container": "#ffdad6",
+              "on-primary-fixed-variant": "#3a4b3a",
+              "on-tertiary-fixed": "#261814",
+              "on-secondary": "#ffffff",
+              "on-primary-container": "#435443"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fdf9ef;
+            font-family: 'Manrope', sans-serif;
+            color: #1c1c16;
+        }
+        .editorial-shadow {
+            box-shadow: 0 32px 64px -12px rgba(28, 28, 22, 0.04);
+        }
+        .line-drawing {
+            background-image: radial-gradient(#c3c8c0 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Bar -->
+<header class="bg-[#fdf9ef]/80 dark:bg-stone-900/80 backdrop-blur-md text-[#516351] dark:text-[#b4c8b2] docked full-width top-0 sticky z-50 no-border tonal-shift shadow-sm shadow-[#1c1c16]/5 flex items-center justify-between px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:opacity-80 transition-opacity" data-icon="menu">menu</span>
+</div>
+<h1 class="text-2xl font-serif text-[#516351] dark:text-[#b4c8b2] tracking-widest">Maťka &amp; Dušan</h1>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:opacity-80 transition-opacity" data-icon="favorite">favorite</span>
+</div>
+</header>
+<main class="max-w-4xl mx-auto px-6 py-12 md:py-24 space-y-24">
+<!-- Hero Section: Editorial Header -->
+<section class="space-y-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+<div class="space-y-4">
+<span class="font-label text-xs uppercase tracking-[0.2em] text-secondary">Náš Príbeh</span>
+<h2 class="font-headline text-5xl md:text-7xl text-primary leading-tight tracking-tight">Cesta, ktorou kráčame spoločne.</h2>
+</div>
+<div class="max-w-xs text-right hidden md:block">
+<p class="font-body text-sm text-on-surface-variant leading-relaxed italic">
+                        "Láska nie je o hľadaní osoby, s ktorou môžeme žiť, ale o hľadaní tej, bez ktorej žiť nemôžeme."
+                    </p>
+</div>
+</div>
+</section>
+<!-- Timeline: 2018 - First Meeting -->
+<section class="relative">
+<div class="flex flex-col md:flex-row gap-12 items-center">
+<div class="w-full md:w-1/2 overflow-hidden rounded-lg editorial-shadow">
+<img alt="First Meeting" class="w-full aspect-[4/5] object-cover hover:scale-105 transition-transform duration-700" data-alt="Candid moment of a young couple laughing in a sunlit outdoor cafe during autumn, soft warm afternoon light, romantic mood" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiSGNf9q0_H0zk-1HRUTm2mXCdTaB1OkyNs_KBH4u_LJwX0-eZrinBykHwF9z6_2_6FubL2uIbe7fEJyvSA0DZl7jcKPDV_OCqJrT_ZFM_u2hu_TuFhd7ISSWLm3FKuhMN-u3xVsaBzEm287o8ge7zNpfkam6wLvTmQrpUyr_biln4ESu2y3of8q0fSDUP5QQW9PbHLYc0UrXAvH128SjwjQqTKQet4y5fXYLvyraskl_vF8PK6_axB0IP2Ga7q8Mrh0Dedtuk3Gc"/>
+</div>
+<div class="w-full md:w-1/2 space-y-6 md:pl-12">
+<div class="flex items-baseline gap-4">
+<span class="font-headline text-4xl text-secondary opacity-40">2018</span>
+<h3 class="font-headline text-3xl text-primary">Prvé stretnutie</h3>
+</div>
+<p class="font-body text-lg text-on-surface-variant leading-relaxed">
+                        Všetko to začalo jednou nevinnou kávou v centre Bratislavy. Stačil jeden pohľad a vedeli sme, že tento rozhovor nikdy neskončí. Od toho dňa sa naše svety stali jedným.
+                    </p>
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<span class="font-label text-sm tracking-wide">Bratislava, Staré Mesto</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Timeline: 2021 - Engagement -->
+<section class="relative">
+<div class="flex flex-col md:flex-row-reverse gap-12 items-center">
+<div class="w-full md:w-1/2 overflow-hidden rounded-lg editorial-shadow">
+<img alt="Engagement" class="w-full aspect-[4/5] object-cover hover:scale-105 transition-transform duration-700" data-alt="Close up of a romantic wedding ring in a velvet box, blurred background of mountain peaks at sunset, warm cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC06kq4gPzFT1Swn64MkMNWeLNPV1qw3zuVjwVy5KYsIMRQGj-MAbseMVI-nAVEIzIPZfTu6ItBGHTOx3yhzlmVgzTYnwxWzhKjiL9bE07RvrBAZhZ8po1Xyd_bP3jT0jA8ZkcubrJIaeiV2SfjAD9t6laHEB05FrPHOCuT7zNOWofP-QOWrb6bKdpVgeZ7yt5klR6Pn2Ksh0kXV-vFqFm4nOFEgw8pL2DGpnlZtYy7FFSYB6yL7fHsVII1Tdkj6btQFVszt1lIBV4"/>
+</div>
+<div class="w-full md:w-1/2 space-y-6 md:pr-12 text-left md:text-right">
+<div class="flex items-baseline gap-4 md:flex-row-reverse">
+<span class="font-headline text-4xl text-secondary opacity-40">2021</span>
+<h3 class="font-headline text-3xl text-primary">Povedala "Áno"</h3>
+</div>
+<p class="font-body text-lg text-on-surface-variant leading-relaxed">
+                        Pod hviezdnou oblohou, uprostred ticha hôr, Dušan pokľakol. Bol to moment, kedy sa čas zastavil a jediné slovo zmenilo zvyšok našich životov navždy.
+                    </p>
+<div class="flex items-center gap-2 text-secondary justify-start md:justify-end">
+<span class="font-label text-sm tracking-wide">Vysoké Tatry</span>
+<span class="material-symbols-outlined" data-icon="landscape">landscape</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Timeline: 2024 - The Wedding -->
+<section class="bg-surface-container-low rounded-3xl p-8 md:p-16 space-y-12">
+<div class="text-center space-y-4 max-w-2xl mx-auto">
+<span class="font-headline text-5xl text-secondary opacity-40">2024</span>
+<h3 class="font-headline text-4xl text-primary">Náš deň D</h3>
+<p class="font-body text-lg text-on-surface-variant">
+                    Pripravujeme sa na najkrajšiu kapitolu nášho príbehu. Tešíme sa, že ju môžeme zdieľať s vami všetkými.
+                </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+<div class="aspect-square bg-surface-container-highest rounded-xl overflow-hidden">
+<img alt="Wedding Flowers" class="w-full h-full object-cover" data-alt="Detail of elegant bridal bouquet with sage green leaves and white roses, soft focus background, natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4RqQ9g5kxgew4cL0f7xxF0qxOkW0dGXE2iAqL7-HVSDwjDlwIjEaBn7aFw892APPepZ0MnNBMX4USgR8JxS_jML0eawaKIrHe6305ylQ1ZqCClXLG1PQ5gA-0DX6jFv91DA3Jqk_7d5hOEgjfiSdtNcprkyy-vW2zX6XGtQdrM--Az5DWZgVYE6eBT5-whQtdXSTdzW4y5UA4Ks-S_5-AEstLL18QMaHR0947VBzMvvWwcvY2ukYFdBwHxAFpIxstOpxTH0GIjVk"/>
+</div>
+<div class="aspect-square bg-surface-container-highest rounded-xl overflow-hidden col-span-1">
+<img alt="Ceremony" class="w-full h-full object-cover" data-alt="Rustic outdoor wedding ceremony setup with wooden chairs and green garlands, soft overcast light, moody forest vibes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbwjyjdxzvAqHc40-VJoW2rcuyou4ha0FFxNGXrS_h0k8lto0ApVxh-MqAOcASTHFjWXhJFYJJ7IEN8rqXu3q4_vf7EjHJF7OGagzO9uq7DjQ-NIDos-9F2FH1pzRDcdNmNMLvg4wr6U8Fsu4APRp0gVkBkoEWf83lpKVZcNSweh1GV16NwKPqURfb_itJJCNNJymDpcDTSNEmcPlRJbQGcMurr68080VcHfE4Pdy0hDm9S3JJqG5Wa-oCCSRZof-Gp6PjSjewxRU"/>
+</div>
+<div class="aspect-square bg-surface-container-highest rounded-xl overflow-hidden col-span-2 md:col-span-1">
+<img alt="Love Note" class="w-full h-full object-cover" data-alt="Minimalist wedding invitation on textured ivory paper with silk ribbon, soft editorial lighting, flat lay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHsikHtTAe4wuhJPkGd1cyHw_3TrdFAvK-CIZn1yGJhkUDvWTsgbvKd1BnNzWKxPwwpcgSves2xoqb2UsQVQEhYl51-r5ff0tm2u9L0M8wfEbs4W_7uNhjuKWox3Ln_GsmxbPNi4gVoTl01URk1mQEmXAeIpzT-xcL7GHv5P8iN_PKLhGI3G-ib15yUyg-RUiQVlIfYRK9eFFW3yER2ITqoNSDboU1r50fGaXdLt34bI7AhlhKdxtMTSDmkW81_Ts17fhxKSzBStk"/>
+</div>
+</div>
+</section>
+<!-- Quote Spacer -->
+<div class="py-12 flex justify-center">
+<div class="w-24 h-px bg-outline-variant/30"></div>
+<span class="material-symbols-outlined px-6 text-tertiary" data-icon="auto_awesome">auto_awesome</span>
+<div class="w-24 h-px bg-outline-variant/30"></div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="bg-[#fdf9ef]/90 dark:bg-stone-900/90 backdrop-blur-xl text-[#516351] dark:text-[#b4c8b2] docked full-width bottom-0 rounded-t-3xl no-border shadow-inner-soft shadow-[0_-4px_20px_rgba(28,28,22,0.04)] fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3">
+<a class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium">Domov</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#516351] text-[#fdf9ef] rounded-2xl px-5 py-2" href="#">
+<span class="material-symbols-outlined" data-icon="event" style="font-variation-settings: 'FILL' 1;">event</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium">Program</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="photo_library">photo_library</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium">Fotky</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#516351]/60 dark:text-[#b4c8b2]/60 px-5 py-2 hover:text-[#775a19] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium">Profil</span>
+</a>
+</nav>
+<!-- Floating Action Button - Register / Guest List (Contextual suppression check) -->
+<!-- Suppressed on detailed timeline view to prioritize story reading experience -->
+</body></html>

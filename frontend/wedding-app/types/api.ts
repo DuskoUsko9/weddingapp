@@ -33,6 +33,7 @@ export interface GuestMatch {
 // Feature flags
 export interface FeatureFlag {
   key: string;
+  displayName?: string;
   isEnabled: boolean;
   isManuallyEnabled: boolean;
   isManuallyDisabled: boolean;
@@ -57,6 +58,7 @@ export interface MenuItem {
   sectionId: string;
   name: string;
   description: string | null;
+  tags?: string[];
   displayOrder: number;
 }
 
@@ -85,15 +87,35 @@ export interface StaticContent {
 }
 
 // Questionnaire
-export interface QuestionnaireResponse {
-  id: string;
+export type AlcoholPreference = 'Drinks' | 'WineOnly' | 'BeerOnly' | 'NonDrinker';
+
+export interface QuestionnaireMyResponse {
+  guestId: string;
+  alcoholPreference: AlcoholPreference;
+  hasAllergy: boolean;
+  allergyNotes: string | null;
+  submittedAt: string;
+}
+
+export interface QuestionnaireAdminResponse {
   guestId: string;
   guestName: string;
-  isAttending: boolean;
-  mealChoice: string | null;
-  allergies: string | null;
-  note: string | null;
+  alcoholPreference: AlcoholPreference;
+  hasAllergy: boolean;
+  allergyNotes: string | null;
   submittedAt: string;
+}
+
+export interface QuestionnaireNotSubmittedGuest {
+  guestId: string;
+  guestName: string;
+}
+
+export interface QuestionnaireAllData {
+  totalGuests: number;
+  submitted: number;
+  responses: QuestionnaireAdminResponse[];
+  notSubmitted: QuestionnaireNotSubmittedGuest[];
 }
 
 // Song requests
@@ -108,6 +130,13 @@ export interface SongRequest {
   dedication: string | null;
   status: SongRequestStatus;
   createdAt: string;
+}
+
+export interface SongRequestPage {
+  items: SongRequest[];
+  total: number;
+  page: number;
+  pageSize: number;
 }
 
 // Admin stats

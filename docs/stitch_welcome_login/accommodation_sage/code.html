@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html lang="sk"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#5e4c46",
+              "on-surface-variant": "#434842",
+              "primary-container": "#b4c8b2",
+              "surface-dim": "#dddad0",
+              "secondary-fixed-dim": "#e9c176",
+              "on-secondary-container": "#785a1a",
+              "on-background": "#1c1c16",
+              "surface-bright": "#fdf9ef",
+              "outline": "#747872",
+              "on-error-container": "#93000a",
+              "primary": "#516351",
+              "on-tertiary": "#ffffff",
+              "surface-variant": "#e6e2d8",
+              "surface-tint": "#516351",
+              "inverse-surface": "#31312a",
+              "on-surface": "#1c1c16",
+              "surface-container-high": "#ece8de",
+              "secondary": "#775a19",
+              "outline-variant": "#c3c8c0",
+              "on-secondary-fixed-variant": "#5d4201",
+              "tertiary-container": "#d6beb6",
+              "secondary-container": "#fed488",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#b8ccb6",
+              "on-secondary-fixed": "#261900",
+              "secondary-fixed": "#ffdea5",
+              "surface-container-low": "#f7f3e9",
+              "on-error": "#ffffff",
+              "primary-fixed-dim": "#b8ccb6",
+              "on-primary-fixed": "#0f1f11",
+              "surface-container-highest": "#e6e2d8",
+              "error": "#ba1a1a",
+              "tertiary-fixed": "#f7ddd5",
+              "surface": "#fdf9ef",
+              "primary-fixed": "#d4e8d1",
+              "inverse-on-surface": "#f4f0e6",
+              "tertiary-fixed-dim": "#dac1ba",
+              "tertiary": "#6d5a54",
+              "surface-container": "#f1eee4",
+              "surface-container-lowest": "#ffffff",
+              "background": "#fdf9ef",
+              "on-tertiary-fixed-variant": "#54433d",
+              "error-container": "#ffdad6",
+              "on-primary-fixed-variant": "#3a4b3a",
+              "on-tertiary-fixed": "#261814",
+              "on-secondary": "#ffffff",
+              "on-primary-container": "#435443"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #fdf9ef;
+            color: #1c1c16;
+        }
+        h1, h2, h3 {
+            font-family: 'Noto Serif', serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-[#fdf9ef]/80 dark:bg-stone-900/80 backdrop-blur-md sticky top-0 z-50 shadow-sm shadow-[#1c1c16]/5 flex items-center justify-between px-6 py-4 w-full no-border tonal-shift">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#516351] dark:text-[#b4c8b2] hover:opacity-80 transition-opacity cursor-pointer">menu</span>
+<h1 class="font-serif tracking-widest text-2xl text-[#516351] dark:text-[#b4c8b2]">Maťka &amp; Dušan</h1>
+</div>
+<div class="hidden md:flex gap-8 items-center font-sans text-[11px] uppercase tracking-[0.05em] font-medium text-[#516351]/70">
+<a class="hover:text-[#775a19] transition-colors" href="#">Domov</a>
+<a class="hover:text-[#775a19] transition-colors" href="#">Program</a>
+<a class="hover:text-[#775a19] transition-colors" href="#">Fotky</a>
+<a class="text-[#775a19] font-bold" href="#">Ubytovanie</a>
+</div>
+</header>
+<main class="max-w-5xl mx-auto px-6 pt-12 lg:pt-20">
+<!-- Hero Section -->
+<div class="mb-16 md:mb-24 text-center md:text-left grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+<div class="order-2 md:order-1">
+<span class="text-secondary font-label uppercase tracking-[0.2em] text-xs mb-4 block">Váš domov na víkend</span>
+<h2 class="text-4xl md:text-6xl font-headline text-primary leading-tight mb-6">Ubytovanie</h2>
+<p class="text-on-surface-variant leading-relaxed text-lg max-w-md">Tešíme sa, že s nami strávite tento výnimočný čas. Pripravili sme pre vás informácie o vašom pohodlí v krásnom prostredí Zemianskeho dvora.</p>
+</div>
+<div class="order-1 md:order-2">
+<div class="relative">
+<img alt="Rustic upscale manor house room" class="rounded-xl shadow-sm aspect-[4/5] object-cover" data-alt="Elegant rustic boutique hotel room with exposed wooden beams, white linen bedding, and soft morning sunlight filtering through linen curtains" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArhiIvVrIeQ2JsA0Fk9nwuuX9sGOx5S1ht1HIrpDQAfQiUqin9a0iBx_pNtlQ4Ork75R25kZPYf12Gw-_dPXHdGT0ASYECcpHpjJCq5M61bQwIIyPL3k3KYu0IxCNjcaZYyv8NztVWhWRApTJzbMHK2EGr2kJQpX2EeS6w-PjZhAQkYqtSI47qvbKoUZT3Eqawgutl-vOQvcpwaVoArJLejuWDDH1BZuuwQ0uElO8MCpUvU6Ia1YFwg5D-HXYefXQu8EI6njZCPEo"/>
+<div class="absolute -bottom-6 -left-6 bg-surface-container-high p-6 rounded-lg hidden md:block">
+<span class="material-symbols-outlined text-secondary block mb-2" style="font-variation-settings: 'FILL' 1;">hotel</span>
+<p class="font-headline italic text-primary">Pokojný spánok<br/>v srdci prírody</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Grid Info Sections -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+<!-- Primary Accommodation -->
+<div class="md:col-span-2 bg-surface-container-low p-8 rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="castle">castle</span>
+<h3 class="text-2xl font-headline text-on-surface">Zemiansky dvor</h3>
+</div>
+<p class="text-on-surface-variant mb-8 leading-relaxed">
+                        Väčšina hostí bude ubytovaná priamo v areáli Zemianskeho dvora. Izby spájajú historický šarm s moderným komfortom. Ak máte špecifické požiadavky na izbu, neváhajte nás kontaktovať.
+                    </p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface p-4 rounded-lg">
+<span class="text-[10px] uppercase tracking-wider text-secondary block mb-1">Check-in</span>
+<span class="font-bold text-primary">od 14:00</span>
+</div>
+<div class="bg-surface p-4 rounded-lg">
+<span class="text-[10px] uppercase tracking-wider text-secondary block mb-1">Check-out</span>
+<span class="font-bold text-primary">do 10:30</span>
+</div>
+</div>
+</div>
+<!-- Breakfast Info -->
+<div class="bg-primary text-on-primary p-8 rounded-xl flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-primary-container mb-4 text-3xl" data-icon="coffee_maker">coffee_maker</span>
+<h3 class="text-2xl font-headline mb-4">Raňajky</h3>
+<p class="text-primary-container/90 text-sm leading-relaxed mb-6">
+                        Pre ubytovaných hostí sú pripravené bohaté bufetové raňajky v hlavnej reštaurácii.
+                    </p>
+</div>
+<div class="border-t border-primary-container/20 pt-6">
+<div class="flex justify-between items-center">
+<span class="font-body text-sm opacity-80">Nedeľa ráno</span>
+<span class="font-bold tracking-widest">08:30 – 10:30</span>
+</div>
+</div>
+</div>
+<!-- Alternative Accommodation -->
+<div class="bg-surface-container-highest p-8 rounded-xl md:col-span-1">
+<span class="material-symbols-outlined text-secondary mb-4" data-icon="distance">distance</span>
+<h3 class="text-xl font-headline text-on-surface mb-4">Okolité penzióny</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">
+                    V prípade naplnenia kapacity sú k dispozícii partnerské penzióny vzdialené do 5 minút chôdze.
+                </p>
+<ul class="space-y-3 text-sm font-medium text-primary">
+<li class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                        Penzión U Jakuba
+                    </li>
+<li class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                        Vila Horal
+                    </li>
+</ul>
+</div>
+<!-- Map/Location -->
+<div class="md:col-span-2 relative h-64 md:h-full min-h-[300px] rounded-xl overflow-hidden shadow-inner-soft">
+<img alt="Topographic map aesthetic" class="w-full h-full object-cover" data-alt="Abstract minimalist topographic map art with earthy tones, organic lines, and soft sage green accents" data-location="Šuňava, Slovakia" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwLPTR-988qbJ5-KFyRhQSmefejGA-UdavGl3Du5IJcd9_cS0Uhe8ghA5ajvwYCLXXIdOicqc4z1oI7zKU6HMatj9HLUM3JWk6Ww69Q2L9KNj-5a-qyqbLSR7kWocwd-T5daSBMTV29_MN0ux9hhABztpel6NeLjrJ1oA9wyfKrM5jn7Pnbb9Q5MHzbtDonf2Pa40O8-HiB7oYsn0O8t58i-UPDtogeK22hGoe-ufAVtmQXM7tpw7vi1GypY5Xi3lDWnsbAKOwwNU"/>
+<div class="absolute inset-0 bg-primary/20 backdrop-blur-[2px] flex items-center justify-center">
+<div class="bg-surface p-6 rounded-xl shadow-lg max-w-xs text-center">
+<span class="material-symbols-outlined text-secondary mb-2" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<h4 class="font-headline text-primary mb-1">Zemiansky dvor</h4>
+<p class="text-xs text-on-surface-variant mb-4">Hlavná 124, 059 39 Šuňava</p>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-all">
+                            Navigovať
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Contact/Practical Info -->
+<section class="border-t border-outline-variant/15 pt-12 pb-24 grid grid-cols-1 md:grid-cols-2 gap-12">
+<div>
+<h3 class="font-headline text-2xl text-primary mb-6">Praktické informácie</h3>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-tertiary-container text-sm" data-icon="local_parking">local_parking</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface text-sm">Parkovanie</h4>
+<p class="text-on-surface-variant text-sm">Bezplatné parkovanie je k dispozícii priamo v uzavretom areáli dvora.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-tertiary-container text-sm" data-icon="wifi">wifi</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface text-sm">Wi-Fi pripojenie</h4>
+<p class="text-on-surface-variant text-sm">Dostupné v celom objekte. Heslo nájdete na uvítacej karte v izbe.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container p-8 rounded-xl border border-outline-variant/10">
+<h3 class="font-headline text-xl text-primary mb-4">Potrebujete poradiť?</h3>
+<p class="text-on-surface-variant text-sm mb-6">Ak máte akékoľvek otázky ohľadom ubytovania alebo dopravy, neváhajte sa obrátiť na nášho koordinátora.</p>
+<div class="flex items-center gap-4 text-secondary font-bold">
+<span class="material-symbols-outlined" data-icon="call">call</span>
+<span>+421 9xx xxx xxx (Marek)</span>
+</div>
+</div>
+</section>
+</main>
+<!-- NavigationDrawer (Mobile Interaction Visual Only) -->
+<div class="fixed inset-y-0 left-0 w-80 p-8 z-[60] flex flex-col gap-4 bg-[#f7f3e9] dark:bg-stone-800 -translate-x-full transition-transform duration-500 rounded-r-3xl shadow-2xl shadow-[#1c1c16]/10" id="drawer">
+<h2 class="font-serif text-[#516351] mb-8 text-2xl">Svadobné Menu</h2>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-4 p-3 text-[#6d5a54] hover:bg-[#e6e2d8]/50 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+<span class="font-serif text-lg tracking-tight">Timeline</span>
+</a>
+<a class="flex items-center gap-4 p-3 text-[#6d5a54] hover:bg-[#e6e2d8]/50 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+<span class="font-serif text-lg tracking-tight">Menu</span>
+</a>
+<a class="flex items-center gap-4 p-3 text-[#516351] font-bold bg-[#e6e2d8] rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="hotel">hotel</span>
+<span class="font-serif text-lg tracking-tight">Accommodation</span>
+</a>
+</nav>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#fdf9ef]/90 backdrop-blur-xl no-border shadow-[0_-4px_20px_rgba(28,28,22,0.04)] rounded-t-3xl md:hidden">
+<div class="flex flex-col items-center justify-center text-[#516351]/60 px-5 py-2 hover:text-[#775a19] transition-colors">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium">Domov</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#516351]/60 px-5 py-2 hover:text-[#775a19] transition-colors">
+<span class="material-symbols-outlined" data-icon="event">event</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium">Program</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#516351]/60 px-5 py-2 hover:text-[#775a19] transition-colors">
+<span class="material-symbols-outlined" data-icon="photo_library">photo_library</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium">Fotky</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#516351] text-[#fdf9ef] rounded-2xl px-5 py-2 scale-90 duration-300">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium">Profil</span>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html lang="sk"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dotazník pre hostí | Maťka &amp; Dušan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@400;500;600;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#5e4c46",
+              "on-surface-variant": "#434842",
+              "primary-container": "#b4c8b2",
+              "surface-dim": "#dddad0",
+              "secondary-fixed-dim": "#e9c176",
+              "on-secondary-container": "#785a1a",
+              "on-background": "#1c1c16",
+              "surface-bright": "#fdf9ef",
+              "outline": "#747872",
+              "on-error-container": "#93000a",
+              "primary": "#516351",
+              "on-tertiary": "#ffffff",
+              "surface-variant": "#e6e2d8",
+              "surface-tint": "#516351",
+              "inverse-surface": "#31312a",
+              "on-surface": "#1c1c16",
+              "surface-container-high": "#ece8de",
+              "secondary": "#775a19",
+              "outline-variant": "#c3c8c0",
+              "on-secondary-fixed-variant": "#5d4201",
+              "tertiary-container": "#d6beb6",
+              "secondary-container": "#fed488",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#b8ccb6",
+              "on-secondary-fixed": "#261900",
+              "secondary-fixed": "#ffdea5",
+              "surface-container-low": "#f7f3e9",
+              "on-error": "#ffffff",
+              "primary-fixed-dim": "#b8ccb6",
+              "on-primary-fixed": "#0f1f11",
+              "surface-container-highest": "#e6e2d8",
+              "error": "#ba1a1a",
+              "tertiary-fixed": "#f7ddd5",
+              "surface": "#fdf9ef",
+              "primary-fixed": "#d4e8d1",
+              "inverse-on-surface": "#f4f0e6",
+              "tertiary-fixed-dim": "#dac1ba",
+              "tertiary": "#6d5a54",
+              "surface-container": "#f1eee4",
+              "surface-container-lowest": "#ffffff",
+              "background": "#fdf9ef",
+              "on-tertiary-fixed-variant": "#54433d",
+              "error-container": "#ffdad6",
+              "on-primary-fixed-variant": "#3a4b3a",
+              "on-tertiary-fixed": "#261814",
+              "on-secondary": "#ffffff",
+              "on-primary-container": "#435443"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fdf9ef;
+            font-family: 'Manrope', sans-serif;
+            color: #1c1c16;
+        }
+        .editorial-shadow {
+            box-shadow: 0 32px 64px -12px rgba(28, 28, 22, 0.04);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface selection:bg-primary-container">
+<!-- TopAppBar -->
+<header class="bg-[#fdf9ef]/80 backdrop-blur-md text-[#516351] font-serif tracking-wide docked full-width top-0 sticky z-50 no-border tonal-shift shadow-sm shadow-[#1c1c16]/5 flex items-center justify-between px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#516351] cursor-pointer hover:opacity-80 transition-opacity">menu</span>
+<h1 class="text-2xl font-serif text-[#516351] tracking-widest">Maťka &amp; Dušan</h1>
+</div>
+<div class="hidden md:flex gap-8 text-[#516351]/70 font-medium tracking-wide uppercase text-xs">
+<a class="hover:opacity-80 transition-opacity" href="#">Domov</a>
+<a class="text-[#775a19]" href="#">Dotazník</a>
+<a class="hover:opacity-80 transition-opacity" href="#">Program</a>
+<a class="hover:opacity-80 transition-opacity" href="#">Profil</a>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-weight="fill" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+</header>
+<main class="max-w-5xl mx-auto px-6 py-12 md:py-24 space-y-24">
+<!-- Hero Section Asymmetric -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+<div class="md:col-span-7 space-y-6">
+<span class="text-secondary font-label uppercase tracking-[0.2em] text-xs font-semibold">Svadobné Prípravy</span>
+<h2 class="font-headline text-5xl md:text-7xl text-on-surface leading-tight tracking-tight">Dotazník pre hostí</h2>
+<p class="font-body text-lg text-on-surface-variant max-w-lg leading-relaxed">
+                    Pomôžte nám vyladiť náš veľký deň k dokonalosti. Záleží nám na tom, aby sa každý z vás cítil príjemne a vychutnal si spoločné chvíle bez starostí.
+                </p>
+</div>
+<div class="md:col-span-5 relative">
+<div class="aspect-[4/5] rounded-xl overflow-hidden editorial-shadow transform rotate-2">
+<img alt="Wedding preparations" class="w-full h-full object-cover" data-alt="Soft focused close-up of elegant wedding invitations on cream linen fabric with a sprig of dried sage and golden wax seal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJpi9tcdIuQ6Anuu7124VG20aGSNHF3lAtK5V-CDX4z1Xd8B3WXQrWNom4MR-Tr9C7B1i0Mb6ge9FZPSk6ncl6X8h1kUdryBsMaBp7LMHQhVaqWBII8geY0dZFVg9yPb-ZJn0S8SG940aML5O_yHOS4AZL_LD0yw3FcBm_7uRkvpZEXBobtG6Q_xPJa__VeeE6IdahYYpankZVnGnmOnZAuDD7jgZaVLtQeN7SLwVJI9AtMJVx1lgCIDSbq8Dh3u6zyXuoHN8PDco"/>
+</div>
+<div class="absolute -bottom-6 -left-6 w-32 h-32 bg-primary-container/30 rounded-full blur-3xl -z-10"></div>
+</div>
+</section>
+<!-- Form Section -->
+<section class="bg-surface-container-low rounded-[2rem] p-8 md:p-16">
+<form class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
+<!-- Food Section -->
+<div class="space-y-8">
+<div class="space-y-2">
+<h3 class="font-headline text-2xl text-primary flex items-center gap-3">
+<span class="material-symbols-outlined">restaurant</span>
+                            Strava a Alergie
+                        </h3>
+<div class="h-px w-12 bg-secondary/30"></div>
+</div>
+<div class="space-y-6">
+<div class="group">
+<label class="block font-label text-xs uppercase tracking-wider text-on-surface-variant mb-2">Vaše Meno</label>
+<input class="w-full bg-transparent border-b border-outline-variant/30 py-3 focus:outline-none focus:border-primary transition-colors text-on-surface font-body" placeholder="Meno a Priezvisko" type="text"/>
+</div>
+<div class="group">
+<label class="block font-label text-xs uppercase tracking-wider text-on-surface-variant mb-2">Dietetické obmedzenia</label>
+<div class="flex flex-wrap gap-3 pt-2">
+<label class="flex items-center gap-2 cursor-pointer group/chip">
+<input class="hidden peer" type="checkbox"/>
+<span class="px-4 py-2 rounded-full border border-outline-variant peer-checked:bg-primary peer-checked:text-on-primary peer-checked:border-primary text-sm font-medium transition-all hover:bg-surface-container-highest">Vegetarián</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group/chip">
+<input class="hidden peer" type="checkbox"/>
+<span class="px-4 py-2 rounded-full border border-outline-variant peer-checked:bg-primary peer-checked:text-on-primary peer-checked:border-primary text-sm font-medium transition-all hover:bg-surface-container-highest">Vegán</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group/chip">
+<input class="hidden peer" type="checkbox"/>
+<span class="px-4 py-2 rounded-full border border-outline-variant peer-checked:bg-primary peer-checked:text-on-primary peer-checked:border-primary text-sm font-medium transition-all hover:bg-surface-container-highest">Bezlaktózová</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group/chip">
+<input class="hidden peer" type="checkbox"/>
+<span class="px-4 py-2 rounded-full border border-outline-variant peer-checked:bg-primary peer-checked:text-on-primary peer-checked:border-primary text-sm font-medium transition-all hover:bg-surface-container-highest">Bezlepková</span>
+</label>
+</div>
+</div>
+<div class="group">
+<label class="block font-label text-xs uppercase tracking-wider text-on-surface-variant mb-2">Špecifické alergie</label>
+<textarea class="w-full bg-transparent border-b border-outline-variant/30 py-3 focus:outline-none focus:border-primary transition-colors text-on-surface font-body resize-none" placeholder="Napr. orechy, morské plody..." rows="2"></textarea>
+</div>
+</div>
+</div>
+<!-- Drinks & Requirements -->
+<div class="space-y-8">
+<div class="space-y-2">
+<h3 class="font-headline text-2xl text-primary flex items-center gap-3">
+<span class="material-symbols-outlined">local_bar</span>
+                            Nápoje a Ostatné
+                        </h3>
+<div class="h-px w-12 bg-secondary/30"></div>
+</div>
+<div class="space-y-6">
+<div class="group">
+<label class="block font-label text-xs uppercase tracking-wider text-on-surface-variant mb-2">Preferovaný alkohol</label>
+<select class="w-full bg-transparent border-b border-outline-variant/30 py-3 focus:outline-none focus:border-primary transition-colors text-on-surface font-body appearance-none">
+<option>Vyberte preferenciu</option>
+<option>Biele víno</option>
+<option>Červené víno</option>
+<option>Pivo</option>
+<option>Miešané drinky</option>
+<option>Nealko / Abstinent</option>
+</select>
+</div>
+<div class="group">
+<label class="block font-label text-xs uppercase tracking-wider text-on-surface-variant mb-2">Doprava a ubytovanie</label>
+<div class="space-y-3 pt-2">
+<label class="flex items-center gap-3 cursor-pointer group/radio">
+<input class="w-4 h-4 text-primary border-outline-variant focus:ring-primary" name="lodging" type="radio"/>
+<span class="text-on-surface text-sm">Mám záujem o ubytovanie v mieste konania</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group/radio">
+<input class="w-4 h-4 text-primary border-outline-variant focus:ring-primary" name="lodging" type="radio"/>
+<span class="text-on-surface text-sm">Mám záujem o svadobný odvoz (shuttle)</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group/radio">
+<input class="w-4 h-4 text-primary border-outline-variant focus:ring-primary" name="lodging" type="radio"/>
+<span class="text-on-surface text-sm">Zabezpečím si vlastnú dopravu a ubytovanie</span>
+</label>
+</div>
+</div>
+<div class="group">
+<label class="block font-label text-xs uppercase tracking-wider text-on-surface-variant mb-2">Špeciálne požiadavky</label>
+<input class="w-full bg-transparent border-b border-outline-variant/30 py-3 focus:outline-none focus:border-primary transition-colors text-on-surface font-body" placeholder="Miesto pre kočík, detská stolička..." type="text"/>
+</div>
+</div>
+</div>
+<!-- Footer Action -->
+<div class="md:col-span-2 pt-8 flex flex-col md:flex-row items-center justify-between gap-8 border-t border-outline-variant/10">
+<p class="text-sm text-on-surface-variant italic max-w-md">
+                        * Odoslaním dotazníka nám veľmi uľahčíte organizáciu a zabezpečíte si tie najlepšie miesta pri stole. Ďakujeme!
+                    </p>
+<button class="w-full md:w-auto px-12 py-4 bg-secondary text-on-primary rounded-xl font-body font-bold text-sm uppercase tracking-[0.1em] shadow-lg shadow-secondary/20 hover:opacity-90 transition-all hover:-translate-y-0.5" type="submit">
+                        Odoslať Odpovede
+                    </button>
+</div>
+</form>
+</section>
+<!-- Bento Grid Decor -->
+<section class="grid grid-cols-2 md:grid-cols-4 gap-4 md:h-64">
+<div class="rounded-xl overflow-hidden bg-surface-container-highest">
+<img alt="Detail 1" class="w-full h-full object-cover opacity-80" data-alt="Macro photo of delicate white field flowers against a soft sage green background with morning dew" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCk8jl4pb3tMIX7JXpQpRzCNQ3-k3eszUUssw_RIe5aPyY21nMPJFOd-fC-UFJDRmQ4HjBsv0qPniT5RZ0FHyAn-eZfh1_4JBeD0Pyzu5FU1eM41vLlT58vdbWs_yZSdlta6R8erYZadfVEjgtwIxA7URnN9nCiRbwSN63nOh9tb4WqnSfBmTf_FAVZoRIsBPTBRd76LHCmX1YKN0rN8MpNpyX1rkCWBJzZv-Mp9_SoGEnBbsaUbIIXSmHl-C9kR4R1PPrDs0tUpKM"/>
+</div>
+<div class="col-span-2 rounded-xl bg-primary flex items-center justify-center p-8 text-center">
+<div class="space-y-4">
+<p class="font-headline text-2xl text-on-primary">"Láska je v detailoch"</p>
+<div class="w-8 h-px bg-on-primary/30 mx-auto"></div>
+</div>
+</div>
+<div class="rounded-xl overflow-hidden bg-surface-container-highest">
+<img alt="Detail 2" class="w-full h-full object-cover opacity-80" data-alt="Minimalist overhead shot of a single champagne glass on a cream textured linen tablecloth with warm sunlight shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhXI9dCBgpUH1Arsya7gUIpskjNJjpEbWyP3NPQwCC3cH6S7KLF8NaVWAFfCy6yHLLhWnGGkevfiNgIU9ejrHY5RLhbSqx6ZZ0_WgYdJvYmmfMu5NuMTTGowGDOiTCUzZ-FOWElt47ELc0hYAWCuUtWfBYjtEt-cStiOToxti5ixO3lH8EtwfPW-mG9dYYqbN7vBCL9IDJ75I-tXQykorOlLoo1gkybVV7fBqGkvrZx3JlduS_W1AijZn4AFUC46_46Wh2vWR5D34"/>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#fdf9ef]/90 dark:bg-stone-900/90 backdrop-blur-xl docked full-width rounded-t-3xl shadow-[0_-4px_20px_rgba(28,28,22,0.04)] no-border shadow-inner-soft md:hidden">
+<div class="flex flex-col items-center justify-center text-[#516351]/60 px-5 py-2 hover:text-[#775a19] transition-colors">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium">Domov</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#516351] text-[#fdf9ef] rounded-2xl px-5 py-2">
+<span class="material-symbols-outlined" data-icon="event">event</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium">Program</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#516351]/60 px-5 py-2 hover:text-[#775a19] transition-colors">
+<span class="material-symbols-outlined" data-icon="photo_library">photo_library</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium">Fotky</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#516351]/60 px-5 py-2 hover:text-[#775a19] transition-colors">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium">Profil</span>
+</div>
+</nav>
+<!-- Navigation Drawer (Hidden by default, for mobile interaction) -->
+<aside class="fixed inset-y-0 left-0 w-80 p-8 z-[60] flex flex-col gap-4 bg-[#f7f3e9] rounded-r-3xl h-full shadow-2xl shadow-[#1c1c16]/10 -translate-x-full hidden transition-transform duration-500">
+<h2 class="font-serif text-[#516351] mb-8 text-2xl">Svadobné Menu</h2>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-4 p-4 text-[#516351] font-bold bg-[#e6e2d8] rounded-xl" href="#">
+<span class="material-symbols-outlined">schedule</span> Timeline
+            </a>
+<a class="flex items-center gap-4 p-4 text-[#6d5a54] hover:bg-[#e6e2d8]/50 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">restaurant</span> Menu
+            </a>
+<a class="flex items-center gap-4 p-4 text-[#6d5a54] hover:bg-[#e6e2d8]/50 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">event_seat</span> Seating
+            </a>
+<a class="flex items-center gap-4 p-4 text-[#6d5a54] hover:bg-[#e6e2d8]/50 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">music_note</span> Music
+            </a>
+<a class="flex items-center gap-4 p-4 text-[#6d5a54] hover:bg-[#e6e2d8]/50 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">grid_view</span> Bingo
+            </a>
+<a class="flex items-center gap-4 p-4 text-[#6d5a54] hover:bg-[#e6e2d8]/50 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">hotel</span> Accommodation
+            </a>
+</nav>
+</aside>
+<footer class="pb-32 pt-16 px-6 text-center border-t border-outline-variant/5">
+<p class="font-serif text-[#516351]/40 text-sm tracking-widest">Maťka &amp; Dušan • 2024</p>
+</footer>
+</body></html>

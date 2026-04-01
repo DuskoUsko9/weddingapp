@@ -14,7 +14,8 @@
       "Bash(findstr \":8081\")",
       "Bash(taskkill:*)",
       "Bash(cmd /c \"netstat -aon | findstr LISTEN | findstr 8081\" 2>&1)",
-      "Bash(docker exec:*)"
+      "Bash(docker exec:*)",
+      "Bash(curl -s \"http://localhost:3000/index.ts.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app&unstable_transformProfile=hermes-stable\")"
     ]
   }
 }

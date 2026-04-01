@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light" lang="sk"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&amp;family=Montserrat:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "sage": {
+                50: "#f4f7f4",
+                100: "#e6ede6",
+                200: "#cfdbcf",
+                300: "#afc1af",
+                400: "#8ca58c",
+                500: "#6d8a6d", // Soft Sage
+                600: "#566e56",
+              },
+              "blush": {
+                50: "#fef7f6",
+                100: "#fdedeb",
+                200: "#fadcd8",
+                300: "#f4bdb4",
+                400: "#eb9689",
+                500: "#e07362", // Blush
+              },
+              "gold": {
+                50: "#faf8f2",
+                100: "#f4f0df",
+                200: "#e9dfbf",
+                300: "#dbca95",
+                400: "#cdb26d",
+                500: "#c0a44d", // Gold
+                600: "#a68a3d",
+              },
+              "surface": "#faf9f7",
+              "on-surface": "#2d312d",
+              "on-surface-variant": "#5c625c",
+            },
+            fontFamily: {
+              "headline": ["Cormorant Garamond", "serif"],
+              "body": ["Montserrat", "sans-serif"],
+            },
+            borderRadius: {
+              "DEFAULT": "0.5rem",
+              "lg": "0.75rem",
+              "xl": "1rem",
+              "2xl": "1.5rem",
+              "3xl": "2rem",
+              "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        .bg-gold-gradient {
+            background: linear-gradient(135deg, #c0a44d 0%, #dbca95 100%);
+        }
+        .glass-nav {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        body {
+            min-height: 100dvh;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-blush-100 selection:text-blush-500">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-white/70 glass-nav border-b border-sage-100">
+<nav class="flex justify-between items-center px-6 h-16 w-full max-w-screen-xl mx-auto">
+<button class="material-symbols-outlined text-sage-600 hover:opacity-70 transition-opacity active:scale-95">menu</button>
+<h1 class="font-headline text-3xl font-semibold tracking-tight text-sage-600">Madu</h1>
+<button class="material-symbols-outlined text-sage-600 hover:opacity-70 transition-opacity active:scale-95">notifications</button>
+</nav>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-screen-xl mx-auto">
+<!-- Hero Section -->
+<section class="mb-10 relative">
+<div class="relative overflow-hidden rounded-3xl h-[520px] group shadow-xl">
+<img alt="Wedding venue" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChFlxFg61w7iGVDKDgEtFujNS3nFTGpEGKdx5R7aK6LfZVAV1-_XSxZJ4UP7HAZ82xLrI_SurxadpNd8z5KOcE9_EtigQtKufYc6A_flbAy6T6oxAA8KAKhUXFke8tujfyV5h57vcqjMdtPuTM26oV7CceGf2SkbCcaQPb_3pXIG80fpvS2IPpx3eN7_52TJrL4GjwqYo8KSgTK4EL1JpvhsohMBqw3Pjjq0uiiH4qwsAJw_71f1x8l-Ya4-zDTPGgD976Njaclv4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+<div class="absolute inset-0 flex flex-col justify-end p-8 md:p-12">
+<span class="inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] tracking-[0.2em] font-bold mb-4 uppercase">
+                        Svadobný Deň
+                    </span>
+<h2 class="font-headline text-5xl md:text-7xl text-white mb-2 font-bold leading-[1.1]">Madu &amp; Jakub</h2>
+<p class="font-headline text-2xl italic text-white/90 mb-8">24. Augusta 2024 — Kaštieľ v Tomášove</p>
+<div class="flex items-center">
+<div class="bg-gold-gradient px-8 py-3 rounded-full shadow-lg">
+<span class="text-white text-sm font-semibold tracking-wider">Zostáva už len 12 dní</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Harmonogram -->
+<div class="bg-white p-8 rounded-3xl border border-sage-100 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-h-[240px]">
+<div>
+<div class="flex justify-between items-start mb-6">
+<div class="p-3 bg-sage-50 rounded-2xl">
+<span class="material-symbols-outlined text-sage-500 text-3xl">calendar_today</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-sage-600 bg-sage-100 px-3 py-1 rounded-full">Dostupné teraz</span>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-2">Harmonogram</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Prehľad dôležitých okamihov nášho dňa.</p>
+</div>
+<div class="mt-6 flex items-center text-sage-600 font-bold text-xs tracking-widest uppercase group cursor-pointer">
+                    Zobraziť plán
+                    <span class="material-symbols-outlined ml-2 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- Menu (Locked) -->
+<div class="bg-sage-50/50 p-8 rounded-3xl border border-sage-100/50 flex flex-col justify-between min-h-[240px] opacity-80">
+<div>
+<div class="flex justify-between items-start mb-6">
+<div class="p-3 bg-white/80 rounded-2xl">
+<span class="material-symbols-outlined text-sage-300 text-3xl">restaurant</span>
+</div>
+<div class="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-sage-400 bg-sage-100/50 px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-[12px]">lock</span>
+                            V deň svadby
+                        </div>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-2 text-on-surface/50">Svadobné Menu</h3>
+<p class="text-on-surface-variant/60 text-sm leading-relaxed">Kulinársky zážitok, ktorý sme pre vás pripravili.</p>
+</div>
+<div class="mt-6 text-sage-300 font-bold text-xs tracking-widest uppercase">Obsah je uzamknutý</div>
+</div>
+<!-- Parkovanie -->
+<div class="bg-white p-8 rounded-3xl border border-sage-100 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-h-[240px]">
+<div>
+<div class="flex justify-between items-start mb-6">
+<div class="p-3 bg-gold-50 rounded-2xl">
+<span class="material-symbols-outlined text-gold-500 text-3xl">local_parking</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-sage-600 bg-sage-100 px-3 py-1 rounded-full">Dostupné teraz</span>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-2">Parkovanie</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Informácie o možnostiach parkovania v areáli.</p>
+</div>
+<div class="mt-6 flex items-center text-sage-600 font-bold text-xs tracking-widest uppercase group cursor-pointer">
+                    Navigovať
+                    <span class="material-symbols-outlined ml-2 text-sm group-hover:translate-x-1 transition-transform">directions_car</span>
+</div>
+</div>
+<!-- Ubytovanie (Large Card) -->
+<div class="md:col-span-2 bg-white p-8 rounded-3xl border border-sage-100 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col md:flex-row gap-8 min-h-[280px]">
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-6">
+<div class="p-3 bg-blush-50 rounded-2xl">
+<span class="material-symbols-outlined text-blush-400 text-3xl">hotel</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-sage-600 bg-sage-100 px-3 py-1 rounded-full">Dostupné teraz</span>
+</div>
+<h3 class="font-headline text-3xl font-bold mb-3">Ubytovanie</h3>
+<p class="text-on-surface-variant text-base leading-relaxed max-w-md">Pripravili sme pre vás izby priamo v kaštieli a blízkom okolí. Skontrolujte si detaily svojej rezervácie.</p>
+</div>
+<div class="mt-8 flex items-center text-sage-600 font-bold text-xs tracking-widest uppercase group cursor-pointer">
+                        Moja rezervácia
+                        <span class="material-symbols-outlined ml-2 text-sm group-hover:translate-x-1 transition-transform">vpn_key</span>
+</div>
+</div>
+<div class="hidden md:block w-1/3 rounded-2xl overflow-hidden">
+<img alt="Hotel room" class="w-full h-full object-cover sepia-[0.3] hover:sepia-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-RrNoVFT0yw9bROHYQ5WR5dST44L30X_YVctkfVCgOI-bZehJDDq9SQB3CqKPflUtceL9RuyTUuvJydJt3WhBVZb1Mxdnlwy2wVYj-QxJyuHVrhbPZ07zBGk_C0GTCHTS-Rgc3DwdnSVat2vTkMCQBod2icKhWM6PVJz_Mg0ChGawmCuZVqec5vbdp_yU_fNcN0rnIXF0CWIAfUCKUfOnSZn8thainRMsbaXAJyjtDeA4BSugq1AXGvTsTR0LPJ6ulQAwfxFjVJ0"/>
+</div>
+</div>
+<!-- Dotazník (Call to Action) -->
+<div class="bg-gold-gradient p-8 rounded-3xl shadow-lg flex flex-col justify-between min-h-[240px] text-white">
+<div>
+<div class="flex justify-between items-start mb-6">
+<div class="p-3 bg-white/20 rounded-2xl">
+<span class="material-symbols-outlined text-white text-3xl">assignment</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-white/90 bg-white/20 px-3 py-1 rounded-full">Dôležité</span>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-2">Dotazník</h3>
+<p class="text-white/80 text-sm leading-relaxed">Prosíme o potvrdenie vašich preferencií a diét.</p>
+</div>
+<div class="mt-6 flex items-center font-bold text-xs tracking-widest uppercase group cursor-pointer">
+                    Vyplniť teraz
+                    <span class="material-symbols-outlined ml-2 text-sm group-hover:translate-x-1 transition-transform">edit_document</span>
+</div>
+</div>
+<!-- Playlist -->
+<div class="bg-white p-8 rounded-3xl border border-sage-100 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-h-[240px]">
+<div>
+<div class="flex justify-between items-start mb-6">
+<div class="p-3 bg-sage-50 rounded-2xl">
+<span class="material-symbols-outlined text-sage-500 text-3xl">queue_music</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-sage-600 bg-sage-100 px-3 py-1 rounded-full">Dostupné teraz</span>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-2">Playlist</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Pridajte skladbu, na ktorú si s nami radi zatancujete.</p>
+</div>
+<div class="mt-6 flex items-center text-sage-600 font-bold text-xs tracking-widest uppercase group cursor-pointer">
+                    Pridať pieseň
+                    <span class="material-symbols-outlined ml-2 text-sm group-hover:translate-x-1 transition-transform">library_add</span>
+</div>
+</div>
+<!-- Sedenie (Locked) -->
+<div class="bg-sage-50/50 p-8 rounded-3xl border border-sage-100/50 flex flex-col justify-between min-h-[240px] opacity-80">
+<div>
+<div class="flex justify-between items-start mb-6">
+<div class="p-3 bg-white/80 rounded-2xl">
+<span class="material-symbols-outlined text-sage-300 text-3xl">event_seat</span>
+</div>
+<div class="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-sage-400 bg-sage-100/50 px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-[12px]">lock</span>
+                            V deň svadby
+                        </div>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-2 text-on-surface/50">Zasadací poriadok</h3>
+<p class="text-on-surface-variant/60 text-sm leading-relaxed">Váš stôl v hlavnej sále kaštieľa.</p>
+</div>
+<div class="mt-6 text-sage-300 font-bold text-xs tracking-widest uppercase">Obsah je uzamknutý</div>
+</div>
+<!-- Fotky (Locked) -->
+<div class="bg-sage-50/50 p-8 rounded-3xl border border-sage-100/50 flex flex-col justify-between min-h-[240px] opacity-80">
+<div>
+<div class="flex justify-between items-start mb-6">
+<div class="p-3 bg-white/80 rounded-2xl">
+<span class="material-symbols-outlined text-sage-300 text-3xl">photo_library</span>
+</div>
+<div class="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-sage-400 bg-sage-100/50 px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-[12px]">lock_clock</span>
+                            Po svadbe
+                        </div>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-2 text-on-surface/50">Svadobná Galéria</h3>
+<p class="text-on-surface-variant/60 text-sm leading-relaxed">Spoločné spomienky zachytené objektívom.</p>
+</div>
+<div class="mt-6 text-sage-300 font-bold text-xs tracking-widest uppercase">Momentálne nedostupné</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 pb-safe bg-white/90 glass-nav border-t border-sage-100">
+<div class="flex justify-around items-center h-20 w-full px-4 max-w-screen-xl mx-auto">
+<button class="flex flex-col items-center justify-center text-sage-600">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[9px] uppercase tracking-wider font-bold mt-1">Domov</span>
+</button>
+<button class="flex flex-col items-center justify-center text-sage-300 hover:text-sage-500 transition-colors">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-[9px] uppercase tracking-wider font-bold mt-1">Program</span>
+</button>
+<button class="flex flex-col items-center justify-center text-sage-300 hover:text-sage-500 transition-colors">
+<span class="material-symbols-outlined">photo_library</span>
+<span class="text-[9px] uppercase tracking-wider font-bold mt-1">Fotky</span>
+</button>
+<button class="flex flex-col items-center justify-center text-sage-300 hover:text-sage-500 transition-colors">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[9px] uppercase tracking-wider font-bold mt-1">Profil</span>
+</button>
+</div>
+</nav>
+<!-- Floating Action Button -->
+<div class="fixed bottom-24 right-6 z-40">
+<button class="bg-gold-gradient w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-white active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-2xl">chat_bubble</span>
+</button>
+</div>
+</body></html>

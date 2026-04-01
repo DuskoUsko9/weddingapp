@@ -1,56 +1,96 @@
 # Design System — MadU Wedding App
 
-**Style:** Premium, romantic, modern. Warm neutrals. Not kitsch.
+**Style:** Editorial Elegance — "The Digital Concierge"
+**Source:** Stitch project `4401616869883670187` (Sage variant, updated 2026-04-01)
 **Target devices:** Mobile-first (iPhone SE → iPhone 16 Pro Max, Android equivalents)
-**Accessibility:** Large touch targets (min 48px), high contrast text, readable for older guests
+**Accessibility:** Large touch targets (min 48dp), high contrast, readable for older guests
 
 ---
 
-## Color Palette
+## Core Philosophy
 
-### Base Colors
+The UI should feel like a high-end, tactile wedding invitation — not a standard mobile app.
+Three principles drive every decision:
+
+1. **Breathability** — generous whitespace is a luxury. If a guest has to scroll, let them.
+2. **Tonal Layering** — depth is created by stacking warm paper layers, not by drop-shadows or borders.
+3. **"No-Line" Rule** — **1px solid borders are strictly forbidden** for defining sections. Boundaries come from background color shifts only.
+
+> Ghost border exception: if accessibility demands a visible border (e.g., high-sunlight outdoor use), use `outlineVariant` at **15% opacity** — felt, not seen.
+
+---
+
+## Color System
+
+### Surface Hierarchy — "Stacked Paper Layers"
+
 ```
-Ivory (background)      #FDFAF5   ← app background, warm off-white
-White (surface)         #FFFFFF   ← cards, modals, sheets
-Champagne (primary)     #C9A96E   ← primary brand color, CTAs, accents
-Champagne Dark          #A8854A   ← pressed state, active icons
-Champagne Light         #EDD9B0   ← subtle highlights, selected chips
-Champagne Faint         #F7F0E3   ← very subtle tint, section backgrounds
+surface-container-lowest  #ffffff    ← floating cards (max contrast on ivory)
+background / surface       #faf9f6   ← base layer, warm ivory
+surface-container-low     #f4f3f1   ← large section groupings
+surface-container         #efeeeb   ← default containers
+surface-container-high    #e9e8e5   ← input field backgrounds
+surface-container-highest #e3e2e0   ← toggle / interactive backgrounds
+surface-dim               #dbdad7   ← dimmed state
 ```
 
-### Text Colors
+### Primary — Gold
+
 ```
-Text Primary            #2C2423   ← main text, headings (warm near-black)
-Text Secondary          #8C7B6B   ← subtitles, captions, placeholders
-Text Disabled           #C4B9B0   ← disabled state
-Text On Primary         #FFFFFF   ← text on champagne buttons
-Text Link               #A8854A   ← inline links
+primary               #725b28   ← dark gold, buttons, active icons
+primary-container     #c0a469   ← lighter gold, gradient end, highlights
+primary-fixed         #fedf9f   ← very light gold, subtle tints
+primary-fixed-dim     #e0c385   ← dim gold
+on-primary            #ffffff   ← text on primary backgrounds
+on-primary-container  #4d3a08
 ```
 
-### Accent Colors
+### Secondary — Eucalyptus / Sage
+
 ```
-Sage (accent)           #A8B5A0   ← soft green, secondary accents
-Sage Light              #D4DDD1   ← sage chip backgrounds
-Sage Dark               #728A69   ← sage icons active state
+secondary             #516351   ← sage green, success, positive actions
+secondary-container   #d4e8d1   ← light sage, chip backgrounds
+on-secondary          #ffffff
+on-secondary-container #576957
 ```
 
-### Semantic Colors
+### Tertiary — Warm Brown
+
 ```
-Success                 #7A9E7E   ← confirmation, submitted
-Success Light           #E8F2EA   ← success background
-Error                   #C0666B   ← validation errors
-Error Light             #F9E8E9   ← error background
-Warning                 #C4956A   ← caution states
-Info                    #7A9EB5   ← informational
-Locked                  #C4B9B0   ← locked feature icon/text
-Locked BG               #F0EBE5   ← locked card background
+tertiary              #6a5d43
+tertiary-container    #b6a687
+on-tertiary           #ffffff
+```
+
+### Text
+
+```
+on-surface            #1a1c1a   ← deep warm charcoal (NEVER pure black)
+on-surface-variant    #4d4638   ← secondary text, captions
+on-background         #1a1c1a
+```
+
+### Semantic
+
+```
+error                 #ba1a1a
+error-container       #ffdad6
+on-error              #ffffff
+```
+
+### Outline
+
+```
+outline               #7f7667   ← visible outlines when needed
+outline-variant       #d0c5b3   ← ghost border base (apply at 15% opacity)
 ```
 
 ### Gradients
+
 ```
-Hero gradient     linear(135deg, #FDFAF5 → #F0E6D0)
-Card shimmer      linear(90deg, #F7F0E3 → #EDD9B0 → #F7F0E3)  ← loading skeleton
-Gold accent       linear(135deg, #C9A96E → #A8854A)
+Primary CTA gradient   linear(primary #725b28 → primary-container #c0a469)
+                       — gives buttons a "silk-like" depth
+Hero / section tint    linear(#faf9f6 → #f4f3f1)
 ```
 
 ---
@@ -58,35 +98,39 @@ Gold accent       linear(135deg, #C9A96E → #A8854A)
 ## Typography
 
 ### Font Families
-```
-Heading:  Playfair Display (Google Fonts, serif)
-          — romantic, elegant, editorial feel
-          — use for: page titles, hero text, names, dates
 
-Body:     DM Sans (Google Fonts, humanist sans-serif)
-          — modern, highly readable, friendly
-          — use for: body text, labels, buttons, captions
+```
+Heading:  Noto Serif (Google Fonts, serif)
+          — statement elements: page titles, names, dates, display numbers
+          — handles Slovak diacritics (mäkčene/dĺžne) gracefully
+          — centered, generous vertical breathing room
+
+Body:     Manrope (Google Fonts, geometric sans-serif)
+          — functional counter-balance, high legibility for all ages
+          — buttons, labels, body text, captions
 ```
 
 ### Type Scale
+
 ```
-Display   40px / 48px lh / Playfair Display Bold    ← hero countdown number
-H1        32px / 40px lh / Playfair Display Bold    ← page titles
-H2        24px / 32px lh / Playfair Display SemiBold ← section headings
-H3        20px / 28px lh / DM Sans SemiBold         ← card titles
-H4        18px / 24px lh / DM Sans SemiBold         ← subsection headings
-Body L    17px / 26px lh / DM Sans Regular          ← primary body text
-Body M    15px / 22px lh / DM Sans Regular          ← secondary body text
-Body S    13px / 18px lh / DM Sans Regular          ← captions, metadata
-Label     12px / 16px lh / DM Sans Medium CAPS      ← labels, chips, tags
-Button    16px / 24px lh / DM Sans SemiBold         ← all button text
+Display   40px / 48px lh / Noto Serif Bold    ← hero countdown, couple name
+H1        32px / 40px lh / Noto Serif Bold    ← page titles
+H2        24px / 32px lh / Noto Serif Regular ← section headings
+H3        20px / 28px lh / Manrope SemiBold   ← card titles
+H4        18px / 24px lh / Manrope SemiBold   ← subsection headings
+Body L    17px / 26px lh / Manrope Regular    ← primary body text
+Body M    15px / 22px lh / Manrope Regular    ← secondary body text
+Body S    13px / 18px lh / Manrope Regular    ← captions, metadata
+Label     12px / 16px lh / Manrope Medium     ← labels, chips, tags
+Button    16px / 24px lh / Manrope SemiBold   ← all button text
 ```
 
 ### Letter Spacing
+
 ```
-Playfair Display headings:  letter-spacing: 0.01em
-DM Sans body:               letter-spacing: 0
-DM Sans CAPS labels:        letter-spacing: 0.08em
+Noto Serif headings:   letter-spacing: 0.01em
+Manrope body:          letter-spacing: 0
+Manrope label CAPS:    letter-spacing: 0.08em
 ```
 
 ---
@@ -105,12 +149,14 @@ space-6    24px    ← section spacing
 space-8    32px
 space-10   40px
 space-12   48px
-space-16   64px
+space-16   64px    ← top-of-page margin ("Gallery" feel)
 ```
 
 ### Screen Padding
+
 ```
 Horizontal screen padding:  16px (space-4)
+Top-of-page margin:         64px (space-16) for "Gallery" feel
 Content max-width:          430px (centered on web/tablet)
 Safe area inset:            respected via SafeAreaView
 ```
@@ -119,107 +165,106 @@ Safe area inset:            respected via SafeAreaView
 
 ## Border Radius
 
+Roundness scale: **ROUND_EIGHT** (base 8px)
+
 ```
 radius-sm      8px    ← chips, tags, small elements
-radius-md      12px   ← input fields, small cards
-radius-lg      16px   ← standard cards
-radius-xl      24px   ← large cards, bottom sheets
-radius-full    100px  ← pills, avatar circles, round buttons
-radius-btn     28px   ← primary button
+radius-md      12px   ← input fields
+radius-lg      16px   ← medium elements
+radius-card    24px   ← "Madu" card (xl = 1.5rem)
+radius-button  24px   ← primary CTA (xl roundness)
+radius-full    999px  ← pills, avatars, round buttons
 ```
 
 ---
 
-## Shadows
+## Elevation & Shadows
+
+**Tonal Layering Principle:** Place a `surface-container-lowest` (#fff) card on a
+`surface-container-low` (#f4f3f1) section to create a "soft lift" — natural, not mechanical.
+
+When an element *must* float, use ambient shadow only:
 
 ```
-shadow-sm   0px 1px 3px rgba(44, 36, 35, 0.06)                            ← subtle card
-shadow-md   0px 4px 12px rgba(44, 36, 35, 0.08)                           ← raised card
-shadow-lg   0px 8px 24px rgba(44, 36, 35, 0.10), 0px 2px 6px rgba(44,36,35,0.06)  ← modal
-shadow-glow 0px 0px 16px rgba(201, 169, 110, 0.20)                        ← gold accent glow
+Ambient shadow:   blur 24px, y-offset 8px, opacity 6%, color on-surface (#1a1c1a)
+                  → looks like a soft glow, NOT a dark drop-shadow
 ```
 
 ---
 
 ## Components
 
-### Buttons
+### Buttons & CTAs
 
 **Primary Button**
 ```
-Background:     #C9A96E (champagne)
-Text:           #FFFFFF, DM Sans SemiBold 16px
-Border radius:  28px
+Background:     gradient primary (#725b28) → primary-container (#c0a469)
+Text:           #ffffff, Manrope SemiBold 16px
+Border radius:  24px (radius-button)
 Height:         52px
 Padding:        16px 28px
-Shadow:         shadow-sm
-Pressed:        background #A8854A, scale 0.98
-Disabled:       background #C4B9B0, text #FFFFFF
-Loading:        spinner icon, text "Načítava sa..."
+Pressed:        slight scale(0.98), 80ms ease-out
+Disabled:       surface-container-highest background, on-surface-variant text
+Loading:        spinner, "Načítava sa..."
 ```
 
-**Secondary Button**
+**Secondary (Text-only CTA)**
 ```
-Background:     transparent
-Border:         1.5px solid #C9A96E
-Text:           #A8854A, DM Sans SemiBold 16px
-Border radius:  28px
-Height:         52px
-Pressed:        background #F7F0E3
+Style:          Manrope title-md in primary color (#725b28)
+Layout:         gap 1.2rem + trailing chevron-right icon
+Background:     none (no box, no border)
 ```
 
-**Ghost Button / Text Button**
+**Ghost / Text Button**
 ```
-Background:     transparent
-Text:           #8C7B6B, DM Sans Medium 15px
+Text:           on-surface-variant (#4d4638), Manrope Medium 15px
 Underline on press
 ```
 
 **Icon Button**
 ```
-Size:           48px × 48px (touch target)
+Size:           48dp × 48dp (minimum touch target)
 Icon size:      24px
-Background:     transparent or #F7F0E3
+Background:     transparent or surface-container-low
 Border radius:  radius-full
 ```
 
 ---
 
-### Cards
+### Cards — "The Madu Card"
 
 **Standard Card**
 ```
-Background:     #FFFFFF
-Border radius:  radius-lg (16px)
-Shadow:         shadow-md
-Padding:        16px
-Margin bottom:  12px
-```
-
-**Feature Card (dashboard tile)**
-```
-Background:     #FFFFFF
-Border radius:  radius-lg (16px)
-Shadow:         shadow-md
-Padding:        16px
-Contains:       icon (32px), title (H3), subtitle (Body S)
-State — available:   normal
-State — locked:      background #F0EBE5, icon greyed, lock icon overlay, text muted
-State — active:      subtle champagne border (1.5px #EDD9B0)
+Background:     surface-container-lowest (#ffffff)
+Border radius:  24px (radius-card)
+Shadow:         ambient (blur 24px, y-offset 8px, 6% on-surface)
+Padding:        space-4 (16px) internally
+No dividers.    Use space-4 (16px) between elements.
+Layout trick:   overlap images slightly over card edge to break the container feel
 ```
 
 **Hero Card**
 ```
-Background:     gradient (champagne faint)
-Border radius:  radius-xl (24px)
+Background:     gradient #faf9f6 → #f4f3f1
+Border radius:  24px
 Padding:        24px
 Use for:        countdown, wedding info summary
 ```
 
-**Timeline Card**
+**Feature Card (dashboard tile)**
 ```
-Left border:    3px solid #C9A96E (for schedule items)
-Background:     #FFFFFF
+Background:     surface-container-lowest (#ffffff)
+Border radius:  24px
+Shadow:         ambient
+Contains:       icon (32px), title (H3), subtitle (Body S)
+State — locked:  surface-container-low bg, greyed icon, lock icon, muted text
+```
+
+**Timeline Card (schedule)**
+```
+Layout:         vertical whitespace (space-8 = 32px) between blocks
+Marker:         secondary (#516351) dot — NO connecting line
+Background:     surface-container-lowest
 Border radius:  radius-md (12px)
 Padding:        12px 16px
 ```
@@ -230,24 +275,25 @@ Padding:        12px 16px
 
 **Text Input**
 ```
-Background:     #FFFFFF
-Border:         1.5px solid #E0D8D0
+Background:     surface-container-high (#e9e8e5)
+Border:         none (default) — no line borders
 Border radius:  radius-md (12px)
 Height:         52px
 Padding:        16px
-Font:           DM Sans Regular 17px, Text Primary
-Placeholder:    DM Sans Regular 17px, Text Disabled
-Focus:          border #C9A96E, shadow-glow
-Error:          border #C0666B, error message below
+Font:           Manrope Regular 17px, on-surface (#1a1c1a)
+Placeholder:    Manrope Regular 17px, on-surface-variant
+Focus:          background shifts to surface-container-lowest (#fff),
+                ghost primary border at 20% opacity
+Error:          error border (ba1a1a at 20%), error message below
 ```
 
-**Search Input** (for name lookup)
+**Search Input** (name lookup)
 ```
-Background:     #F7F0E3
+Background:     surface-container-low (#f4f3f1)
 Border:         none
-Border radius:  radius-full (100px)
+Border radius:  radius-full (999px)
 Height:         52px
-Prefix:         🔍 icon (18px, #8C7B6B)
+Prefix:         search icon (18px, on-surface-variant)
 ```
 
 ---
@@ -256,136 +302,132 @@ Prefix:         🔍 icon (18px, #8C7B6B)
 
 **Role chip**
 ```
-Background:     #EDD9B0
-Text:           #A8854A, Label (12px CAPS)
+Background:     primary-fixed (#fedf9f)
+Text:           on-primary-container (#4d3a08), Label 12px
 Border radius:  radius-sm (8px)
 Padding:        4px 10px
 ```
 
 **Category tag**
 ```
-Background:     #D4DDD1 (sage light)
-Text:           #728A69, Label (12px CAPS)
+Background:     secondary-container (#d4e8d1)
+Text:           on-secondary-container (#576957), Label 12px
 Border radius:  radius-sm (8px)
 Padding:        4px 10px
 ```
 
-**Status chip — locked**
+**Status — locked**
 ```
-Background:     #F0EBE5
-Text:           #C4B9B0, Label (12px)
-Icon:           🔒 (12px)
-Border radius:  radius-sm (8px)
+Background:     surface-container-highest (#e3e2e0)
+Text:           on-surface-variant, Label 12px
+Icon:           lock (12px)
 ```
 
-**Status chip — available**
+**Status — available**
 ```
-Background:     #E8F2EA
-Text:           #7A9E7E, Label (12px)
-Border radius:  radius-sm (8px)
+Background:     secondary-container (#d4e8d1)
+Text:           secondary (#516351), Label 12px
 ```
 
 ---
 
 ### Navigation
 
-**Bottom Tab Bar**
+**Bottom Tab Bar (Glassmorphism)**
 ```
-Background:     #FFFFFF
-Border top:     1px solid #F0EBE5
+Background:     rgba(250, 249, 246, 0.80) — surface at 80% opacity
+Backdrop blur:  20px
 Height:         64px + safe area inset
-Active tab:     icon + label, color #C9A96E
-Inactive tab:   icon + label, color #C4B9B0
+No top border.  The blur provides visual separation.
+Active tab:     icon + label, color primary (#725b28)
+Inactive tab:   icon + label, color on-surface-variant (#4d4638)
 ```
 
 **Tab configuration (Guest)**
 ```
-Tab 1: 🏠  Domov       ← Dashboard
-Tab 2: 📋  Program     ← Schedule + Menu
-Tab 3: 🎵  Playlist    ← DJ Song Request
-Tab 4: ℹ️  Info        ← Parking, Accommodation, Wedding Info
+Tab 1: Domov       ← Dashboard
+Tab 2: Program     ← Schedule + Menu
+Tab 3: Playlist    ← DJ Song Request
+Tab 4: Info        ← Parking, Accommodation, Wedding Info
 ```
 
 **Tab configuration (DJ)**
 ```
-Tab 1: 🎵  Požiadavky  ← Song Request Queue (only screen)
+Tab 1: Požiadavky  ← Song Request Queue only
 ```
 
 **Tab configuration (Admin)**
 ```
-Tab 1: 🏠  Prehľad     ← Admin Dashboard
-Tab 2: ⚙️  Nastavenia  ← Feature Toggles
-Tab 3: 👥  Hostia      ← Guest List + Questionnaire responses
-Tab 4: 📝  Obsah       ← Content Management
+Tab 1: Prehľad     ← Admin Dashboard
+Tab 2: Nastavenia  ← Feature Toggles
+Tab 3: Hostia      ← Guest List + Questionnaire responses
+Tab 4: Obsah       ← Content Management
 ```
 
 ---
 
-### Empty States
+### Empty & State Components
 
 **Standard empty state**
 ```
-Illustration:   simple line icon (centered, 80px, color #EDD9B0)
-Title:          H3, Text Secondary
-Subtitle:       Body M, Text Secondary
+Icon:           thin-stroke line icon, 80px, color primary-fixed (#fedf9f)
+Title:          H3, on-surface-variant
+Subtitle:       Body M, on-surface-variant
 CTA:            optional Primary Button
 ```
 
 **Locked feature state**
 ```
-Icon:           🔒 large (64px, #C4B9B0)
+Icon:           lock, 64px, on-surface-variant
 Title:          "Dostupné [date]" or "Dostupné v deň svadby"
-Subtitle:       brief explanation
-Background:     #F0EBE5
+Background:     surface-container-low (#f4f3f1)
 ```
 
 **Loading state**
 ```
-Use skeleton screens (shimmer animation)
-Skeleton color: gradient #F7F0E3 → #EDD9B0 → #F7F0E3
+Skeleton screens — shimmer from surface-container-low → surface-container-highest → surface-container-low
+Duration: 1.5s loop
 Card skeletons match real card dimensions
 ```
 
 **Error state**
 ```
-Icon:           ⚠️ (48px, #C0666B)
+Icon:           warning, 48px, error (#ba1a1a)
 Title:          "Niečo sa pokazilo"
-Subtitle:       friendly Slovak error message
-CTA:            "Skúsiť znova" (retry button)
+CTA:            "Skúsiť znova"
 ```
 
 **Success state**
 ```
-Icon:           ✓ in circle (48px, #7A9E7E)
+Icon:           check-circle, 48px, secondary (#516351)
 Title:          confirmation message in Slovak
-Auto-dismiss:   after 2s or with button "Zavrieť"
-Background:     #E8F2EA
+Background:     secondary-container (#d4e8d1)
+Auto-dismiss:   2s or "Zavrieť"
 ```
 
 ---
 
 ### Banners & Alerts
 
+No left borders on banners — use background color shifts only.
+
 **Info banner**
 ```
-Background:     #F7F0E3
-Left border:    3px solid #C9A96E
-Icon:           ℹ️
-Text:           Body M, Text Primary
+Background:     primary-fixed (#fedf9f)
+Icon:           info
+Text:           Body M, on-primary-container (#4d3a08)
 Border radius:  radius-md
 Padding:        12px 16px
 ```
 
 **Warning banner**
 ```
-Background:     #FDF3E8
-Left border:    3px solid #C4956A
+Background:     tertiary-container (#b6a687)
 ```
 
 **Success banner**
 ```
-Background:     #E8F2EA
-Left border:    3px solid #7A9E7E
+Background:     secondary-container (#d4e8d1)
 ```
 
 ---
@@ -393,11 +435,11 @@ Left border:    3px solid #7A9E7E
 ### Countdown Widget
 
 ```
-Container:      Hero Card (gradient champagne)
+Container:      Hero Card (gradient faf9f6 → f4f3f1)
 Layout:         centered
-Numbers:        Display (40px), Playfair Display Bold, Text Primary
-Labels:         Label (12px CAPS), Text Secondary ("DNÍ", "HODÍN", "MINÚT", "SEKÚND")
-Separator:      ":" in Text Secondary
+Numbers:        Display (40px), Noto Serif Bold, on-surface (#1a1c1a)
+Labels:         Label (12px), Manrope, on-surface-variant ("DNÍ", "HODÍN", "MINÚT", "SEKÚND")
+Separator:      ":" in on-surface-variant
 Animation:      subtle fade transition on number change
 ```
 
@@ -409,18 +451,19 @@ Animation:      subtle fade transition on number change
 - Card tap: `scale(0.99)` + opacity 0.95, 100ms ease-out
 - Page transitions: slide left/right (native feel), 300ms
 - Countdown: smooth number flip animation
-- Success submission: green checkmark with scale-in animation
+- Success submission: secondary-colored checkmark with scale-in animation
 - Skeleton loading: left-to-right shimmer, 1.5s loop
-- Bottom sheet: spring animation from bottom, blur backdrop
-- Feature unlock notification: subtle champagne glow pulse
+- Bottom sheet: spring animation from bottom, glassmorphism backdrop
+- Feature unlock: subtle primary glow pulse
 
 ---
 
 ## Icons
 
 **Library:** `@expo/vector-icons` (Feather + MaterialCommunityIcons)
+**Style:** thin-stroke, elegant iconography — matches Manrope weight. No kitschy symbols.
 **Size:** 24px standard, 20px inline, 32px feature card, 48px empty state
-**Color:** follows text color hierarchy (primary/secondary/disabled)
+**Color:** follows text hierarchy (on-surface / on-surface-variant / disabled)
 
 **Key icons:**
 ```
@@ -446,9 +489,9 @@ Arrow:          chevron-right (Feather)
 ## Imagery & Media
 
 - **Hero photos:** warm toned, soft focus, slightly desaturated (+5% warm filter)
-- **Love story photos:** displayed in rounded cards (radius-lg), with subtle shadow
+- **Love story photos:** rounded cards (radius-card = 24px), ambient shadow, overlap card edge
 - **Aspect ratios:** 16:9 for banners, 1:1 for timeline photos, 4:3 for gallery
-- **Placeholder:** champagne gradient with centered heart icon
+- **Placeholder:** primary-fixed gradient (#fedf9f) with thin centered icon
 
 ---
 
@@ -460,4 +503,30 @@ Tablet (768px+):     2 column grid for feature cards, max-width 768px centered
 Desktop web (1024+): max-width 430px centered (simulating phone frame)
 ```
 
-The app is intentionally narrow even on desktop — it is a mobile companion, not a website.
+The app is intentionally narrow on desktop — it is a mobile companion, not a website.
+
+---
+
+## Stitch Screens Reference
+
+Project ID: `4401616869883670187`
+
+| Screen | Stitch ID |
+|---|---|
+| Welcome / Login | `292127959a6144dfbe7ba8d67b09f081` |
+| Guest Dashboard | `2ee6236f0c664af1adff3b9f17898abb` |
+| Wedding Schedule | `279734c037844b9a8d0116a9fdf3e0ee` |
+| Wedding Menu | `06af7a1838024cd2a9eeb3c50c0895ae` |
+| Questionnaire | `800ef5596f7c464f9ed1673141238e1f` |
+| Wedding Details | `e9a3da9b49dc469c882d3297bfa94094` |
+| Accommodation | `038b9cdc569c4721b2acb5586484bcf4` |
+| Parking Information | `db2d69eeff4b4313bed6124a0cca88b7` |
+| Love Story Timeline | `bdc7119c9caf489a836db0e282fee9ae` |
+| Seating Plan | `53753295e0fe425280fad5b0b19b4f28` |
+| Photo Gallery | `785335a2a82c44eb8a8e769745305908` |
+| Photo Bingo | `504199cd4db24bf0a453a851793d21da` |
+| DJ Screen | `44335af8b2434a299149b95edb3e5cb2` |
+| Playlist Request | `68b11f480c074a4eb5e7faf27e8530be` |
+| Add to Calendar | `9a52d13476944514be865fa8034df23f` |
+| Admin Overview | `358ed1e306cf49ee9e057c0fa4011573` |
+| Thank You | `56fcd30fb19a4885b31cae95b1f56873` |

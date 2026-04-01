@@ -5,6 +5,9 @@ import { Colors, Typography, Spacing, Radius, Shadow } from '../../constants/the
 import { Copy } from '../../constants/copy';
 import type { ScheduleItem } from '../../types/api';
 
+// Alternating dot colors per design
+const DOT_COLORS = [Colors.secondary, Colors.primary, Colors.tertiary, Colors.secondary, Colors.primary];
+
 export default function ScheduleScreen() {
   const { data: items = [], isLoading } = useQuery<ScheduleItem[]>({
     queryKey: ['schedule'],
@@ -13,75 +16,145 @@ export default function ScheduleScreen() {
 
   if (isLoading) {
     return (
-      <View style={styles.center}>
+      <View style={s.center}>
         <ActivityIndicator color={Colors.primary} />
       </View>
     );
   }
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      <Text style={styles.title}>{Copy.schedule.title}</Text>
-      {items.map((item) => (
-        <View key={item.id} style={styles.item}>
-          <View style={styles.timeCol}>
-            <Text style={styles.timeLabel}>{item.timeLabel}</Text>
-          </View>
-          <View style={styles.divider} />
-          <View style={styles.detailCol}>
-            <Text style={styles.itemTitle}>
-              {item.icon ? `${item.icon} ` : ''}{item.title}
-            </Text>
-            {item.description && (
-              <Text style={styles.itemDescription}>{item.description}</Text>
-            )}
-          </View>
-        </View>
-      ))}
+    <ScrollView style={s.scroll} contentContainerStyle={s.content}>
+
+      {/* ── Hero header ────────────────────────────────────────── */}
+      <View style={s.heroHeader}>
+        <Text style={s.heroTitle}>{Copy.schedule.title}</Text>
+        <Text style={s.heroSub}>{Copy.schedule.subtitle}</Text>
+        <View style={s.heroDivider} />
+      </View>
+
+      {/* ── Timeline ───────────────────────────────────────────── */}
+      <View style={s.timeline}>
+        {items.map((item, idx) => {
+          const dotColor = DOT_COLORS[idx % DOT_COLORS.length];
+          return (
+            <View key={item.id} style={s.eventRow}>
+              {/* Dot — no connecting line per design system */}
+              <View style={[s.dot, { backgroundColor: dotColor }]} />
+
+              {/* Card */}
+              <View style={s.card}>
+                <View style={s.cardTop}>
+                  <View style={[s.timePill, { backgroundColor: `${dotColor}18` }]}>
+                    <Text style={[s.timeText, { color: dotColor }]}>{item.timeLabel}</Text>
+                  </View>
+                </View>
+                <Text style={s.itemTitle}>{item.title}</Text>
+                {item.description ? (
+                  <Text style={s.itemDesc}>{item.description}</Text>
+                ) : null}
+              </View>
+            </View>
+          );
+        })}
+      </View>
+
     </ScrollView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.background },
-  content: { padding: Spacing.md, paddingBottom: Spacing.xxl },
-  center: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  title: {
-    fontFamily: Typography.heading,
-    fontSize: 24,
-    color: Colors.textPrimary,
-    marginBottom: Spacing.lg,
+const s = StyleSheet.create({
+  scroll: { flex: 1, backgroundColor: Colors.background },
+  content: {
+    paddingBottom: Spacing.xxl,
   },
-  item: {
-    flexDirection: 'row',
-    backgroundColor: Colors.surface,
-    borderRadius: Radius.card,
-    padding: Spacing.md,
+  center: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+
+  // Hero header
+  heroHeader: {
+    paddingHorizontal: Spacing.md,
+    paddingTop: Spacing.gallery,
+    paddingBottom: Spacing.lg,
+    alignItems: 'center',
+  },
+  heroTitle: {
+    fontFamily: Typography.heading,
+    fontSize: 36,
+    color: Colors.onSurface,
+    letterSpacing: 0.2,
+    textAlign: 'center',
     marginBottom: Spacing.sm,
+  },
+  heroSub: {
+    fontFamily: Typography.body,
+    fontSize: 14,
+    color: Colors.onSurfaceVariant,
+    fontStyle: 'italic',
+    textAlign: 'center',
+  },
+  heroDivider: {
+    width: 32,
+    height: 1,
+    backgroundColor: Colors.outlineVariant,
+    marginTop: Spacing.md,
+  },
+
+  // Timeline
+  timeline: {
+    paddingHorizontal: Spacing.md,
+  },
+  eventRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: Spacing.xl,
+    gap: Spacing.md,
+  },
+
+  // Dot — NO connecting line
+  dot: {
+    width: 14,
+    height: 14,
+    borderRadius: Radius.full,
+    marginTop: 18,
+    flexShrink: 0,
+  },
+
+  // Card
+  card: {
+    flex: 1,
+    backgroundColor: Colors.surface,
+    borderRadius: Radius.md,
+    padding: Spacing.md,
     ...Shadow.card,
   },
-  timeCol: { width: 56, justifyContent: 'flex-start', paddingTop: 2 },
-  timeLabel: {
-    fontFamily: Typography.bodyMedium,
-    fontSize: 13,
-    color: Colors.primary,
+  cardTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: Spacing.sm,
   },
-  divider: {
-    width: 1,
-    backgroundColor: Colors.border,
-    marginHorizontal: Spacing.md,
+  timePill: {
+    borderRadius: Radius.full,
+    paddingHorizontal: Spacing.md,
+    paddingVertical: 4,
+    alignSelf: 'flex-start',
   },
-  detailCol: { flex: 1 },
+  timeText: {
+    fontFamily: Typography.bodySemiBold,
+    fontSize: 12,
+    letterSpacing: 1,
+    textTransform: 'uppercase',
+  },
   itemTitle: {
-    fontFamily: Typography.bodyMedium,
-    fontSize: 15,
-    color: Colors.textPrimary,
+    fontFamily: Typography.heading,
+    fontSize: 20,
+    color: Colors.onSurface,
+    marginBottom: 6,
+    lineHeight: 28,
   },
-  itemDescription: {
+  itemDesc: {
     fontFamily: Typography.body,
-    fontSize: 13,
-    color: Colors.textSecondary,
-    marginTop: 4,
-    lineHeight: 20,
+    fontSize: 14,
+    color: Colors.onSurfaceVariant,
+    lineHeight: 22,
   },
 });

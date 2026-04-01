@@ -1,15 +1,7 @@
 import { Slot, useRouter, useSegments } from 'expo-router';
 import { useEffect } from 'react';
+import { View, StyleSheet, Platform } from 'react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import {
-  useFonts,
-  PlayfairDisplay_700Bold,
-  PlayfairDisplay_700Bold_Italic,
-} from '@expo-google-fonts/playfair-display';
-import {
-  DMSans_400Regular,
-  DMSans_500Medium,
-} from '@expo-google-fonts/dm-sans';
 import { StatusBar } from 'expo-status-bar';
 import { AuthProvider, useAuth } from '../store/AuthContext';
 
@@ -44,21 +36,30 @@ function RootNavigator() {
 }
 
 export default function RootLayout() {
-  const [fontsLoaded] = useFonts({
-    PlayfairDisplay_700Bold,
-    PlayfairDisplay_700Bold_Italic,
-    DMSans_400Regular,
-    DMSans_500Medium,
-  });
-
-  if (!fontsLoaded) return null;
-
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <StatusBar style="dark" backgroundColor="#FDFAF5" />
-        <RootNavigator />
+        <StatusBar style="dark" backgroundColor="#faf9f6" />
+        <View style={styles.appShell}>
+          <RootNavigator />
+        </View>
       </AuthProvider>
     </QueryClientProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  appShell: {
+    flex: 1,
+    backgroundColor: '#faf9f6',
+    ...(Platform.OS === 'web'
+      ? {
+          maxWidth: 430,
+          marginHorizontal: 'auto',
+          minHeight: '100vh' as any,
+          // subtle shadow to frame the "phone" on desktop
+          boxShadow: '0px 0px 40px rgba(26, 28, 26, 0.08)',
+        }
+      : {}),
+  },
+});

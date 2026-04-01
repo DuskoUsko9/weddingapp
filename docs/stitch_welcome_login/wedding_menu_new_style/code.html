@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html lang="sk"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface": "#FAF9F6", // Ivory background
+              "background": "#FAF9F6",
+              "primary": "#725B28", // Gold accent
+              "secondary": "#516351", // Sage accent
+              "on-secondary-container": "#3A4B3A",
+              "secondary-container": "#D4E8D1",
+              "on-surface": "#1A1C1A",
+              "on-surface-variant": "#4D4638",
+              "outline-variant": "#D0C5B3",
+              "surface-container-lowest": "#FFFFFF",
+              "surface-container-low": "#F4F3F1",
+              "surface-container": "#EFEEEB",
+              "surface-container-high": "#E9E8E5",
+            },
+            fontFamily: {
+              "headline": ["Noto Serif", "serif"],
+              "body": ["Manrope", "sans-serif"],
+              "label": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #FAF9F6;
+            color: #1A1C1A;
+        }
+        .editorial-header {
+            font-family: 'Noto Serif', serif;
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-70 transition-opacity">menu</span>
+</div>
+<h1 class="editorial-header text-3xl tracking-wide italic text-primary">Madu</h1>
+<div class="w-6"></div> <!-- Spacer for centering -->
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-screen-md mx-auto">
+<!-- Hero Branding Section -->
+<section class="text-center mb-16 space-y-4">
+<span class="font-label text-[10px] uppercase tracking-[0.4em] text-secondary font-bold">Hostina</span>
+<h2 class="editorial-header text-5xl md:text-6xl text-on-surface font-light">Svadobné Menu</h2>
+<div class="w-12 h-px bg-primary/30 mx-auto mt-6"></div>
+<p class="font-body text-on-surface-variant max-w-xs mx-auto text-sm leading-relaxed mt-4">
+            Starostlivo vybrané chute pre náš spoločný večer v kruhu najbližších.
+        </p>
+</section>
+<!-- Menu Categories Grid -->
+<div class="space-y-16">
+<!-- Category: Predjedlo -->
+<section class="space-y-6">
+<div class="flex items-center gap-4">
+<span class="editorial-header italic text-3xl text-primary/30">01</span>
+<h3 class="editorial-header text-2xl tracking-wide">Predjedlo</h3>
+</div>
+<div class="bg-white rounded-2xl p-6 md:p-8 transition-all hover:shadow-xl shadow-[0_12px_40px_rgba(81,99,81,0.08)] overflow-hidden border border-secondary/5">
+<div class="flex flex-col gap-8">
+<div class="w-full aspect-[16/9] md:aspect-[4/3] rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Elegant gourmet appetizer with fresh salmon tartare, avocado mousse and microgreens on a white ceramic plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYy1VUfw-dDXIxFCtBf6u9y7VCHw8rEgC0XoroMf6Bed2u1q-RnRf0XUR59HXWZl2BQBeJQZPyAPpjyJIed_y4MSNkW8L-PruoISZsOy7J_1k2Otfsyib8jY4I_VzgATmwSVP_0DweUN5o6obY326lyhPZ_ncGq5WLE1gDQ4sXm92j6TbXPD5FXls3Mlj4Wo0HdQH1B3Knx-GOAOMYEMr_vm9F0N3UnXnyE0tz0n5ttxcuVTKsVF-A4y_sNL1fMqlOLeODP9dYZpE"/>
+</div>
+<div class="space-y-3">
+<h4 class="editorial-header text-xl text-primary">Lososový tatarák s avokádom</h4>
+<p class="font-body text-on-surface-variant leading-relaxed text-sm">
+                            Jemne sekaný čerstvý losos s marinovanou šalotkou, kôprom a krémovým avokádovým mousse, podávaný s domácim maslovým toastom.
+                        </p>
+<div class="pt-2 flex items-center gap-2">
+<span class="bg-secondary/10 text-secondary text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full border border-secondary/20">Bezlepkové</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Category: Polievka -->
+<section class="space-y-6">
+<div class="flex items-center gap-4">
+<span class="editorial-header italic text-3xl text-primary/30">02</span>
+<h3 class="editorial-header text-2xl tracking-wide">Polievka</h3>
+</div>
+<div class="relative bg-white rounded-2xl p-8 border border-primary/10 shadow-sm">
+<div class="flex flex-col gap-4 text-center max-w-xl mx-auto">
+<h4 class="editorial-header text-xl text-primary">Slepačí vývar s domácimi rezancami</h4>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                        Tradičný pomaly ťahaný vývar z domáceho kuraťa s koreňovou zeleninou a ručne vaľkanými rezancami.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Category: Hlavné jedlo -->
+<section class="space-y-6">
+<div class="flex items-center gap-4">
+<span class="editorial-header italic text-3xl text-primary/30">03</span>
+<h3 class="editorial-header text-2xl tracking-wide">Hlavné jedlo</h3>
+</div>
+<div class="grid grid-cols-1 gap-8">
+<div class="bg-white rounded-2xl p-6 md:p-8 shadow-[0_12px_40px_rgba(81,99,81,0.08)] border border-secondary/5">
+<div class="flex flex-col gap-8">
+<div class="w-full aspect-[16/9] md:aspect-[4/3] rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Slow roasted beef tenderloin with truffle potato puree and red wine reduction sauce in a high-end restaurant setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALSjhC7qIGST8cAqVDGN_c9rYvl7d-ZjCm3cQ3rSeXbDu93SoXBTBZ-4mG8JUhgwLqFdzEkUcmgoh-tfps3ZvLPLSPochjqPDb1wjRYP17at-PULZs5dozXKmDFw9pSKWXVj6ibw7zF5Un9Oj8FM1Ze7xhtfwD6xN8px82tsGAUF4qGNRkJzlAsmrtGJNZ9OHUAbk-U-6nGpfgNrruDk4bEC_j2X4JnQAZqpLKRmtqKK13DHLCAh2BgJDRDlTEFhw7N315w9wRmog"/>
+</div>
+<div class="space-y-3">
+<h4 class="editorial-header text-xl text-primary">Konfitované hovädzie líčka</h4>
+<p class="font-body text-on-surface-variant leading-relaxed text-sm">
+                                Pomaly konfitované hovädzie líčka na červenom víne s hľuzovkovým zemiakovým pyré a glazovanou karotkou.
+                            </p>
+</div>
+</div>
+</div>
+<div class="bg-secondary-container/30 rounded-2xl p-8 border-l-4 border-secondary">
+<div class="space-y-3">
+<span class="font-label text-[10px] uppercase tracking-widest text-secondary font-bold">Vegetariánska alternatíva</span>
+<h4 class="editorial-header text-xl text-on-surface">Krémové hubové rizoto</h4>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                            Talianska ryža Carnaroli s lesnými hubami, parmezánovým čipsom a čerstvým tymiánom.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Category: Dezert -->
+<section class="space-y-6">
+<div class="flex items-center gap-4">
+<span class="editorial-header italic text-3xl text-primary/30">04</span>
+<h3 class="editorial-header text-2xl tracking-wide">Dezert</h3>
+</div>
+<div class="bg-white rounded-2xl overflow-hidden shadow-[0_12px_40px_rgba(81,99,81,0.08)] border border-secondary/5">
+<div class="h-56 md:h-64 w-full">
+<img class="w-full h-full object-cover" data-alt="Rich dark chocolate fondant with a molten core, served with fresh raspberries and a scoop of vanilla bean ice cream" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFB_T1d6X5e-zlFj4j3IsqgWKWIgSbtAkoQ2ms2cranlRO6U1rNetmNPh_HJ9B_RUNVtd2P2xOdllMy2VtrQ5XLVdrPerX000Kk671dF2KneTLOAB7LqxysrygXSN6jM6CZFUFyw1Vb1caWict2VKC0G1AdjsO_jSRCJ7PJxrqIWw1TnDe6MtxdNky_z1_KQXinbg_8QrCkdtyFqzh7OsOcKIqtRaR9-6Mz52u6vfT0MhQNwA24_CYLUBKnvmkEo3QvLGx34zxn7U"/>
+</div>
+<div class="p-8 text-center space-y-3">
+<h4 class="editorial-header text-xl text-primary">Belgický čokoládový fondant</h4>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                        Teplý koláčik s tekutým stredom, podávaný s domácou vanilkovou zmrzlinou a lesným ovocím.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Drinks Footer -->
+<section class="pt-8 text-center pb-8">
+<div class="inline-flex flex-col items-center gap-4 p-10 bg-secondary/5 rounded-full w-full max-w-[280px] mx-auto aspect-square justify-center border border-secondary/10 shadow-inner">
+<span class="material-symbols-outlined text-primary text-4xl">wine_bar</span>
+<h3 class="editorial-header text-xl italic text-primary">Nápojový lístok</h3>
+<p class="font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em] px-4 font-semibold">K dispozícii počas celého večera v bare</p>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-md border-t border-primary/10">
+<div class="flex justify-around items-center h-20 w-full px-4">
+<a class="flex flex-col items-center justify-center text-on-surface/40 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-label text-[9px] uppercase tracking-widest font-bold">Domov</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+<span class="font-label text-[9px] uppercase tracking-widest font-bold">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface/40 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">photo_library</span>
+<span class="font-label text-[9px] uppercase tracking-widest font-bold">Fotky</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface/40 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label text-[9px] uppercase tracking-widest font-bold">Profil</span>
+</a>
+</div>
+</nav>
+</body></html>

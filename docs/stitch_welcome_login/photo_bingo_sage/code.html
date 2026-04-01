@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="light" lang="sk"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#5e4c46",
+              "on-surface-variant": "#434842",
+              "primary-container": "#b4c8b2",
+              "surface-dim": "#dddad0",
+              "secondary-fixed-dim": "#e9c176",
+              "on-secondary-container": "#785a1a",
+              "on-background": "#1c1c16",
+              "surface-bright": "#fdf9ef",
+              "outline": "#747872",
+              "on-error-container": "#93000a",
+              "primary": "#516351",
+              "on-tertiary": "#ffffff",
+              "surface-variant": "#e6e2d8",
+              "surface-tint": "#516351",
+              "inverse-surface": "#31312a",
+              "on-surface": "#1c1c16",
+              "surface-container-high": "#ece8de",
+              "secondary": "#775a19",
+              "outline-variant": "#c3c8c0",
+              "on-secondary-fixed-variant": "#5d4201",
+              "tertiary-container": "#d6beb6",
+              "secondary-container": "#fed488",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#b8ccb6",
+              "on-secondary-fixed": "#261900",
+              "secondary-fixed": "#ffdea5",
+              "surface-container-low": "#f7f3e9",
+              "on-error": "#ffffff",
+              "primary-fixed-dim": "#b8ccb6",
+              "on-primary-fixed": "#0f1f11",
+              "surface-container-highest": "#e6e2d8",
+              "error": "#ba1a1a",
+              "tertiary-fixed": "#f7ddd5",
+              "surface": "#fdf9ef",
+              "primary-fixed": "#d4e8d1",
+              "inverse-on-surface": "#f4f0e6",
+              "tertiary-fixed-dim": "#dac1ba",
+              "tertiary": "#6d5a54",
+              "surface-container": "#f1eee4",
+              "surface-container-lowest": "#ffffff",
+              "background": "#fdf9ef",
+              "on-tertiary-fixed-variant": "#54433d",
+              "error-container": "#ffdad6",
+              "on-primary-fixed-variant": "#3a4b3a",
+              "on-tertiary-fixed": "#261814",
+              "on-secondary": "#ffffff",
+              "on-primary-container": "#435443"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #fdf9ef;
+            color: #1c1c16;
+        }
+        h1, h2, h3 {
+            font-family: 'Noto Serif', serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- Top Navigation Bar -->
+<header class="bg-[#fdf9ef]/80 backdrop-blur-md text-[#516351] font-serif tracking-wide display-md docked full-width top-0 sticky z-50 no-border tonal-shift shadow-sm shadow-[#1c1c16]/5 flex items-center justify-between px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined hover:opacity-80 transition-opacity cursor-pointer">menu</span>
+<span class="text-2xl font-serif text-[#516351] tracking-widest">Maťka &amp; Dušan</span>
+</div>
+<div class="hidden md:flex gap-8 items-center font-sans text-xs uppercase tracking-widest font-semibold">
+<a class="text-[#516351]/70 hover:opacity-80 transition-opacity" href="#">Domov</a>
+<a class="text-[#516351]/70 hover:opacity-80 transition-opacity" href="#">Program</a>
+<a class="text-[#516351]/70 hover:opacity-80 transition-opacity" href="#">Fotky</a>
+<a class="text-[#775a19]" href="#">Bingo</a>
+</div>
+</header>
+<main class="max-w-4xl mx-auto px-6 pt-12">
+<!-- Hero Editorial Moment -->
+<section class="mb-16">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="max-w-xl">
+<span class="font-label text-xs uppercase tracking-[0.2em] text-secondary mb-4 block">Svadobná Hra</span>
+<h1 class="text-5xl md:text-7xl font-headline text-primary leading-tight">Svadobné Bingo</h1>
+<p class="mt-6 text-lg text-on-surface-variant font-body leading-relaxed">
+                        Zachyťte najkrajšie momenty dnešného dňa. Keď splníte výzvu, stačí na ňu kliknúť a nahrať fotku.
+                    </p>
+</div>
+<div class="flex flex-col items-end">
+<div class="bg-surface-container-highest px-6 py-4 rounded-xl flex items-center gap-4">
+<div class="text-right">
+<span class="block text-[10px] uppercase tracking-widest text-secondary font-bold">Váš Pokrok</span>
+<span class="text-2xl font-headline text-primary">8 / 16</span>
+</div>
+<div class="w-12 h-12 rounded-full border-4 border-primary-container flex items-center justify-center relative">
+<svg class="absolute inset-0 w-full h-full -rotate-90">
+<circle class="text-primary" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-dasharray="125" stroke-dashoffset="62.5" stroke-width="4"></circle>
+</svg>
+<span class="text-[10px] font-bold">50%</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bingo Grid -->
+<section class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+<!-- Card 1: Completed State -->
+<div class="group relative aspect-square bg-primary text-on-primary rounded-xl overflow-hidden flex flex-col items-center justify-center p-4 text-center transition-all duration-300 shadow-sm">
+<div class="absolute inset-0 opacity-20">
+<img alt="close-up artistic shot of a groom laughing heartily with a blurry background of wedding guests" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDablmEqWjQg3RRR4mC7rYz--HeUSnN6bYKXeCQWtqDUApAQxn_vBY5c5meX5CMJgG_EwWfavHFO7FW4E2qdTPsH36dj3-pL20_cb2J65AOdPvm1USfjjO9woeoyXIXTGHKP7C8VXiEuv8Kf21eShkHSaYNGMIOscdBi7VmtdWWJiGbQqvzmha7XKi0d-jYec8LtT3H1jC_FKATRzoBw-EWtYzuOs_ixt3CDQFCyhVc-hLwHRDYg9fIAS2kInL0_arPrKOEUuifTOM"/>
+</div>
+<span class="material-symbols-outlined text-3xl mb-2" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label text-sm font-medium tracking-tight">Smiaci sa ženích</span>
+<div class="absolute bottom-2 right-2">
+<span class="material-symbols-outlined text-xs">photo_camera</span>
+</div>
+</div>
+<!-- Card 2: Interactive State -->
+<button class="aspect-square bg-surface-container-low hover:bg-surface-container-highest text-primary rounded-xl flex flex-col items-center justify-center p-4 text-center border-none transition-all duration-300">
+<span class="material-symbols-outlined text-4xl mb-3 opacity-40">celebration</span>
+<span class="font-body text-sm font-semibold text-on-surface">Prvý tanec</span>
+</button>
+<!-- Card 3 -->
+<button class="aspect-square bg-surface-container-low hover:bg-surface-container-highest text-primary rounded-xl flex flex-col items-center justify-center p-4 text-center border-none transition-all duration-300">
+<span class="material-symbols-outlined text-4xl mb-3 opacity-40">restaurant</span>
+<span class="font-body text-sm font-semibold text-on-surface">Detail menu</span>
+</button>
+<!-- Card 4: Completed State -->
+<div class="group relative aspect-square bg-primary text-on-primary rounded-xl overflow-hidden flex flex-col items-center justify-center p-4 text-center transition-all duration-300 shadow-sm">
+<div class="absolute inset-0 opacity-20">
+<img alt="elegant shot of wedding shoes resting on a vintage chair with soft afternoon light" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-OxHUxC1-Z8n6Z041S7SD_0BgDDerqo2cy2fdP-onf-rI33Xgf21XBNTTIgG6cCuf7k_LWXAkS89VmNzHjVBb6BXC45XWkzPq1NmVlrdZDxGm1u_RF4iIhbF9dW9GM5N4qkZIkdh6IXBFkKVQPnDyneTfNpK3l5_tsLbEWf0O4ZMnetpAeWnfhM9qB625BeRPLWuUhenM2V-w9sGMhOtKGYdo8EF1MzHP8pYcEvemS2xPhCFk_-q1ZF-0zgnD_lEbbd4Vn1nGUh0"/>
+</div>
+<span class="material-symbols-outlined text-3xl mb-2" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label text-sm font-medium tracking-tight">Pohodlné topánky</span>
+</div>
+<!-- Card 5 -->
+<button class="aspect-square bg-surface-container-low hover:bg-surface-container-highest text-primary rounded-xl flex flex-col items-center justify-center p-4 text-center border-none transition-all duration-300">
+<span class="material-symbols-outlined text-4xl mb-3 opacity-40">favorite</span>
+<span class="font-body text-sm font-semibold text-on-surface">Bozk novomanželov</span>
+</button>
+<!-- Card 6 -->
+<button class="aspect-square bg-surface-container-low hover:bg-surface-container-highest text-primary rounded-xl flex flex-col items-center justify-center p-4 text-center border-none transition-all duration-300">
+<span class="material-symbols-outlined text-4xl mb-3 opacity-40">groups</span>
+<span class="font-body text-sm font-semibold text-on-surface">Skupinové objatie</span>
+</button>
+<!-- Card 7 -->
+<button class="aspect-square bg-surface-container-low hover:bg-surface-container-highest text-primary rounded-xl flex flex-col items-center justify-center p-4 text-center border-none transition-all duration-300">
+<span class="material-symbols-outlined text-4xl mb-3 opacity-40">local_bar</span>
+<span class="font-body text-sm font-semibold text-on-surface">Prípitok hostí</span>
+</button>
+<!-- Card 8 -->
+<button class="aspect-square bg-surface-container-low hover:bg-surface-container-highest text-primary rounded-xl flex flex-col items-center justify-center p-4 text-center border-none transition-all duration-300">
+<span class="material-symbols-outlined text-4xl mb-3 opacity-40">cake</span>
+<span class="font-body text-sm font-semibold text-on-surface">Krájanie torty</span>
+</button>
+<!-- Asymmetric Grid Break -->
+<div class="col-span-2 row-span-2 relative rounded-xl overflow-hidden bg-surface-container-highest p-8 flex flex-col justify-end">
+<img alt="blurred background of a wedding reception table with eucalyptus leaves and candles" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdunr-3m9X61zqjqdm0Mq67Gou5pjqpInGfDRI3Cl2d2p02FqQuLhGMmvFzI9n9r9DIWIG_Mm0gKLMHiy5Bcbqno2pjjO0c_Wjk-6KU5GNSY1g9KOH4uGuIHaKx2FxZSgG1PwKXfWovZFdzLet6AqHnkRJyxNh3ybhVTIq90dAWwYeP_5pjyjuPMJEoACTpEoB0eU6w-oppWFzohFdOf1AHMwjKIRMojmtNjF_gibx-pihIHp4ELGgA-9T_KWcxW_wCvKnXc5giXE"/>
+<h3 class="text-2xl font-headline text-primary relative z-10 mb-2">Podeľte sa s nami</h3>
+<p class="text-sm text-on-surface-variant relative z-10 mb-4">Vaše pohľady na náš deň sú pre nás tým najkrajším darom.</p>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-xl font-label text-xs uppercase tracking-widest relative z-10 self-start hover:opacity-90 transition-all">Nahrať Album</button>
+</div>
+<!-- Card 9 -->
+<button class="aspect-square bg-surface-container-low hover:bg-surface-container-highest text-primary rounded-xl flex flex-col items-center justify-center p-4 text-center border-none transition-all duration-300">
+<span class="material-symbols-outlined text-4xl mb-3 opacity-40">local_florist</span>
+<span class="font-body text-sm font-semibold text-on-surface">Kytica</span>
+</button>
+<!-- Card 10 -->
+<button class="aspect-square bg-surface-container-low hover:bg-surface-container-highest text-primary rounded-xl flex flex-col items-center justify-center p-4 text-center border-none transition-all duration-300">
+<span class="material-symbols-outlined text-4xl mb-3 opacity-40">music_note</span>
+<span class="font-body text-sm font-semibold text-on-surface">Kapela v akcii</span>
+</button>
+</section>
+<!-- Progress Footer Section -->
+<section class="mt-20 p-8 rounded-3xl bg-surface-container-low border border-outline-variant/15 flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="flex items-center gap-6">
+<div class="w-16 h-16 bg-primary-container rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">emoji_events</span>
+</div>
+<div>
+<h4 class="font-headline text-xl text-primary">Hlavná výhra</h4>
+<p class="text-sm text-on-surface-variant">Za kompletné bingo vás čaká prekvapenie na bare!</p>
+</div>
+</div>
+<div class="w-full md:w-64">
+<div class="flex justify-between text-xs font-label text-secondary mb-2 uppercase tracking-tighter">
+<span>Svadobný Album</span>
+<span>50%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-1/2"></div>
+</div>
+</div>
+</section>
+</main>
+<!-- Navigation Drawer (Desktop/Mobile Pivot) -->
+<nav class="fixed inset-y-0 left-0 w-80 p-8 z-[60] flex flex-col gap-4 bg-[#f7f3e9] dark:bg-stone-800 rounded-r-3xl shadow-2xl shadow-[#1c1c16]/10 -translate-x-full transition-transform duration-500" id="mobile-nav">
+<h2 class="font-serif text-[#516351] mb-8 text-2xl tracking-widest">Svadobné Menu</h2>
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-4 px-4 py-3 text-[#6d5a54] hover:bg-[#e6e2d8]/50 transition-all rounded-xl font-serif text-lg tracking-tight" href="#">
+<span class="material-symbols-outlined">schedule</span> Timeline
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 text-[#6d5a54] hover:bg-[#e6e2d8]/50 transition-all rounded-xl font-serif text-lg tracking-tight" href="#">
+<span class="material-symbols-outlined">restaurant</span> Menu
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 text-[#516351] font-bold bg-[#e6e2d8] rounded-xl font-serif text-lg tracking-tight" href="#">
+<span class="material-symbols-outlined">grid_view</span> Bingo
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 text-[#6d5a54] hover:bg-[#e6e2d8]/50 transition-all rounded-xl font-serif text-lg tracking-tight" href="#">
+<span class="material-symbols-outlined">hotel</span> Accommodation
+            </a>
+</div>
+</nav>
+<!-- Bottom Navigation Bar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#fdf9ef]/90 backdrop-blur-xl no-border shadow-[0_-4px_20px_rgba(28,28,22,0.04)] rounded-t-3xl">
+<div class="flex flex-col items-center justify-center text-[#516351]/60 px-5 py-2 transition-colors hover:text-[#775a19]">
+<span class="material-symbols-outlined">home</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium mt-1">Domov</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#516351]/60 px-5 py-2 transition-colors hover:text-[#775a19]">
+<span class="material-symbols-outlined">event</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium mt-1">Program</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#516351] text-[#fdf9ef] rounded-2xl px-5 py-2">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium mt-1">Bingo</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#516351]/60 px-5 py-2 transition-colors hover:text-[#775a19]">
+<span class="material-symbols-outlined">person</span>
+<span class="font-sans text-[11px] uppercase tracking-[0.05em] font-medium mt-1">Profil</span>
+</div>
+</nav>
+</body></html>
