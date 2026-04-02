@@ -1,9 +1,24 @@
-import { Tabs } from 'expo-router';
+import { Tabs, useRouter } from 'expo-router';
+import { useEffect } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { Platform, StyleSheet } from 'react-native';
 import { Colors } from '../../constants/theme';
+import { useAuth } from '../../store/AuthContext';
 
 export default function GuestLayout() {
+  const { user, isLoading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isLoading) return;
+    if (!user) return; // root layout handles unauthenticated
+    if (user.role === 'DJ') {
+      router.replace('/(dj)/queue');
+    } else if (user.role === 'Admin') {
+      router.replace('/(admin)/dashboard');
+    }
+  }, [user, isLoading]);
+
   return (
     <Tabs
       screenOptions={{

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using WeddingApp.Domain.Entities;
 using WeddingApp.Infrastructure.Data;
 
 namespace WeddingApp.Infrastructure.Data.Seed;
@@ -27,6 +28,8 @@ public class DataSeeder
         await SeedStaticContentAsync(ct);
         await SeedLoveStoryAsync(ct);
         await SeedBingoChallengesAsync(ct);
+        await SeedQuestionnaireResponsesAsync(ct);
+        await SeedSongRequestsAsync(ct);
 
         _logger.LogInformation("Database seeding complete.");
     }
@@ -100,5 +103,63 @@ public class DataSeeder
         await _db.BingoChallenges.AddRangeAsync(challenges, ct);
         await _db.SaveChangesAsync(ct);
         _logger.LogInformation("Seeded {Count} bingo challenges.", challenges.Count);
+    }
+
+    private async Task SeedQuestionnaireResponsesAsync(CancellationToken ct)
+    {
+        if (await _db.QuestionnaireResponses.AnyAsync(ct)) return;
+
+        var guestNames = QuestionnaireResponseSeed.GetResponses().Select(r => r.GuestName).ToHashSet();
+        var guests = await _db.Guests
+            .Where(g => guestNames.Contains(g.FullName))
+            .ToDictionaryAsync(g => g.FullName, ct);
+
+        var responses = new List<QuestionnaireResponse>();
+        var offset = 0;
+        foreach (var (name, alcohol, hasAllergy, notes) in QuestionnaireResponseSeed.GetResponses())
+        {
+            if (!guests.TryGetValue(name, out var guest)) continue;
+            responses.Add(new QuestionnaireResponse
+            {
+                GuestId = guest.Id,
+                AlcoholPreference = alcohol,
+                HasAllergy = hasAllergy,
+                AllergyNotes = notes,
+                SubmittedAt = DateTime.UtcNow.AddDays(-offset),
+            });
+            offset++;
+        }
+
+        await _db.QuestionnaireResponses.AddRangeAsync(responses, ct);
+        await _db.SaveChangesAsync(ct);
+        _logger.LogInformation("Seeded {Count} questionnaire responses.", responses.Count);
+    }
+
+    private async Task SeedSongRequestsAsync(CancellationToken ct)
+    {
+        if (await _db.SongRequests.AnyAsync(ct)) return;
+
+        var guestNames = SongRequestSeed.GetRequests().Select(r => r.GuestName).ToHashSet();
+        var guests = await _db.Guests
+            .Where(g => guestNames.Contains(g.FullName))
+            .ToDictionaryAsync(g => g.FullName, ct);
+
+        var requests = new List<SongRequest>();
+        foreach (var (name, song, artist, dedication, status) in SongRequestSeed.GetRequests())
+        {
+            if (!guests.TryGetValue(name, out var guest)) continue;
+            requests.Add(new SongRequest
+            {
+                GuestId = guest.Id,
+                SongName = song,
+                Artist = artist,
+                Dedication = dedication,
+                Status = status,
+            });
+        }
+
+        await _db.SongRequests.AddRangeAsync(requests, ct);
+        await _db.SaveChangesAsync(ct);
+        _logger.LogInformation("Seeded {Count} song requests.", requests.Count);
     }
 }

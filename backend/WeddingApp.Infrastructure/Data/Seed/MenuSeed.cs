@@ -6,20 +6,13 @@ public static class MenuSeed
 {
     public static IEnumerable<MenuSection> GetSectionsWithItems()
     {
-        var predjedla = new MenuSection { Name = "Predjedlá", DisplayOrder = 1 };
+        var predjedla = new MenuSection { Name = "Predjedlo", DisplayOrder = 1 };
         predjedla.Items.Add(new MenuItem
         {
             Section = predjedla,
-            Name = "Šunkovo-syrová plnka",
-            Description = "Jemná plnka zo šunky a syrového krému, podávaná s chrumkavými krekrami a čerstvou zeleninou.",
+            Name = "Kozí syr",
+            Description = "Krémový kozí syr podávaný so sladkým hruškovým chutney a čerstvým domácim chlebom.",
             DisplayOrder = 1,
-        });
-        predjedla.Items.Add(new MenuItem
-        {
-            Section = predjedla,
-            Name = "Bruschetta s paradajkami",
-            Description = "Opečené plátky ciabatty s čerstvými paradajkami, bazalkou, cesnakom a olivovým olejom.",
-            DisplayOrder = 2,
         });
 
         var polievka = new MenuSection { Name = "Polievka", DisplayOrder = 2 };
@@ -35,26 +28,12 @@ public static class MenuSeed
         hlavne.Items.Add(new MenuItem
         {
             Section = hlavne,
-            Name = "Pečené bravčové so zemiakovou kašou",
-            Description = "Pomaly pečená bravčová panenka s bylinkovým korením, podávaná s krémovou zemiakovou kašou a pečenou zeleninou.",
+            Name = "Bravčová panenka so zemiakmi",
+            Description = "Bravčová panenka s pečenými baby zemiakmi, grilovanou zeleninou a mrkvovým pyré. Podávané so staročeskou slivkovou omáčkou.",
             DisplayOrder = 1,
-        });
-        hlavne.Items.Add(new MenuItem
-        {
-            Section = hlavne,
-            Name = "Grilované kuracie prsia so zeleninou",
-            Description = "Šťavnaté kuracie prsia marinované v bylinách, grilované a podávané so sezónnou zeleninou.",
-            DisplayOrder = 2,
         });
 
-        var dezerty = new MenuSection { Name = "Dezerty", DisplayOrder = 4 };
-        dezerty.Items.Add(new MenuItem
-        {
-            Section = dezerty,
-            Name = "Svadobná torta",
-            Description = "Naša špeciálne pripravená svadobná torta — prekvapenie čaká na krájanie!",
-            DisplayOrder = 1,
-        });
+        var dezerty = new MenuSection { Name = "Dezert", DisplayOrder = 4 };
         dezerty.Items.Add(new MenuItem
         {
             Section = dezerty,

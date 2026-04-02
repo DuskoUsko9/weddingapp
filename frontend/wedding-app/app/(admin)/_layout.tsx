@@ -1,9 +1,21 @@
-import { Tabs } from 'expo-router';
+import { Tabs, useRouter } from 'expo-router';
+import { useEffect } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { Platform, StyleSheet } from 'react-native';
 import { Colors } from '../../constants/theme';
+import { useAuth } from '../../store/AuthContext';
 
 export default function AdminLayout() {
+  const { user, isLoading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isLoading) return;
+    if (!user || (user.role !== 'Admin' && user.role !== 'MasterOfCeremony')) {
+      router.replace('/(guest)/dashboard');
+    }
+  }, [user, isLoading]);
+
   return (
     <Tabs
       screenOptions={{
@@ -21,6 +33,7 @@ export default function AdminLayout() {
         name="dashboard"
         options={{
           title: 'Prehľad',
+          headerShown: false,
           tabBarIcon: ({ color, size }) => <Feather name="bar-chart-2" size={size} color={color} />,
         }}
       />
@@ -45,10 +58,15 @@ export default function AdminLayout() {
           tabBarIcon: ({ color, size }) => <Feather name="clipboard" size={size} color={color} />,
         }}
       />
-      {/* Hidden from tabs */}
-      <Tabs.Screen name="song-requests" options={{ href: null }} />
-      <Tabs.Screen name="feature-toggles" options={{ href: null }} />
+      {/* Hidden from tabs — accessible via dashboard content section */}
+      <Tabs.Screen name="song-requests"       options={{ href: null, title: 'Hudobné priania' }} />
+      <Tabs.Screen name="feature-toggles"     options={{ href: null }} />
       <Tabs.Screen name="questionnaire-responses" options={{ href: null }} />
+      <Tabs.Screen name="schedule"            options={{ href: null, title: 'Program svadby' }} />
+      <Tabs.Screen name="menu"                options={{ href: null, title: 'Menu' }} />
+      <Tabs.Screen name="static-content"      options={{ href: null, title: 'Statický obsah' }} />
+      <Tabs.Screen name="love-story"          options={{ href: null, title: 'Náš príbeh' }} />
+      <Tabs.Screen name="bingo"               options={{ href: null, title: 'Svadobné bingo' }} />
     </Tabs>
   );
 }

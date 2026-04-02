@@ -34,6 +34,7 @@ public static class DependencyInjection
         services.AddScoped<IMenuRepository, MenuRepository>();
         services.AddScoped<IStaticContentRepository, StaticContentRepository>();
         services.AddScoped<ILoveStoryRepository, LoveStoryRepository>();
+        services.AddScoped<IBingoChallengeRepository, BingoChallengeRepository>();
 
         // Services
         services.AddScoped<IJwtService, JwtService>();
