@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   StyleSheet,
   Linking,
+  Platform,
+  useWindowDimensions,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
@@ -178,6 +180,9 @@ export default function DashboardScreen() {
   const { user, logout } = useAuth();
   const router = useRouter();
   const cd = useCountdown();
+  const { width } = useWindowDimensions();
+  // Wide = desktop browser or large tablet; use 4-column grid and centered content
+  const isWide = Platform.OS === 'web' && width >= 768;
 
   const { data: flags = [] } = useQuery<FeatureFlag[]>({
     queryKey: ['feature-flags'],
@@ -201,7 +206,8 @@ export default function DashboardScreen() {
   };
 
   return (
-    <ScrollView style={s.scroll} contentContainerStyle={s.content}>
+    <ScrollView style={s.scroll}>
+      <View style={[s.content, isWide && s.contentWide]}>
 
       {/* ── Header ────────────────────────────────────────────── */}
       <View style={s.header}>
@@ -243,7 +249,7 @@ export default function DashboardScreen() {
           return (
             <TouchableOpacity
               key={f.key}
-              style={[s.tile, !on && s.tileLocked]}
+              style={[s.tile, isWide && s.tileWide, !on && s.tileLocked]}
               activeOpacity={on ? 0.72 : 1}
               onPress={() => on && router.push(f.route as never)}
               disabled={!on}
@@ -281,7 +287,7 @@ export default function DashboardScreen() {
         {/* Admin shortcut */}
         {(user?.role === 'Admin' || user?.role === 'MasterOfCeremony') && (
           <TouchableOpacity
-            style={[s.tile, s.tileAdmin]}
+            style={[s.tile, isWide && s.tileWide, s.tileAdmin]}
             activeOpacity={0.72}
             onPress={() => router.push('/(admin)/dashboard' as never)}
           >
@@ -322,6 +328,7 @@ export default function DashboardScreen() {
         </View>
       </TouchableOpacity>
 
+      </View>
     </ScrollView>
   );
 }
@@ -330,6 +337,12 @@ export default function DashboardScreen() {
 const s = StyleSheet.create({
   scroll: { flex: 1, backgroundColor: Colors.background },
   content: { paddingTop: Spacing.gallery, paddingBottom: Spacing.xxl },
+  // On wide screens: center content and constrain max width for readability
+  contentWide: {
+    maxWidth: 960,
+    alignSelf: 'center' as any,
+    width: '100%',
+  },
 
   // Header
   header: {
@@ -430,6 +443,10 @@ const s = StyleSheet.create({
     padding: Spacing.md,
     minHeight: 160,
     ...Shadow.card,
+  },
+  // 4-column layout on wide screens
+  tileWide: {
+    width: '23%' as any,
   },
   tileLocked: {
     backgroundColor: Colors.surfaceContainerLow,

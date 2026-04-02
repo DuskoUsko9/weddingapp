@@ -52,14 +52,5 @@ const styles = StyleSheet.create({
   appShell: {
     flex: 1,
     backgroundColor: '#faf9f6',
-    ...(Platform.OS === 'web'
-      ? {
-          maxWidth: 430,
-          marginHorizontal: 'auto',
-          minHeight: '100vh' as any,
-          // subtle shadow to frame the "phone" on desktop
-          boxShadow: '0px 0px 40px rgba(26, 28, 26, 0.08)',
-        }
-      : {}),
   },
 });

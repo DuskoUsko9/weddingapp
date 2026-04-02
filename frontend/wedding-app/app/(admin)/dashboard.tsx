@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, ActivityIndicator, Platform, useWindowDimensions } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from '../../services/api';
@@ -8,6 +8,8 @@ import type { AdminStats } from '../../types/api';
 
 export default function AdminDashboardScreen() {
   const router = useRouter();
+  const { width } = useWindowDimensions();
+  const isWide = Platform.OS === 'web' && width >= 768;
 
   const { data: stats, isLoading } = useQuery<AdminStats>({
     queryKey: ['admin-stats'],
@@ -15,7 +17,8 @@ export default function AdminDashboardScreen() {
   });
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+    <ScrollView style={styles.container}>
+      <View style={[styles.content, isWide && styles.contentWide]}>
       <Text style={styles.title}>{Copy.admin.title}</Text>
 
       {/* Stats */}
@@ -31,7 +34,7 @@ export default function AdminDashboardScreen() {
               { label: 'Hudobné priania', value: stats.totalSongRequests },
               { label: 'Čakajúce priania', value: stats.pendingSongRequests },
             ].map(({ label, value }) => (
-              <View key={label} style={styles.statCard}>
+              <View key={label} style={[styles.statCard, isWide && { width: '31%' }]}>
                 <Text style={styles.statValue}>{value}</Text>
                 <Text style={styles.statLabel}>{label}</Text>
               </View>
@@ -57,6 +60,7 @@ export default function AdminDashboardScreen() {
           <Text style={styles.chevron}>›</Text>
         </TouchableOpacity>
       ))}
+      </View>
     </ScrollView>
   );
 }
@@ -64,6 +68,12 @@ export default function AdminDashboardScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.background },
   content: { padding: Spacing.md, paddingBottom: Spacing.xxl },
+  contentWide: {
+    maxWidth: 960,
+    alignSelf: 'center' as any,
+    width: '100%',
+    paddingHorizontal: Spacing.xl,
+  },
   title: {
     fontFamily: Typography.heading,
     fontSize: 24,
