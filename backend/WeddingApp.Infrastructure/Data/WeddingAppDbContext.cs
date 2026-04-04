@@ -18,6 +18,9 @@ public class WeddingAppDbContext : DbContext
     public DbSet<LoveStoryEvent> LoveStoryEvents => Set<LoveStoryEvent>();
     public DbSet<BingoChallenge> BingoChallenges => Set<BingoChallenge>();
     public DbSet<ThankYouMessage> ThankYouMessages => Set<ThankYouMessage>();
+    public DbSet<GuestPhoto> GuestPhotos => Set<GuestPhoto>();
+    public DbSet<GuestBingoProgress> GuestBingoProgress => Set<GuestBingoProgress>();
+    public DbSet<SeatingAssignment> SeatingAssignments => Set<SeatingAssignment>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

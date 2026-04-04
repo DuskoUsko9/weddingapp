@@ -40,6 +40,29 @@ public class AuthController : BaseController
         };
     }
 
+    /// <summary>Magic link login — validates invitation token from email QR code.</summary>
+    [HttpGet("magic-login")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(410)]
+    public async Task<IActionResult> MagicLogin([FromQuery] Guid t, CancellationToken ct)
+    {
+        var result = await _mediator.Send(new MagicLoginCommand(t), ct);
+
+        return result.Type switch
+        {
+            LoginResultType.Token => OkData(new
+            {
+                token = result.JwtToken,
+                role = result.Role?.ToString(),
+                guestId = result.GuestId,
+                guestName = result.GuestName,
+            }),
+            LoginResultType.Error => ErrorResult(result.ErrorMessage ?? "Neplatný odkaz.", 410),
+            _ => ErrorResult("Neplatný prihlasovací odkaz.", 400),
+        };
+    }
+
     /// <summary>Confirm identity after disambiguation.</summary>
     [HttpPost("confirm")]
     [ProducesResponseType(200)]

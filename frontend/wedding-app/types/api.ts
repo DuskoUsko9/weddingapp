@@ -139,6 +139,72 @@ export interface SongRequestPage {
   pageSize: number;
 }
 
+// Guests
+export interface GuestDto {
+  id: string;
+  fullName: string;
+  side: string;
+  isChild: boolean;
+  ageAtWedding: number | null;
+  category: string;
+  guestType: string;
+  isConfirmed: boolean;
+  hasQuestionnaire: boolean;
+}
+
+// Bingo
+export interface BingoChallengeDto {
+  id: string;
+  title: string;
+  description: string | null;
+  displayOrder: number;
+  isActive: boolean;
+}
+
+export interface BingoChallengeWithProgress {
+  challengeId: string;
+  title: string;
+  description: string | null;
+  displayOrder: number;
+  isCompleted: boolean;
+  photoUrl: string | null;
+  completedAt: string | null;
+}
+
+// Photos
+export interface GuestPhoto {
+  id: string;
+  guestId: string;
+  guestName: string;
+  url: string;
+  fileSizeBytes: number;
+  uploadedAt: string;
+}
+
+// Seating
+export interface MySeating {
+  tableNumber: number;
+  tableName: string | null;
+  seatNote: string | null;
+  tablemates: string[];
+}
+
+export interface SeatingAssignment {
+  guestId: string;
+  guestName: string;
+  tableNumber: number;
+  tableName: string | null;
+  seatNote: string | null;
+}
+
+// Thank you
+export interface ThankYouMessage {
+  guestId: string;
+  guestName: string;
+  message: string;
+  photoUrl: string | null;
+}
+
 // Admin stats
 export interface AdminStats {
   totalGuests: number;

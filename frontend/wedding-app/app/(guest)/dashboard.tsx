@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import {
   View,
   Text,
@@ -8,11 +8,21 @@ import {
   Linking,
   Platform,
   useWindowDimensions,
+  Image,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
 import { Feather } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withRepeat,
+  withTiming,
+  withSequence,
+  Easing,
+  interpolate,
+} from 'react-native-reanimated';
 import { useAuth } from '../../store/AuthContext';
 import { apiClient } from '../../services/api';
 import { Colors, Typography, Spacing, Radius, Shadow } from '../../constants/theme';
@@ -37,6 +47,147 @@ function useCountdown() {
   };
 }
 
+// ─── Animated Monogram ────────────────────────────────────────────────────────
+function AnimatedMonogram() {
+  const ring1 = useSharedValue(0.85);
+  const ring2 = useSharedValue(0.7);
+  const heartScale = useSharedValue(1);
+
+  useEffect(() => {
+    ring1.value = withRepeat(
+      withSequence(
+        withTiming(1, { duration: 2400, easing: Easing.inOut(Easing.ease) }),
+        withTiming(0.85, { duration: 2400, easing: Easing.inOut(Easing.ease) }),
+      ),
+      -1,
+    );
+    ring2.value = withRepeat(
+      withSequence(
+        withTiming(0.85, { duration: 2000, easing: Easing.inOut(Easing.ease) }),
+        withTiming(0.7, { duration: 2000, easing: Easing.inOut(Easing.ease) }),
+      ),
+      -1,
+    );
+    heartScale.value = withRepeat(
+      withSequence(
+        withTiming(1.18, { duration: 700, easing: Easing.out(Easing.quad) }),
+        withTiming(1, { duration: 500, easing: Easing.in(Easing.quad) }),
+        withTiming(1.1, { duration: 500, easing: Easing.out(Easing.quad) }),
+        withTiming(1, { duration: 400, easing: Easing.in(Easing.quad) }),
+        withTiming(1, { duration: 1400 }), // pause
+      ),
+      -1,
+    );
+  }, []);
+
+  const ring1Style = useAnimatedStyle(() => ({
+    opacity: interpolate(ring1.value, [0.7, 1], [0.08, 0.18]),
+    transform: [{ scale: ring1.value }],
+  }));
+  const ring2Style = useAnimatedStyle(() => ({
+    opacity: interpolate(ring2.value, [0.7, 1], [0.12, 0.25]),
+    transform: [{ scale: ring2.value }],
+  }));
+  const heartStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: heartScale.value }],
+  }));
+
+  return (
+    <View style={mono.container}>
+      {/* Outer pulsing rings */}
+      <Animated.View style={[mono.ring, mono.ring1, ring1Style]} />
+      <Animated.View style={[mono.ring, mono.ring2, ring2Style]} />
+
+      {/* Core circle */}
+      <LinearGradient
+        colors={['#fedf9f', '#e0c385', '#c0a469']}
+        start={{ x: 0.2, y: 0 }}
+        end={{ x: 0.8, y: 1 }}
+        style={mono.core}
+      >
+        {/* Replace this Image with the actual couple photo */}
+        <Image
+          source={require('../../assets/icon.png')}
+          style={mono.photo}
+          resizeMode="cover"
+        />
+      </LinearGradient>
+
+      {/* Animated heart */}
+      <Animated.View style={[mono.heartBadge, heartStyle]}>
+        <Text style={mono.heartText}>♥</Text>
+      </Animated.View>
+    </View>
+  );
+}
+
+const mono = StyleSheet.create({
+  container: {
+    width: 148,
+    height: 148,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: Spacing.lg,
+  },
+  ring: {
+    position: 'absolute',
+    borderRadius: Radius.full,
+    borderWidth: 1.5,
+    borderColor: Colors.primaryContainer,
+  },
+  ring1: { width: 148, height: 148 },
+  ring2: { width: 172, height: 172 },
+  core: {
+    width: 120,
+    height: 120,
+    borderRadius: Radius.full,
+    overflow: 'hidden',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  photo: {
+    width: 120,
+    height: 120,
+    borderRadius: Radius.full,
+  },
+  heartBadge: {
+    position: 'absolute',
+    bottom: 4,
+    right: 4,
+    width: 28,
+    height: 28,
+    borderRadius: Radius.full,
+    backgroundColor: Colors.background,
+    alignItems: 'center',
+    justifyContent: 'center',
+    // @ts-ignore
+    boxShadow: '0 2px 8px rgba(114,91,40,0.25)',
+    shadowColor: Colors.primary,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  heartText: {
+    fontSize: 14,
+    color: '#c0504d',
+    lineHeight: 16,
+  },
+});
+
+// ─── Decorative Ornament ─────────────────────────────────────────────────────
+function OrnamentDivider({ light }: { light?: boolean }) {
+  const lineColor = light ? 'rgba(255,255,255,0.35)' : Colors.outlineVariant;
+  const dotColor = light ? 'rgba(255,255,255,0.7)' : Colors.primaryContainer;
+  return (
+    <View style={{ flexDirection: 'row', alignItems: 'center', gap: Spacing.sm }}>
+      <View style={{ flex: 1, height: 1, backgroundColor: lineColor }} />
+      <Text style={{ color: dotColor, fontSize: 10, letterSpacing: 6 }}>✦ ✦ ✦</Text>
+      <View style={{ flex: 1, height: 1, backgroundColor: lineColor }} />
+    </View>
+  );
+}
+
 // ─── Feature grid config ─────────────────────────────────────────────────────
 type FeatherIcon = React.ComponentProps<typeof Feather>['name'];
 
@@ -47,6 +198,7 @@ type DashboardFeature = {
   icon: FeatherIcon;
   iconBg: string;
   iconColor: string;
+  gradientColors: readonly [string, string];
   route: string;
   flagKey?: string;
   lockLabel?: string;
@@ -60,6 +212,7 @@ const FEATURES: DashboardFeature[] = [
     icon: 'calendar',
     iconBg: Colors.secondaryContainer,
     iconColor: Colors.secondary,
+    gradientColors: ['#eef5ed', '#d4e8d1'],
     route: '/(guest)/schedule',
   },
   {
@@ -69,6 +222,7 @@ const FEATURES: DashboardFeature[] = [
     icon: 'edit-3',
     iconBg: Colors.primaryFixed,
     iconColor: Colors.primary,
+    gradientColors: ['#fff8e8', '#fedf9f'],
     route: '/(guest)/questionnaire',
     flagKey: 'questionnaire',
   },
@@ -79,6 +233,7 @@ const FEATURES: DashboardFeature[] = [
     icon: 'map-pin',
     iconBg: Colors.primaryFixed,
     iconColor: Colors.primary,
+    gradientColors: ['#fff8e8', '#fedf9f'],
     route: '/(guest)/parking',
   },
   {
@@ -88,6 +243,7 @@ const FEATURES: DashboardFeature[] = [
     icon: 'home',
     iconBg: Colors.secondaryContainer,
     iconColor: Colors.secondary,
+    gradientColors: ['#eef5ed', '#d4e8d1'],
     route: '/(guest)/accommodation',
   },
   {
@@ -97,6 +253,7 @@ const FEATURES: DashboardFeature[] = [
     icon: 'music',
     iconBg: Colors.secondaryContainer,
     iconColor: Colors.secondary,
+    gradientColors: ['#eef5ed', '#d4e8d1'],
     route: '/(guest)/playlist',
   },
   {
@@ -106,6 +263,7 @@ const FEATURES: DashboardFeature[] = [
     icon: 'heart',
     iconBg: '#fde8e8',
     iconColor: '#c0504d',
+    gradientColors: ['#fff0f0', '#fde8e8'],
     route: '/(guest)/love-story',
     flagKey: 'love_story',
   },
@@ -116,6 +274,7 @@ const FEATURES: DashboardFeature[] = [
     icon: 'book-open',
     iconBg: Colors.primaryFixed,
     iconColor: Colors.primary,
+    gradientColors: ['#fff8e8', '#fedf9f'],
     route: '/(guest)/menu',
   },
   {
@@ -125,6 +284,7 @@ const FEATURES: DashboardFeature[] = [
     icon: 'grid',
     iconBg: Colors.surfaceContainerLow,
     iconColor: Colors.onSurfaceVariant,
+    gradientColors: [Colors.surfaceContainerLow, Colors.surfaceContainer],
     route: '/(guest)/seating',
     flagKey: 'seating',
     lockLabel: Copy.dashboard.weddingDay,
@@ -136,6 +296,7 @@ const FEATURES: DashboardFeature[] = [
     icon: 'camera',
     iconBg: Colors.surfaceContainerLow,
     iconColor: Colors.onSurfaceVariant,
+    gradientColors: [Colors.surfaceContainerLow, Colors.surfaceContainer],
     route: '/(guest)/photo-upload',
     flagKey: 'photo_upload',
     lockLabel: Copy.dashboard.weddingDay,
@@ -147,6 +308,7 @@ const FEATURES: DashboardFeature[] = [
     icon: 'target',
     iconBg: Colors.surfaceContainerLow,
     iconColor: Colors.onSurfaceVariant,
+    gradientColors: [Colors.surfaceContainerLow, Colors.surfaceContainer],
     route: '/(guest)/bingo',
     flagKey: 'photo_bingo',
     lockLabel: Copy.dashboard.weddingDay,
@@ -158,6 +320,7 @@ const FEATURES: DashboardFeature[] = [
     icon: 'image',
     iconBg: Colors.surfaceContainerLow,
     iconColor: Colors.onSurfaceVariant,
+    gradientColors: [Colors.surfaceContainerLow, Colors.surfaceContainer],
     route: '/(guest)/gallery',
     flagKey: 'gallery',
     lockLabel: Copy.dashboard.afterWedding,
@@ -169,6 +332,7 @@ const FEATURES: DashboardFeature[] = [
     icon: 'mail',
     iconBg: Colors.surfaceContainerLow,
     iconColor: Colors.onSurfaceVariant,
+    gradientColors: [Colors.surfaceContainerLow, Colors.surfaceContainer],
     route: '/(guest)/thank-you',
     flagKey: 'thank_you',
     lockLabel: Copy.dashboard.afterWedding,
@@ -181,7 +345,6 @@ export default function DashboardScreen() {
   const router = useRouter();
   const cd = useCountdown();
   const { width } = useWindowDimensions();
-  // Wide = desktop browser or large tablet; use 4-column grid and centered content
   const isWide = Platform.OS === 'web' && width >= 768;
 
   const { data: flags = [] } = useQuery<FeatureFlag[]>({
@@ -206,127 +369,165 @@ export default function DashboardScreen() {
   };
 
   return (
-    <ScrollView style={s.scroll}>
+    <ScrollView style={s.scroll} showsVerticalScrollIndicator={false}>
       <View style={[s.content, isWide && s.contentWide]}>
 
-      {/* ── Header ────────────────────────────────────────────── */}
-      <View style={s.header}>
-        <View>
-          <Text style={s.greeting}>Vitaj,</Text>
-          <Text style={s.userName}>{user?.guestName}</Text>
-        </View>
-        <TouchableOpacity style={s.monogram} onPress={logout} activeOpacity={0.7}>
-          <Text style={s.monogramText}>M&D</Text>
-        </TouchableOpacity>
-      </View>
+        {/* ── Hero ───────────────────────────────────────────────── */}
+        <LinearGradient
+          colors={['#2a1f0a', '#4a3515', '#725b28']}
+          start={{ x: 0.1, y: 0 }}
+          end={{ x: 0.9, y: 1 }}
+          style={s.hero}
+        >
+          {/* Decorative background texture dots */}
+          <View style={s.heroPatternRow} pointerEvents="none">
+            {Array.from({ length: 20 }).map((_, i) => (
+              <View key={i} style={s.heroDot} />
+            ))}
+          </View>
 
-      {/* ── Countdown — Hero Card ─────────────────────────────── */}
-      <LinearGradient colors={['#faf9f6', '#f0ede8']} style={s.hero}>
-        <Text style={s.heroLabel}>{Copy.dashboard.countdown}</Text>
-        <View style={s.cdRow}>
-          {([
-            [cd.days, Copy.dashboard.days],
-            [cd.hours, Copy.dashboard.hours],
-            [cd.minutes, Copy.dashboard.minutes],
-            [cd.seconds, Copy.dashboard.seconds],
-          ] as const).map(([val, label]) => (
-            <View key={label} style={s.cdUnit}>
-              <Text style={s.cdNumber}>{String(val).padStart(2, '0')}</Text>
-              <Text style={s.cdLabel}>{label}</Text>
-            </View>
-          ))}
-        </View>
-        <View style={s.heroDivider} />
-        <Text style={s.heroDate}>{Copy.dashboard.weddingDate}</Text>
-        <Text style={s.heroVenue}>{Copy.dashboard.weddingVenue}</Text>
-      </LinearGradient>
-
-      {/* ── Feature grid ──────────────────────────────────────── */}
-      <View style={s.grid}>
-        {FEATURES.map((f) => {
-          const on = isEnabled(f);
-          const lock = lockLabel(f);
-          return (
-            <TouchableOpacity
-              key={f.key}
-              style={[s.tile, isWide && s.tileWide, !on && s.tileLocked]}
-              activeOpacity={on ? 0.72 : 1}
-              onPress={() => on && router.push(f.route as never)}
-              disabled={!on}
-            >
-              {/* Icon */}
-              <View style={[s.iconWrap, { backgroundColor: on ? f.iconBg : Colors.surfaceContainerLow }]}>
-                <Feather name={f.icon} size={22} color={on ? f.iconColor : Colors.onSurfaceVariant} />
-              </View>
-
-              {/* Status chip */}
-              {on
-                ? <View style={s.chipAvailable}>
-                    <Text style={s.chipAvailableText}>{Copy.dashboard.available}</Text>
-                  </View>
-                : <View style={s.chipLocked}>
-                    <Feather name="lock" size={9} color={Colors.onSurfaceVariant} />
-                    <Text style={s.chipLockedText}>{lock ?? Copy.dashboard.locked}</Text>
-                  </View>
-              }
-
-              {/* Title + desc */}
-              <Text style={[s.tileTitle, !on && s.tileTitleLocked]} numberOfLines={1}>{f.title}</Text>
-              <Text style={s.tileSub} numberOfLines={2}>{f.description}</Text>
-
-              {/* CTA */}
-              {on && (
-                <View style={s.tileCta}>
-                  <Feather name="chevron-right" size={14} color={Colors.primary} />
-                </View>
-              )}
+          {/* Top bar: greeting + logout */}
+          <View style={s.heroTopBar}>
+            <Text style={s.heroGreeting}>Vitaj, {user?.guestName?.split(' ')[0]}</Text>
+            <TouchableOpacity style={s.logoutBtn} onPress={logout} activeOpacity={0.7}>
+              <Feather name="log-out" size={14} color="rgba(255,255,255,0.6)" />
             </TouchableOpacity>
-          );
-        })}
-
-        {/* Admin shortcut */}
-        {(user?.role === 'Admin' || user?.role === 'MasterOfCeremony') && (
-          <TouchableOpacity
-            style={[s.tile, isWide && s.tileWide, s.tileAdmin]}
-            activeOpacity={0.72}
-            onPress={() => router.push('/(admin)/dashboard' as never)}
-          >
-            <View style={[s.iconWrap, { backgroundColor: Colors.primaryFixed }]}>
-              <Feather name="settings" size={22} color={Colors.primary} />
-            </View>
-            <View style={s.chipAvailable}>
-              <Text style={s.chipAvailableText}>{Copy.dashboard.available}</Text>
-            </View>
-            <Text style={s.tileTitle}>{Copy.admin.title}</Text>
-            <Text style={s.tileSub}>Správa hostí, obsah, funkcie.</Text>
-            <View style={s.tileCta}>
-              <Feather name="chevron-right" size={14} color={Colors.primary} />
-            </View>
-          </TouchableOpacity>
-        )}
-      </View>
-
-      {/* ── Calendar banner ───────────────────────────────────── */}
-      <TouchableOpacity
-        style={s.banner}
-        activeOpacity={0.8}
-        onPress={() => {
-          Linking.openURL(
-            'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Svadba+Matky+a+Dusana&dates=20260905T133000Z/20260905T230000Z&location=Penzion+Zemiansky+Dvor,+Surovce&details=Tesime+sa+na+teba+na+svadbe.'
-          ).catch(() => undefined);
-        }}
-      >
-        <View style={s.bannerRow}>
-          <View style={s.bannerIconWrap}>
-            <Feather name="calendar" size={18} color={Colors.primary} />
           </View>
-          <View style={{ marginLeft: Spacing.md, flex: 1 }}>
-            <Text style={s.bannerTitle}>{Copy.dashboard.addToCalendar}</Text>
-            <Text style={s.bannerSub}>{Copy.dashboard.addToCalendarSubtitle}</Text>
+
+          {/* Couple monogram */}
+          <AnimatedMonogram />
+
+          {/* Couple names */}
+          <Text style={s.heroNames}>Maťka &amp; Dušan</Text>
+          <View style={{ marginVertical: Spacing.md, width: '80%' }}>
+            <OrnamentDivider light />
           </View>
-          <Feather name="chevron-right" size={18} color={Colors.primary} />
+          <Text style={s.heroDateText}>{Copy.dashboard.weddingDate}</Text>
+          <Text style={s.heroVenueText}>{Copy.dashboard.weddingVenue}</Text>
+
+          {/* Countdown */}
+          <View style={s.countdownSection}>
+            <Text style={s.countdownLabel}>{Copy.dashboard.countdown}</Text>
+            <View style={s.cdRow}>
+              {([
+                [cd.days, Copy.dashboard.days],
+                [cd.hours, Copy.dashboard.hours],
+                [cd.minutes, Copy.dashboard.minutes],
+                [cd.seconds, Copy.dashboard.seconds],
+              ] as const).map(([val, label]) => (
+                <View key={label} style={s.cdUnit}>
+                  <LinearGradient
+                    colors={['rgba(255,255,255,0.15)', 'rgba(255,255,255,0.06)']}
+                    style={s.cdBox}
+                  >
+                    <Text style={s.cdNumber}>{String(val).padStart(2, '0')}</Text>
+                  </LinearGradient>
+                  <Text style={s.cdLabel}>{label}</Text>
+                </View>
+              ))}
+            </View>
+          </View>
+        </LinearGradient>
+
+        {/* ── Feature grid ──────────────────────────────────────── */}
+        <View style={s.sectionHeader}>
+          <Text style={s.sectionTitle}>Čo na teba čaká</Text>
+          <OrnamentDivider />
         </View>
-      </TouchableOpacity>
+
+        <View style={s.grid}>
+          {FEATURES.map((f) => {
+            const on = isEnabled(f);
+            const lock = lockLabel(f);
+            return (
+              <TouchableOpacity
+                key={f.key}
+                style={[s.tile, isWide && s.tileWide, !on && s.tileLocked]}
+                activeOpacity={on ? 0.72 : 1}
+                onPress={() => on && router.push(f.route as never)}
+                disabled={!on}
+              >
+                <LinearGradient
+                  colors={on ? f.gradientColors : [Colors.surfaceContainerLow, Colors.surfaceContainerLow]}
+                  style={s.tileGradient}
+                >
+                  {/* Icon */}
+                  <View style={[s.iconWrap, { backgroundColor: on ? f.iconBg : Colors.surfaceContainerHigh }]}>
+                    <Feather name={f.icon} size={20} color={on ? f.iconColor : Colors.onSurfaceVariant} />
+                  </View>
+
+                  {/* Lock chip */}
+                  {!on && (
+                    <View style={s.chipLocked}>
+                      <Feather name="lock" size={9} color={Colors.onSurfaceVariant} />
+                      <Text style={s.chipLockedText}>{lock ?? Copy.dashboard.locked}</Text>
+                    </View>
+                  )}
+
+                  <Text style={[s.tileTitle, !on && s.tileTitleLocked]} numberOfLines={1}>{f.title}</Text>
+                  <Text style={s.tileSub} numberOfLines={2}>{f.description}</Text>
+
+                  {on && (
+                    <View style={s.tileCta}>
+                      <Feather name="arrow-right" size={13} color={f.iconColor} />
+                    </View>
+                  )}
+                </LinearGradient>
+              </TouchableOpacity>
+            );
+          })}
+
+          {/* Admin shortcut */}
+          {(user?.role === 'Admin' || user?.role === 'MasterOfCeremony') && (
+            <TouchableOpacity
+              style={[s.tile, isWide && s.tileWide]}
+              activeOpacity={0.72}
+              onPress={() => router.push('/(admin)/dashboard' as never)}
+            >
+              <LinearGradient colors={['#fff8e8', '#fedf9f']} style={s.tileGradient}>
+                <View style={[s.iconWrap, { backgroundColor: Colors.primaryFixed }]}>
+                  <Feather name="settings" size={20} color={Colors.primary} />
+                </View>
+                <Text style={s.tileTitle}>{Copy.admin.title}</Text>
+                <Text style={s.tileSub}>Správa hostí, obsah, funkcie.</Text>
+                <View style={s.tileCta}>
+                  <Feather name="arrow-right" size={13} color={Colors.primary} />
+                </View>
+              </LinearGradient>
+            </TouchableOpacity>
+          )}
+        </View>
+
+        {/* ── Calendar banner ───────────────────────────────────── */}
+        <TouchableOpacity
+          style={s.banner}
+          activeOpacity={0.8}
+          onPress={() => {
+            Linking.openURL(
+              'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Svadba+Matky+a+Dusana&dates=20260905T133000Z/20260905T230000Z&location=Penzion+Zemiansky+Dvor,+Surovce&details=Tesime+sa+na+teba+na+svadbe.'
+            ).catch(() => undefined);
+          }}
+        >
+          <LinearGradient colors={['#fedf9f', '#e0c385']} style={s.bannerGradient}>
+            <View style={s.bannerRow}>
+              <View style={s.bannerIconWrap}>
+                <Feather name="calendar" size={18} color={Colors.primary} />
+              </View>
+              <View style={{ marginLeft: Spacing.md, flex: 1 }}>
+                <Text style={s.bannerTitle}>{Copy.dashboard.addToCalendar}</Text>
+                <Text style={s.bannerSub}>{Copy.dashboard.addToCalendarSubtitle}</Text>
+              </View>
+              <Feather name="chevron-right" size={18} color={Colors.primary} />
+            </View>
+          </LinearGradient>
+        </TouchableOpacity>
+
+        {/* ── Footer signature ─────────────────────────────────── */}
+        <View style={s.footer}>
+          <OrnamentDivider />
+          <Text style={s.footerText}>Maťka &amp; Dušan · 5.9.2026</Text>
+          <Text style={s.footerVenue}>Penzión Zemiansky Dvor, Šúrovce</Text>
+        </View>
 
       </View>
     </ScrollView>
@@ -336,99 +537,144 @@ export default function DashboardScreen() {
 // ─── Styles ──────────────────────────────────────────────────────────────────
 const s = StyleSheet.create({
   scroll: { flex: 1, backgroundColor: Colors.background },
-  content: { paddingTop: Spacing.gallery, paddingBottom: Spacing.xxl },
-  // On wide screens: center content and constrain max width for readability
+  content: { paddingBottom: Spacing.xxl },
   contentWide: {
     maxWidth: 960,
     alignSelf: 'center' as any,
     width: '100%',
   },
 
-  // Header
-  header: {
+  // ── Hero ─────────────────────────────────────────────────────────────────
+  hero: {
+    paddingTop: 56,
+    paddingBottom: Spacing.xl,
+    paddingHorizontal: Spacing.md,
+    alignItems: 'center',
+    overflow: 'hidden',
+  },
+  heroPatternRow: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    opacity: 0.04,
+  },
+  heroDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: '#fff',
+    margin: 14,
+  },
+  heroTopBar: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    paddingHorizontal: Spacing.md,
-    marginBottom: Spacing.lg,
+    alignItems: 'center',
+    width: '100%',
+    marginBottom: Spacing.xl,
   },
-  greeting: {
-    fontFamily: Typography.heading,
-    fontSize: 14,
-    color: Colors.onSurfaceVariant,
-    letterSpacing: 0.2,
+  heroGreeting: {
+    fontFamily: Typography.body,
+    fontSize: 13,
+    color: 'rgba(255,255,255,0.65)',
+    letterSpacing: 0.3,
   },
-  userName: {
-    fontFamily: Typography.heading,
-    fontSize: 28,
-    color: Colors.onSurface,
-    lineHeight: 36,
-    letterSpacing: 0.2,
-  },
-  monogram: {
-    width: 44,
-    height: 44,
+  logoutBtn: {
+    padding: 6,
     borderRadius: Radius.full,
-    backgroundColor: Colors.primaryFixed,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: 'rgba(255,255,255,0.08)',
   },
-  monogramText: { fontFamily: Typography.heading, fontSize: 12, color: Colors.primary },
+  heroNames: {
+    fontFamily: Typography.heading,
+    fontSize: 34,
+    color: '#fff',
+    letterSpacing: 0.5,
+    textAlign: 'center',
+    textShadowColor: 'rgba(0,0,0,0.3)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 8,
+  },
+  heroDateText: {
+    fontFamily: Typography.bodySemiBold,
+    fontSize: 14,
+    color: 'rgba(255,255,255,0.85)',
+    marginTop: Spacing.sm,
+    letterSpacing: 0.5,
+  },
+  heroVenueText: {
+    fontFamily: Typography.body,
+    fontSize: 12,
+    color: 'rgba(255,255,255,0.55)',
+    marginTop: 2,
+    letterSpacing: 0.2,
+  },
 
-  // Hero countdown
-  hero: {
-    marginHorizontal: Spacing.md,
-    borderRadius: Radius.card,
-    padding: Spacing.lg,
+  // Countdown inside hero
+  countdownSection: {
+    marginTop: Spacing.xl,
     alignItems: 'center',
-    marginBottom: Spacing.lg,
+    width: '100%',
   },
-  heroLabel: {
+  countdownLabel: {
     fontFamily: Typography.bodyMedium,
-    fontSize: 11,
-    color: Colors.onSurfaceVariant,
+    fontSize: 10,
+    color: 'rgba(255,255,255,0.5)',
     textTransform: 'uppercase',
-    letterSpacing: 2,
+    letterSpacing: 3,
     marginBottom: Spacing.md,
   },
-  cdRow: { flexDirection: 'row', gap: Spacing.sm, marginBottom: Spacing.md },
-  cdUnit: { alignItems: 'center', minWidth: 60 },
+  cdRow: {
+    flexDirection: 'row',
+    gap: Spacing.sm,
+    justifyContent: 'center',
+  },
+  cdUnit: {
+    alignItems: 'center',
+    minWidth: 64,
+  },
+  cdBox: {
+    width: 64,
+    height: 64,
+    borderRadius: Radius.md,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.12)',
+  },
   cdNumber: {
     fontFamily: Typography.heading,
-    fontSize: 40,
-    color: Colors.onSurface,
-    lineHeight: 48,
+    fontSize: 30,
+    color: '#fff',
+    lineHeight: 36,
     letterSpacing: -0.5,
   },
   cdLabel: {
     fontFamily: Typography.bodyMedium,
-    fontSize: 9,
-    color: Colors.onSurfaceVariant,
+    fontSize: 8,
+    color: 'rgba(255,255,255,0.45)',
     textTransform: 'uppercase',
     letterSpacing: 2,
-    marginTop: 2,
-  },
-  heroDivider: {
-    width: 32,
-    height: 1,
-    backgroundColor: Colors.outlineVariant,
-    marginBottom: Spacing.sm,
-  },
-  heroDate: {
-    fontFamily: Typography.bodySemiBold,
-    fontSize: 14,
-    color: Colors.onSurface,
-    lineHeight: 22,
-  },
-  heroVenue: {
-    fontFamily: Typography.body,
-    fontSize: 12,
-    color: Colors.onSurfaceVariant,
-    marginTop: 2,
-    lineHeight: 18,
+    marginTop: 6,
   },
 
-  // Feature grid — 2 columns
+  // ── Section header ───────────────────────────────────────────────────────
+  sectionHeader: {
+    paddingHorizontal: Spacing.md,
+    paddingTop: Spacing.xl,
+    paddingBottom: Spacing.md,
+    gap: Spacing.sm,
+  },
+  sectionTitle: {
+    fontFamily: Typography.heading,
+    fontSize: 22,
+    color: Colors.onSurface,
+    marginBottom: Spacing.xs,
+  },
+
+  // ── Feature grid ─────────────────────────────────────────────────────────
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -438,71 +684,48 @@ const s = StyleSheet.create({
   },
   tile: {
     width: '47.5%' as any,
-    backgroundColor: Colors.surface,
     borderRadius: Radius.card,
-    padding: Spacing.md,
-    minHeight: 160,
+    overflow: 'hidden',
     ...Shadow.card,
   },
-  // 4-column layout on wide screens
-  tileWide: {
-    width: '23%' as any,
-  },
+  tileWide: { width: '23%' as any },
   tileLocked: {
-    backgroundColor: Colors.surfaceContainerLow,
     shadowOpacity: 0,
     elevation: 0,
   },
-  tileAdmin: {
-    backgroundColor: Colors.surface,
+  tileGradient: {
+    padding: Spacing.md,
+    minHeight: 148,
   },
 
-  // Icon
   iconWrap: {
-    width: 44,
-    height: 44,
+    width: 40,
+    height: 40,
     borderRadius: Radius.lg,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: Spacing.sm,
   },
 
-  // Status chips
-  chipAvailable: {
-    alignSelf: 'flex-start',
-    backgroundColor: Colors.secondaryContainer,
-    borderRadius: Radius.sm,
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    marginBottom: Spacing.sm,
-  },
-  chipAvailableText: {
-    fontFamily: Typography.bodyMedium,
-    fontSize: 9,
-    color: Colors.secondary,
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-  },
   chipLocked: {
     alignSelf: 'flex-start',
     flexDirection: 'row',
     alignItems: 'center',
     gap: 3,
-    backgroundColor: Colors.surfaceContainerHighest,
+    backgroundColor: 'rgba(0,0,0,0.06)',
     borderRadius: Radius.sm,
-    paddingHorizontal: 8,
+    paddingHorizontal: 7,
     paddingVertical: 2,
-    marginBottom: Spacing.sm,
+    marginBottom: Spacing.xs,
   },
   chipLockedText: {
     fontFamily: Typography.bodyMedium,
-    fontSize: 9,
+    fontSize: 8,
     color: Colors.onSurfaceVariant,
     textTransform: 'uppercase',
     letterSpacing: 0.8,
   },
 
-  // Tile text
   tileTitle: {
     fontFamily: Typography.bodySemiBold,
     fontSize: 14,
@@ -523,11 +746,14 @@ const s = StyleSheet.create({
     marginTop: Spacing.xs,
   },
 
-  // Calendar banner
+  // ── Calendar banner ──────────────────────────────────────────────────────
   banner: {
     marginHorizontal: Spacing.md,
-    backgroundColor: Colors.primaryFixed,
     borderRadius: Radius.card,
+    overflow: 'hidden',
+    ...Shadow.card,
+  },
+  bannerGradient: {
     padding: Spacing.md,
   },
   bannerRow: { flexDirection: 'row', alignItems: 'center' },
@@ -535,21 +761,43 @@ const s = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: Radius.lg,
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(255,255,255,0.6)',
     alignItems: 'center',
     justifyContent: 'center',
   },
   bannerTitle: {
     fontFamily: Typography.bodySemiBold,
     fontSize: 14,
-    color: '#4d3a08',
+    color: '#3d2a00',
     lineHeight: 20,
   },
   bannerSub: {
     fontFamily: Typography.body,
     fontSize: 12,
-    color: Colors.onSurfaceVariant,
+    color: '#6b4f12',
     marginTop: 2,
     lineHeight: 18,
+  },
+
+  // ── Footer ───────────────────────────────────────────────────────────────
+  footer: {
+    paddingHorizontal: Spacing.md,
+    paddingTop: Spacing.xl,
+    paddingBottom: Spacing.lg,
+    alignItems: 'center',
+    gap: Spacing.sm,
+  },
+  footerText: {
+    fontFamily: Typography.heading,
+    fontSize: 15,
+    color: Colors.onSurfaceVariant,
+    letterSpacing: 0.3,
+    marginTop: Spacing.sm,
+  },
+  footerVenue: {
+    fontFamily: Typography.body,
+    fontSize: 11,
+    color: Colors.outline,
+    letterSpacing: 0.2,
   },
 });

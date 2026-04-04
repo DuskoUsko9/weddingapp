@@ -12,12 +12,10 @@ public class GuestRepository : IGuestRepository
 
     public async Task<IReadOnlyList<Guest>> SearchByNameAsync(string normalizedName, CancellationToken ct = default)
     {
-        // Use EF.Functions.ILike for case-insensitive prefix/contains match
-        // pg_trgm similarity requires raw SQL — use contains fallback for EF compatibility
         return await _db.Guests
             .Include(g => g.QuestionnaireResponse)
             .Where(g => g.IsConfirmed &&
-                        EF.Functions.ILike(g.NormalizedName, $"%{normalizedName}%"))
+                        EF.Functions.Like(g.NormalizedName, $"%{normalizedName}%"))
             .OrderBy(g => g.FullName)
             .ToListAsync(ct);
     }
@@ -27,6 +25,9 @@ public class GuestRepository : IGuestRepository
             .Include(g => g.QuestionnaireResponse)
             .FirstOrDefaultAsync(g => g.Id == id, ct);
 
+    public async Task<Guest?> GetByInvitationTokenAsync(Guid token, CancellationToken ct = default) =>
+        await _db.Guests.FirstOrDefaultAsync(g => g.InvitationToken == token, ct);
+
     public async Task<IReadOnlyList<Guest>> GetAllAsync(CancellationToken ct = default) =>
         await _db.Guests
             .Include(g => g.QuestionnaireResponse)
@@ -35,4 +36,10 @@ public class GuestRepository : IGuestRepository
 
     public async Task<int> CountAsync(CancellationToken ct = default) =>
         await _db.Guests.CountAsync(ct);
+
+    public async Task UpdateAsync(Guest guest, CancellationToken ct = default)
+    {
+        _db.Guests.Update(guest);
+        await _db.SaveChangesAsync(ct);
+    }
 }

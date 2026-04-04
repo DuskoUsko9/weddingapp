@@ -4,6 +4,9 @@ import { View, StyleSheet, Platform } from 'react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { StatusBar } from 'expo-status-bar';
 import { AuthProvider, useAuth } from '../store/AuthContext';
+import { SimulatedTimeProvider } from '../store/SimulatedTimeContext';
+import { ImpersonationProvider } from '../store/ImpersonationContext';
+import { ImpersonationBanner } from '../components/ImpersonationBanner';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,8 +23,9 @@ function RootNavigator() {
     if (isLoading) return;
 
     const inAuth = segments[0] === '(auth)';
+    const inMagicLogin = segments[0] === 'magic-login';
 
-    if (!user && !inAuth) {
+    if (!user && !inAuth && !inMagicLogin) {
       router.replace('/(auth)/login');
     } else if (user && inAuth) {
       if (user.role === 'DJ') {
@@ -39,10 +43,15 @@ export default function RootLayout() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <StatusBar style="dark" backgroundColor="#faf9f6" />
-        <View style={styles.appShell}>
-          <RootNavigator />
-        </View>
+        <SimulatedTimeProvider>
+          <ImpersonationProvider>
+            <StatusBar style="dark" backgroundColor="#faf9f6" />
+            <View style={styles.appShell}>
+              <RootNavigator />
+              <ImpersonationBanner />
+            </View>
+          </ImpersonationProvider>
+        </SimulatedTimeProvider>
       </AuthProvider>
     </QueryClientProvider>
   );

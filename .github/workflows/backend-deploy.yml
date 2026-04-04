@@ -5,32 +5,72 @@ on:
     branches: [main]
     paths:
       - "backend/**"
+      - ".github/workflows/backend-deploy.yml"
 
   workflow_dispatch:
 
+env:
+  IMAGE: ghcr.io/${{ github.repository_owner }}/wedding-app-api
+  CONTAINER_APP: wedding-api
+  RESOURCE_GROUP: wedding-app-rg
+
 jobs:
-  deploy:
-    name: Deploy to Azure App Service
+  build-and-deploy:
+    name: Build & Deploy to Azure Container Apps
     runs-on: ubuntu-latest
-    environment: production
+
+    permissions:
+      contents: read
+      packages: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup .NET 8
-        uses: actions/setup-dotnet@v4
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
         with:
-          dotnet-version: "8.0.x"
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          push: true
+          tags: |
+            ${{ env.IMAGE }}:latest
+            ${{ env.IMAGE }}:${{ github.sha }}
+
+      - name: Log in to Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Configure GHCR registry in Container App
         run: |
-          dotnet publish backend/WeddingApp.Api/WeddingApp.Api.csproj \
-            -c Release -o ./publish
+          az containerapp registry set \
+            --name ${{ env.CONTAINER_APP }} \
+            --resource-group ${{ env.RESOURCE_GROUP }} \
+            --server ghcr.io \
+            --username ${{ github.repository_owner }} \
+            --password ${{ secrets.GHCR_TOKEN }}
 
-      - name: Deploy to Azure App Service
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: ${{ secrets.AZURE_APP_NAME }}
-          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-          package: ./publish
+      - name: Update Container App image and env vars
+        run: |
+          az containerapp update \
+            --name ${{ env.CONTAINER_APP }} \
+            --resource-group ${{ env.RESOURCE_GROUP }} \
+            --image ${{ env.IMAGE }}:${{ github.sha }} \
+            --set-env-vars \
+              "ASPNETCORE_ENVIRONMENT=Production" \
+              "ASPNETCORE_URLS=http://+:8080" \
+              "ConnectionStrings__DefaultConnection=${{ secrets.SQL_CONNECTION_STRING }}" \
+              "Jwt__Secret=${{ secrets.JWT_SECRET }}" \
+              "Jwt__Issuer=WeddingApp" \
+              "Jwt__Audience=WeddingAppUsers" \
+              "Cors__AllowedOrigins__0=${{ secrets.FRONTEND_URL }}" \
+              "Azure__BlobStorage__ConnectionString=${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" \
+              "Azure__BlobStorage__ContainerName=photos"

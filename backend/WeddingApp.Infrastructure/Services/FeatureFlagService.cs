@@ -6,8 +6,13 @@ namespace WeddingApp.Infrastructure.Services;
 public class FeatureFlagService : IFeatureFlagService
 {
     private readonly IFeatureFlagRepository _repo;
+    private readonly ITimeProvider _timeProvider;
 
-    public FeatureFlagService(IFeatureFlagRepository repo) => _repo = repo;
+    public FeatureFlagService(IFeatureFlagRepository repo, ITimeProvider timeProvider)
+    {
+        _repo = repo;
+        _timeProvider = timeProvider;
+    }
 
     public async Task<bool> IsEnabledAsync(string key, string? role = null, CancellationToken ct = default)
     {
@@ -18,6 +23,6 @@ public class FeatureFlagService : IFeatureFlagService
             if (!flag.RolesAllowed.Contains(role, StringComparer.OrdinalIgnoreCase))
                 return false;
 
-        return flag.IsCurrentlyEnabled(DateTime.UtcNow);
+        return flag.IsCurrentlyEnabled(_timeProvider.UtcNow);
     }
 }

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getToken } from '../store/auth';
+import { getSimulatedTime } from '../store/simulatedTime';
 import type { ApiResponse } from '../types/api';
 
 const BASE_URL =
@@ -10,10 +11,14 @@ export const apiClient = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-// Attach JWT to every request
+// Attach JWT and optional time simulation header to every request
 apiClient.interceptors.request.use(async (config) => {
   const token = await getToken();
   if (token) config.headers.Authorization = `Bearer ${token}`;
+
+  const simTime = getSimulatedTime();
+  if (simTime) config.headers['X-Simulate-Time'] = simTime;
+
   return config;
 });
 

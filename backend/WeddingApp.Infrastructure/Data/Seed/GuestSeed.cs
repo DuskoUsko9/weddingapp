@@ -94,7 +94,8 @@ public static class GuestSeed
         int? age,
         AlcoholPreference alcohol,
         GuestCategory category,
-        string guestType = "Standard") => new()
+        string guestType = "Standard",
+        string? email = null) => new()
     {
         FullName = fullName,
         NormalizedName = fullName.ToLowerInvariant(),
@@ -105,5 +106,7 @@ public static class GuestSeed
         Category = category,
         GuestType = guestType,
         IsConfirmed = true,
+        Email = email,
+        InvitationToken = Guid.NewGuid(),
     };
 }

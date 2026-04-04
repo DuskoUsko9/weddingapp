@@ -55,13 +55,16 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
 
-    // Run migrations and seed data on startup in Development
+// Run migrations and seed data on every startup
+{
     using var scope = app.Services.CreateScope();
     var seeder = scope.ServiceProvider.GetRequiredService<DataSeeder>();
     await seeder.SeedAsync();
 }
 
+app.UseStaticFiles(); // serves /uploads/* from wwwroot/uploads/
 app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();

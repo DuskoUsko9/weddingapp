@@ -21,8 +21,13 @@ public class GuestConfiguration : IEntityTypeConfiguration<Guest>
         builder.Property(g => g.GuestType).HasColumnName("guest_type").HasMaxLength(30);
         builder.Property(g => g.Category).HasColumnName("category").HasConversion<string>().HasMaxLength(30);
         builder.Property(g => g.IsConfirmed).HasColumnName("is_confirmed");
+        builder.Property(g => g.Email).HasColumnName("email").HasMaxLength(300);
+        builder.Property(g => g.InvitationToken).HasColumnName("invitation_token");
+        builder.Property(g => g.InvitationSentAt).HasColumnName("invitation_sent_at");
         builder.Property(g => g.CreatedAt).HasColumnName("created_at");
         builder.Property(g => g.UpdatedAt).HasColumnName("updated_at");
+
+        builder.HasIndex(g => g.InvitationToken).IsUnique().HasDatabaseName("idx_guests_invitation_token");
 
         builder.HasOne(g => g.QuestionnaireResponse)
                .WithOne(q => q.Guest)

@@ -15,7 +15,21 @@
       "Bash(taskkill:*)",
       "Bash(cmd /c \"netstat -aon | findstr LISTEN | findstr 8081\" 2>&1)",
       "Bash(docker exec:*)",
-      "Bash(curl -s \"http://localhost:3000/index.ts.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app&unstable_transformProfile=hermes-stable\")"
+      "Bash(curl -s \"http://localhost:3000/index.ts.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app&unstable_transformProfile=hermes-stable\")",
+      "Bash(npx tsc:*)",
+      "Bash(find D:/WeddingApp/backend/WeddingApp.Domain -name \"BaseEntity.cs\" -exec cat {} \\\\;)",
+      "Bash(xargs cat:*)",
+      "Bash(find D:/WeddingApp/backend/WeddingApp.Infrastructure -name \"*.csproj\" -exec cat {} \\\\;)",
+      "Bash(curl -s http://localhost:5000/api/v1/feature-flags -H \"Authorization: Bearer test\")",
+      "Bash(curl -sv http://localhost:5000/api/v1/feature-flags)",
+      "Bash(curl -s -X POST http://localhost:5000/api/v1/auth/login -H 'Content-Type: application/json' -d '{\"name\":\"maduadmin\"}')",
+      "Read(//tmp/**)",
+      "Bash(curl -s -X POST http://localhost:5000/api/v1/admin/impersonate -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW0tYWRtaW4iLCJuYW1lIjoiQWRtaW4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImp0aSI6ImU2MzQzMGY3LTViZmUtNDYyMS1hZWQ2LWU5YzM1MDgzNjNlMCIsImV4cCI6MTc3NTg0ODk4NiwiaXNzIjoiV2VkZGluZ0FwcCIsImF1ZCI6IldlZGRpbmdBcHBVc2VycyJ9.5vBKvXZ8pgiWJBoBwmsGPPWB0bgIFMCv5xfHSXTZwqg' -H 'Content-Type: application/json' -d '{\"guestId\":\"3494a1bb-a7d1-4339-bbf9-22c8fdc0fd5a\"}')",
+      "Bash(docker cp:*)",
+      "Bash(docker-compose up:*)",
+      "Bash(curl -s http://localhost:5000/api/v1/feature-flags)",
+      "Bash(dir:*)",
+      "Bash(docker volume:*)"
     ]
   }
 }

@@ -23,7 +23,7 @@ public static class DependencyInjection
     {
         // Database
         services.AddDbContext<WeddingAppDbContext>(opts =>
-            opts.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+            opts.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
         // Repositories
         services.AddScoped<IGuestRepository, GuestRepository>();
@@ -35,6 +35,10 @@ public static class DependencyInjection
         services.AddScoped<IStaticContentRepository, StaticContentRepository>();
         services.AddScoped<ILoveStoryRepository, LoveStoryRepository>();
         services.AddScoped<IBingoChallengeRepository, BingoChallengeRepository>();
+        services.AddScoped<IPhotoRepository, PhotoRepository>();
+        services.AddScoped<IGuestBingoProgressRepository, GuestBingoProgressRepository>();
+        services.AddScoped<ISeatingRepository, SeatingRepository>();
+        services.AddScoped<IThankYouMessageRepository, ThankYouMessageRepository>();
 
         // Services
         services.AddScoped<IJwtService, JwtService>();
@@ -42,6 +46,13 @@ public static class DependencyInjection
         services.AddScoped<ISongRequestNotifier, SongRequestNotifier>();
         services.AddHttpContextAccessor();
         services.AddScoped<ICurrentUserService, CurrentUserService>();
+        services.AddScoped<ITimeProvider, SimulationAwareTimeProvider>();
+        if (configuration["Azure:BlobStorage:ConnectionString"] is not null)
+            services.AddScoped<IFileStorageService, AzureBlobStorageService>();
+        else
+            services.AddScoped<IFileStorageService, LocalFileStorageService>();
+        services.AddScoped<IEmailService, SmtpEmailService>();
+        services.AddScoped<IInvitationLinkBuilder, InvitationLinkBuilder>();
 
         // Seed
         services.AddScoped<DataSeeder>();

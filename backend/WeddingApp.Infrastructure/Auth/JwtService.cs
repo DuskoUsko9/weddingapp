@@ -23,7 +23,7 @@ public class JwtService : IJwtService
         _expiryDays = int.TryParse(config["Jwt:ExpiryDays"], out var days) ? days : 7;
     }
 
-    public string GenerateToken(Guid? guestId, string name, UserRole role)
+    public string GenerateToken(Guid? guestId, string name, UserRole role, bool testSession = false)
     {
         var claims = new List<Claim>
         {
@@ -35,6 +35,9 @@ public class JwtService : IJwtService
 
         if (guestId.HasValue)
             claims.Add(new Claim("guestId", guestId.Value.ToString()));
+
+        if (testSession)
+            claims.Add(new Claim("test_session", "1"));
 
         var key   = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secret));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

@@ -1,37 +1,22 @@
 services:
-  postgres:
-    image: postgres:16-alpine
-    container_name: wedding_postgres
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: wedding_sqlserver
     restart: unless-stopped
     environment:
-      POSTGRES_DB: weddingapp
-      POSTGRES_USER: wedding
-      POSTGRES_PASSWORD: wedding123
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Wedding@Local123"
+      MSSQL_PID: "Express"
     ports:
-      - "5432:5432"
+      - "1433:1433"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - sqlserver_data:/var/opt/mssql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U wedding -d weddingapp"]
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'Wedding@Local123' -Q 'SELECT 1' -No -C || exit 1"]
       interval: 10s
       timeout: 5s
-      retries: 5
-
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    container_name: wedding_pgadmin
-    restart: unless-stopped
-    environment:
-      PGADMIN_DEFAULT_EMAIL: dusan.hudcovic@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: admin123
-      PGADMIN_CONFIG_SERVER_MODE: "False"
-    ports:
-      - "5050:80"
-    depends_on:
-      postgres:
-        condition: service_healthy
-    volumes:
-      - pgadmin_data:/var/lib/pgadmin
+      retries: 10
+      start_period: 30s
 
   api:
     build:
@@ -42,7 +27,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: http://+:5000
-      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=weddingapp;Username=wedding;Password=wedding123"
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Initial Catalog=weddingapp;User ID=sa;Password=Wedding@Local123;MultipleActiveResultSets=True;Encrypt=False;TrustServerCertificate=True;"
       Jwt__Secret: "local-dev-secret-minimum-32-chars-long!"
       Jwt__Issuer: "WeddingApp"
       Jwt__Audience: "WeddingAppUsers"
@@ -53,7 +38,7 @@ services:
     ports:
       - "5000:5000"
     depends_on:
-      postgres:
+      sqlserver:
         condition: service_healthy
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:5000/swagger/index.html || exit 1"]
@@ -72,7 +57,6 @@ services:
       - frontend_node_modules:/app/node_modules
     environment:
       EXPO_NO_TELEMETRY: "1"
-      # API is on the host's localhost:5000, accessible from the browser
       EXPO_PUBLIC_API_URL: "http://localhost:5000/api/v1"
       EXPO_PUBLIC_SIGNALR_URL: "http://localhost:5000"
     ports:
@@ -83,6 +67,5 @@ services:
         condition: service_healthy
 
 volumes:
-  postgres_data:
-  pgadmin_data:
+  sqlserver_data:
   frontend_node_modules:
