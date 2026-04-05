@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -12,12 +12,142 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Feather } from '@expo/vector-icons';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withRepeat,
+  withSequence,
+  withTiming,
+  Easing,
+} from 'react-native-reanimated';
 import { useRouter } from 'expo-router';
 import { useAuth } from '../../store/AuthContext';
 import { apiClient } from '../../services/api';
 import { Colors, Typography, Spacing, Radius, Shadow } from '../../constants/theme';
 import { Copy } from '../../constants/copy';
 import type { LoginResponse, GuestMatch } from '../../types/api';
+
+// ── Animated hero badge ──────────────────────────────────────────────────────
+function HeroBadge() {
+  const ring1 = useSharedValue(0.8);
+  const ring2 = useSharedValue(0.65);
+  const ring3 = useSharedValue(0.5);
+  const heartScale = useSharedValue(1);
+
+  useEffect(() => {
+    ring1.value = withRepeat(
+      withSequence(
+        withTiming(1, { duration: 3000, easing: Easing.inOut(Easing.ease) }),
+        withTiming(0.8, { duration: 3000, easing: Easing.inOut(Easing.ease) }),
+      ), -1,
+    );
+    ring2.value = withRepeat(
+      withSequence(
+        withTiming(0.85, { duration: 2500, easing: Easing.inOut(Easing.ease) }),
+        withTiming(0.65, { duration: 2500, easing: Easing.inOut(Easing.ease) }),
+      ), -1,
+    );
+    ring3.value = withRepeat(
+      withSequence(
+        withTiming(0.7, { duration: 2000, easing: Easing.inOut(Easing.ease) }),
+        withTiming(0.5, { duration: 2000, easing: Easing.inOut(Easing.ease) }),
+      ), -1,
+    );
+    heartScale.value = withRepeat(
+      withSequence(
+        withTiming(1.2, { duration: 600, easing: Easing.out(Easing.quad) }),
+        withTiming(1, { duration: 500, easing: Easing.in(Easing.quad) }),
+        withTiming(1.1, { duration: 400, easing: Easing.out(Easing.quad) }),
+        withTiming(1, { duration: 400, easing: Easing.in(Easing.quad) }),
+        withTiming(1, { duration: 1600 }),
+      ), -1,
+    );
+  }, []);
+
+  const r1Style = useAnimatedStyle(() => ({
+    opacity: ring1.value * 0.15,
+    transform: [{ scale: ring1.value }],
+  }));
+  const r2Style = useAnimatedStyle(() => ({
+    opacity: ring2.value * 0.2,
+    transform: [{ scale: ring2.value }],
+  }));
+  const r3Style = useAnimatedStyle(() => ({
+    opacity: ring3.value * 0.25,
+    transform: [{ scale: ring3.value }],
+  }));
+  const heartStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: heartScale.value }],
+  }));
+
+  return (
+    <View style={badge.container}>
+      <Animated.View style={[badge.ring, badge.ring3, r3Style]} />
+      <Animated.View style={[badge.ring, badge.ring2, r2Style]} />
+      <Animated.View style={[badge.ring, badge.ring1, r1Style]} />
+      <LinearGradient
+        colors={['#fedf9f', '#e0c385', '#c0a469']}
+        start={{ x: 0.2, y: 0 }}
+        end={{ x: 0.8, y: 1 }}
+        style={badge.core}
+      >
+        <Text style={badge.monogram}>M&D</Text>
+      </LinearGradient>
+      <Animated.View style={[badge.heartBadge, heartStyle]}>
+        <Text style={badge.heartText}>♥</Text>
+      </Animated.View>
+    </View>
+  );
+}
+
+const badge = StyleSheet.create({
+  container: {
+    width: 160,
+    height: 160,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: Spacing.lg,
+  },
+  ring: {
+    position: 'absolute',
+    borderRadius: Radius.full,
+    borderWidth: 1.5,
+    borderColor: Colors.primaryContainer,
+  },
+  ring1: { width: 160, height: 160 },
+  ring2: { width: 200, height: 200 },
+  ring3: { width: 240, height: 240 },
+  core: {
+    width: 110,
+    height: 110,
+    borderRadius: Radius.full,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  monogram: {
+    fontFamily: Typography.headingItalic,
+    fontSize: 28,
+    color: '#3d2a00',
+    letterSpacing: 2,
+  },
+  heartBadge: {
+    position: 'absolute',
+    bottom: 18,
+    right: 18,
+    width: 28,
+    height: 28,
+    borderRadius: Radius.full,
+    backgroundColor: Colors.background,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: Colors.primary,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 4,
+  },
+  heartText: { fontSize: 14, color: '#c0504d', lineHeight: 16 },
+});
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -112,15 +242,31 @@ export default function LoginScreen() {
 
         {/* ── Hero ────────────────────────────────────────────── */}
         <LinearGradient
-          colors={[Colors.surfaceContainerLow, Colors.background]}
+          colors={['#2a1f0a', '#4a3515', '#725b28', Colors.background]}
+          start={{ x: 0.1, y: 0 }}
+          end={{ x: 0.9, y: 1 }}
           style={s.hero}
         >
-          <View style={s.monogramRing}>
-            <Text style={s.monogramInner}>M&D</Text>
+          {/* Decorative dots texture */}
+          <View style={s.heroPattern} pointerEvents="none">
+            {Array.from({ length: 24 }).map((_, i) => (
+              <View key={i} style={s.heroDot} />
+            ))}
           </View>
+
+          {/* Decorative corner flourishes */}
+          <Text style={[s.flourish, s.flourishTL]}>✦</Text>
+          <Text style={[s.flourish, s.flourishTR]}>✦</Text>
+
+          <HeroBadge />
           <Text style={s.brand}>{Copy.auth.brand}</Text>
           <Text style={s.couple}>Maťka {'&'} Dušan</Text>
-          <Text style={s.heroDate}>5. september 2026</Text>
+          <View style={s.heroDivRow}>
+            <View style={s.heroDivLine} />
+            <Text style={s.heroDivDots}>✦</Text>
+            <View style={s.heroDivLine} />
+          </View>
+          <Text style={s.heroDate}>5. september 2026 · Šúrovce</Text>
         </LinearGradient>
 
         {/* ── Form ────────────────────────────────────────────── */}
@@ -199,42 +345,62 @@ const s = StyleSheet.create({
   // Hero
   hero: {
     alignItems: 'center',
-    paddingTop: Spacing.gallery,
+    paddingTop: 64,
     paddingBottom: Spacing.xl,
     paddingHorizontal: Spacing.xl,
+    overflow: 'hidden',
   },
-  monogramRing: {
-    width: 64,
-    height: 64,
-    borderRadius: Radius.full,
-    backgroundColor: Colors.primaryFixed,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: Spacing.md,
+  heroPattern: {
+    position: 'absolute',
+    top: 0, left: 0, right: 0, bottom: 0,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    opacity: 0.035,
   },
-  monogramInner: {
-    fontFamily: Typography.heading,
-    fontSize: 16,
-    color: Colors.primary,
+  heroDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: '#fff',
+    margin: 14,
   },
+  flourish: {
+    position: 'absolute',
+    fontSize: 18,
+    color: 'rgba(255,255,255,0.25)',
+  },
+  flourishTL: { top: 20, left: 20 },
+  flourishTR: { top: 20, right: 20 },
   brand: {
     fontFamily: Typography.headingItalic,
     fontSize: 52,
-    color: Colors.primary,
+    color: '#fff',
     letterSpacing: 2,
     lineHeight: 60,
+    textShadowColor: 'rgba(0,0,0,0.3)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 8,
   },
   couple: {
     fontFamily: Typography.headingRegular,
     fontSize: 18,
-    color: Colors.onSurface,
+    color: 'rgba(255,255,255,0.85)',
     marginTop: Spacing.xs,
     letterSpacing: 0.5,
   },
+  heroDivRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.sm,
+    width: '60%',
+    marginVertical: Spacing.sm,
+  },
+  heroDivLine: { flex: 1, height: 1, backgroundColor: 'rgba(255,255,255,0.3)' },
+  heroDivDots: { color: 'rgba(255,255,255,0.5)', fontSize: 10, letterSpacing: 4 },
   heroDate: {
     fontFamily: Typography.body,
     fontSize: 13,
-    color: Colors.onSurfaceVariant,
+    color: 'rgba(255,255,255,0.6)',
     marginTop: 4,
     letterSpacing: 0.3,
   },

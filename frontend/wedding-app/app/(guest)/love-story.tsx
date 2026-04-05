@@ -118,7 +118,19 @@ export default function LoveStoryScreen() {
                       style={s.eventImage}
                       resizeMode="cover"
                     />
-                  ) : null}
+                  ) : (
+                    <LinearGradient
+                      colors={[dotColor + '22', dotColor + '08']}
+                      style={s.imagePlaceholder}
+                    >
+                      <Text style={s.imagePlaceholderEmoji}>
+                        {idx === 0 ? '💬' : idx % 3 === 1 ? '✈️' : idx % 3 === 2 ? '💑' : '📸'}
+                      </Text>
+                      <Text style={[s.imagePlaceholderText, { color: dotColor }]}>
+                        {event.title}
+                      </Text>
+                    </LinearGradient>
+                  )}
                   {isLast && (
                     <View style={s.lastBadge}>
                       <Text style={s.lastBadgeText}>♥ Pokračovanie nasleduje…</Text>
@@ -270,6 +282,22 @@ const s = StyleSheet.create({
     borderRadius: Radius.sm,
     marginTop: Spacing.sm,
     backgroundColor: Colors.surfaceContainerLow,
+  },
+  imagePlaceholder: {
+    width: '100%',
+    height: 100,
+    borderRadius: Radius.sm,
+    marginTop: Spacing.sm,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 4,
+  },
+  imagePlaceholderEmoji: { fontSize: 28 },
+  imagePlaceholderText: {
+    fontFamily: Typography.headingItalic,
+    fontSize: 13,
+    textAlign: 'center',
+    opacity: 0.7,
   },
   lastBadge: {
     marginTop: Spacing.md,

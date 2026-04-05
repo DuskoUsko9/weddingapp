@@ -1,10 +1,41 @@
 import { View, Text, ScrollView, StyleSheet, ActivityIndicator } from 'react-native';
 import { useQuery } from '@tanstack/react-query';
 import { Feather } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { apiClient } from '../../services/api';
 import { Colors, Typography, Spacing, Radius, Shadow } from '../../constants/theme';
 import { Copy } from '../../constants/copy';
 import type { StaticContent } from '../../types/api';
+
+// Tiny star field component
+function StarField() {
+  const stars = [
+    { top: 12, left: '15%', size: 3 }, { top: 25, right: '20%', size: 2 },
+    { top: 8, left: '60%', size: 2 }, { top: 40, left: '40%', size: 3 },
+    { top: 18, right: '5%', size: 2 }, { top: 50, left: '8%', size: 2 },
+    { top: 35, right: '35%', size: 2 }, { top: 60, left: '75%', size: 3 },
+    { top: 5, left: '80%', size: 2 }, { top: 70, left: '25%', size: 2 },
+  ];
+  return (
+    <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }} pointerEvents="none">
+      {stars.map((s, i) => (
+        <View
+          key={i}
+          style={{
+            position: 'absolute',
+            top: s.top as any,
+            left: (s as any).left,
+            right: (s as any).right,
+            width: s.size,
+            height: s.size,
+            borderRadius: s.size / 2,
+            backgroundColor: 'rgba(255,255,255,0.7)',
+          }}
+        />
+      ))}
+    </View>
+  );
+}
 
 export default function AccommodationScreen() {
   const { data, isLoading } = useQuery<StaticContent>({
@@ -19,45 +50,65 @@ export default function AccommodationScreen() {
   const meta = (data?.metadata as any) ?? {};
 
   return (
-    <ScrollView style={s.scroll} contentContainerStyle={s.content}>
+    <ScrollView style={s.scroll} contentContainerStyle={s.content} showsVerticalScrollIndicator={false}>
 
-      {/* ── Hero header ───────────────────────────────────────── */}
-      <View style={s.hero}>
-        <View style={s.iconWrap}>
-          <Feather name="home" size={28} color={Colors.secondary} />
+      {/* ── Venue hero ────────────────────────────────────────── */}
+      <LinearGradient
+        colors={['#0d1a1a', '#1a2e28', '#2a4a3a']}
+        start={{ x: 0.1, y: 0 }}
+        end={{ x: 0.9, y: 1 }}
+        style={s.hero}
+      >
+        <StarField />
+
+        {/* Moon + building illustration */}
+        <View style={s.illustration}>
+          <Text style={s.moonEmoji}>🌙</Text>
+          <View style={s.buildingRow}>
+            <Text style={s.buildingEmoji}>🏡</Text>
+          </View>
         </View>
-        <Text style={s.title}>{data?.title ?? Copy.accommodation.title}</Text>
-        <Text style={s.venue}>{Copy.accommodation.venue}</Text>
-      </View>
+
+        <Text style={s.heroTitle}>{data?.title ?? Copy.accommodation.title}</Text>
+        <Text style={s.heroVenue}>{Copy.accommodation.venue}</Text>
+
+        {/* Check-in badge */}
+        <View style={s.checkInBadge}>
+          <Text style={s.checkInEmoji}>🗓️</Text>
+          <Text style={s.checkInText}>{Copy.accommodation.checkIn}</Text>
+        </View>
+      </LinearGradient>
 
       {/* ── Info chips ────────────────────────────────────────── */}
       <View style={s.chips}>
-        <View style={s.chip}>
-          <Feather name="calendar" size={14} color={Colors.primary} />
-          <Text style={s.chipText}>{Copy.accommodation.checkIn}</Text>
-        </View>
-        {meta.breakfastIncluded === false && (
-          <View style={s.chip}>
-            <Feather name="info" size={14} color={Colors.onSurfaceVariant} />
-            <Text style={[s.chipText, { color: Colors.onSurfaceVariant }]}>Raňajky nie sú v cene</Text>
+        {[
+          { emoji: '🛏️', label: 'Ubytovanie priamo na mieste' },
+          ...(meta.breakfastIncluded === false
+            ? [{ emoji: 'ℹ️', label: 'Raňajky nie sú v cene' }]
+            : [{ emoji: '🥐', label: 'Raňajky v cene' }]),
+          ...(meta.note ? [{ emoji: 'ℹ️', label: meta.note }] : []),
+        ].map(({ emoji, label }) => (
+          <View key={label} style={s.chip}>
+            <Text style={s.chipEmoji}>{emoji}</Text>
+            <Text style={s.chipText}>{label}</Text>
           </View>
-        )}
-        {meta.note && (
-          <View style={s.chip}>
-            <Feather name="info" size={14} color={Colors.onSurfaceVariant} />
-            <Text style={[s.chipText, { color: Colors.onSurfaceVariant }]}>{meta.note}</Text>
-          </View>
-        )}
+        ))}
       </View>
 
       {/* ── Content card ─────────────────────────────────────── */}
-      <View style={s.card}>
-        <Text style={s.body}>{data?.content}</Text>
-      </View>
+      {data?.content ? (
+        <View style={s.card}>
+          <View style={s.cardIconRow}>
+            <Feather name="home" size={16} color={Colors.secondary} />
+            <Text style={s.cardLabel}>O ubytovaní</Text>
+          </View>
+          <Text style={s.body}>{data.content}</Text>
+        </View>
+      ) : null}
 
       {/* ── Info banner ──────────────────────────────────────── */}
       <View style={s.infoBanner}>
-        <Feather name="phone" size={14} color="#4d3a08" />
+        <Text style={s.bannerEmoji}>📞</Text>
         <Text style={s.infoText}>
           Pre detaily o izbe kontaktujte organizátorov svadby.
         </Text>
@@ -73,49 +124,71 @@ const s = StyleSheet.create({
   center: { flex: 1, alignItems: 'center', justifyContent: 'center' },
 
   hero: {
-    paddingTop: Spacing.gallery,
+    paddingTop: 56,
+    paddingBottom: Spacing.xl,
     paddingHorizontal: Spacing.md,
-    paddingBottom: Spacing.lg,
     alignItems: 'center',
+    overflow: 'hidden',
+    minHeight: 260,
+    justifyContent: 'flex-end',
   },
-  iconWrap: {
-    width: 72,
-    height: 72,
-    borderRadius: Radius.full,
-    backgroundColor: Colors.secondaryContainer,
+  illustration: {
     alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: Spacing.md,
+    marginBottom: Spacing.sm,
   },
-  title: {
+  moonEmoji: { fontSize: 32, marginBottom: -8 },
+  buildingRow: { flexDirection: 'row', alignItems: 'flex-end', gap: 4 },
+  buildingEmoji: { fontSize: 48 },
+  heroTitle: {
     fontFamily: Typography.heading,
-    fontSize: 32,
-    color: Colors.onSurface,
+    fontSize: 28,
+    color: '#fff',
     textAlign: 'center',
     letterSpacing: 0.2,
+    textShadowColor: 'rgba(0,0,0,0.4)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 8,
     marginBottom: Spacing.xs,
   },
-  venue: {
+  heroVenue: {
     fontFamily: Typography.body,
-    fontSize: 14,
-    color: Colors.onSurfaceVariant,
+    fontSize: 13,
+    color: 'rgba(255,255,255,0.65)',
     textAlign: 'center',
+    marginBottom: Spacing.md,
+  },
+  checkInBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.sm,
+    backgroundColor: 'rgba(255,255,255,0.12)',
+    borderRadius: Radius.full,
+    paddingHorizontal: Spacing.md,
+    paddingVertical: 7,
+  },
+  checkInEmoji: { fontSize: 14 },
+  checkInText: {
+    fontFamily: Typography.bodyMedium,
+    fontSize: 13,
+    color: 'rgba(255,255,255,0.85)',
   },
 
   chips: {
     paddingHorizontal: Spacing.md,
+    paddingTop: Spacing.md,
     gap: Spacing.sm,
     marginBottom: Spacing.md,
   },
   chip: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: Spacing.sm,
+    gap: Spacing.md,
     backgroundColor: Colors.primaryFixed,
     borderRadius: Radius.md,
     paddingHorizontal: Spacing.md,
     paddingVertical: Spacing.sm,
   },
+  chipEmoji: { fontSize: 18 },
   chipText: {
     fontFamily: Typography.bodyMedium,
     fontSize: 13,
@@ -130,6 +203,19 @@ const s = StyleSheet.create({
     marginHorizontal: Spacing.md,
     marginBottom: Spacing.md,
     ...Shadow.card,
+  },
+  cardIconRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.sm,
+    marginBottom: Spacing.sm,
+  },
+  cardLabel: {
+    fontFamily: Typography.bodySemiBold,
+    fontSize: 13,
+    color: Colors.secondary,
+    textTransform: 'uppercase',
+    letterSpacing: 1,
   },
   body: {
     fontFamily: Typography.body,
@@ -147,6 +233,7 @@ const s = StyleSheet.create({
     padding: Spacing.md,
     marginHorizontal: Spacing.md,
   },
+  bannerEmoji: { fontSize: 18 },
   infoText: {
     fontFamily: Typography.body,
     fontSize: 13,

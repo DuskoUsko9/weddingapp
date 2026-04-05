@@ -1,11 +1,73 @@
+import { useEffect } from 'react';
 import { View, Text, Image, ScrollView, StyleSheet, ActivityIndicator } from 'react-native';
 import { useQuery } from '@tanstack/react-query';
 import { Feather } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withRepeat,
+  withSequence,
+  withTiming,
+  Easing,
+} from 'react-native-reanimated';
 import { Colors, Typography, Spacing, Radius, Shadow } from '../../constants/theme';
 import { Copy } from '../../constants/copy';
 import { useFeatureFlag } from '../../hooks/useFeatureFlag';
 import { apiClient } from '../../services/api';
 import type { ThankYouMessage } from '../../types/api';
+
+const HEART_CONFIGS = [
+  { left: '10%', size: 12, color: '#ffb3ba', delay: 0 },
+  { left: '30%', size: 8, color: '#c0504d', delay: 300 },
+  { left: '55%', size: 14, color: '#ffb3ba', delay: 600 },
+  { left: '75%', size: 10, color: '#c0504d', delay: 900 },
+  { left: '88%', size: 8, color: '#ffb3ba', delay: 1200 },
+];
+
+function FloatingHeart({ cfg }: { cfg: typeof HEART_CONFIGS[0] }) {
+  const progress = useSharedValue(0);
+  useEffect(() => {
+    // stagger start
+    const timer = setTimeout(() => {
+      progress.value = withRepeat(
+        withSequence(
+          withTiming(1, { duration: 2200, easing: Easing.out(Easing.ease) }),
+          withTiming(0, { duration: 100 }),
+        ),
+        -1,
+      );
+    }, cfg.delay);
+    return () => clearTimeout(timer);
+  }, []);
+  const style = useAnimatedStyle(() => ({
+    transform: [{ translateY: -progress.value * 100 }],
+    opacity: progress.value < 0.7 ? progress.value / 0.7 : (1 - progress.value) / 0.3,
+  }));
+  return (
+    <Animated.Text
+      style={[{
+        position: 'absolute',
+        bottom: 20,
+        left: cfg.left as any,
+        fontSize: cfg.size,
+        color: cfg.color,
+      }, style]}
+    >
+      ♥
+    </Animated.Text>
+  );
+}
+
+function FloatingHearts() {
+  return (
+    <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden' }} pointerEvents="none">
+      {HEART_CONFIGS.map((cfg, i) => (
+        <FloatingHeart key={i} cfg={cfg} />
+      ))}
+    </View>
+  );
+}
 
 export default function ThankYouScreen() {
   const { isEnabled, isLoading: flagLoading } = useFeatureFlag('thank_you');
@@ -65,17 +127,50 @@ export default function ThankYouScreen() {
   return (
     <ScrollView style={s.scroll} contentContainerStyle={s.content} showsVerticalScrollIndicator={false}>
 
-      {/* Header */}
-      <View style={s.hero}>
-        <View style={[s.iconWrap, s.iconWrapActive]}>
-          <Feather name="heart" size={28} color={Colors.primary} />
+      {/* ── Envelope hero ─────────────────────────────────────── */}
+      <LinearGradient
+        colors={[Colors.primaryFixed, '#fedf9f', Colors.background]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
+        style={s.hero}
+      >
+        <FloatingHearts />
+
+        {/* Wax seal */}
+        <View style={s.waxSeal}>
+          <LinearGradient
+            colors={[Colors.primary, '#4d3a08']}
+            style={s.waxSealInner}
+          >
+            <Text style={s.waxSealText}>M&D</Text>
+          </LinearGradient>
+          {/* Seal rays */}
+          {Array.from({ length: 8 }).map((_, i) => (
+            <View
+              key={i}
+              style={[s.waxRay, { transform: [{ rotate: `${i * 45}deg` }] }]}
+            />
+          ))}
         </View>
+
         <Text style={s.heroTitle}>{Copy.thankYou.title}</Text>
         <Text style={s.heroSub}>od Maťky a Dušana</Text>
-      </View>
 
-      {/* Message card */}
+        {/* Decorative envelope flap */}
+        <View style={s.envelopeFlap}>
+          <View style={s.flapLeft} />
+          <View style={s.flapRight} />
+        </View>
+      </LinearGradient>
+
+      {/* ── Message card (letter paper style) ─────────────────── */}
       <View style={s.card}>
+        {/* Corner decorations */}
+        <Text style={[s.corner, s.cornerTL]}>✦</Text>
+        <Text style={[s.corner, s.cornerTR]}>✦</Text>
+        <Text style={[s.corner, s.cornerBL]}>✦</Text>
+        <Text style={[s.corner, s.cornerBR]}>✦</Text>
+
         {message.photoUrl ? (
           <Image
             source={{ uri: message.photoUrl }}
@@ -152,9 +247,43 @@ const s = StyleSheet.create({
 
   hero: {
     alignItems: 'center',
-    paddingTop: Spacing.xl,
+    paddingTop: 56,
     paddingHorizontal: Spacing.xl,
-    paddingBottom: Spacing.lg,
+    paddingBottom: 0,
+    overflow: 'hidden',
+    minHeight: 240,
+    justifyContent: 'flex-end',
+  },
+  // Wax seal
+  waxSeal: {
+    width: 80,
+    height: 80,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: Spacing.md,
+  },
+  waxSealInner: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 2,
+    ...Shadow.card,
+  },
+  waxSealText: {
+    fontFamily: Typography.headingItalic,
+    fontSize: 16,
+    color: '#fedf9f',
+    letterSpacing: 1,
+  },
+  waxRay: {
+    position: 'absolute',
+    width: 80,
+    height: 4,
+    backgroundColor: Colors.primaryContainer,
+    borderRadius: 2,
+    opacity: 0.4,
   },
   heroTitle: {
     fontFamily: Typography.heading,
@@ -168,15 +297,52 @@ const s = StyleSheet.create({
     fontSize: 14,
     color: Colors.onSurfaceVariant,
     fontStyle: 'italic',
+    marginBottom: Spacing.lg,
+  },
+  // Envelope flap decorations
+  envelopeFlap: {
+    flexDirection: 'row',
+    width: '100%',
+    height: 32,
+    marginTop: Spacing.sm,
+  },
+  flapLeft: {
+    flex: 1,
+    borderTopWidth: 32,
+    borderTopColor: Colors.background,
+    borderRightWidth: 0,
+    borderRightColor: 'transparent',
+    borderLeftWidth: 0,
+    borderLeftColor: 'transparent',
+    // CSS trick for triangle not available in RN, use opacity overlay instead
+    opacity: 0.7,
+  },
+  flapRight: {
+    flex: 1,
+    borderTopWidth: 32,
+    borderTopColor: Colors.background,
+    opacity: 0.7,
   },
 
   card: {
     marginHorizontal: Spacing.md,
+    marginTop: Spacing.lg,
     backgroundColor: Colors.surface,
     borderRadius: Radius.card,
     overflow: 'hidden',
     ...Shadow.card,
   },
+  // Corner ornaments
+  corner: {
+    position: 'absolute',
+    fontSize: 14,
+    color: Colors.primaryContainer,
+    zIndex: 1,
+  },
+  cornerTL: { top: 12, left: 12 },
+  cornerTR: { top: 12, right: 12 },
+  cornerBL: { bottom: 12, left: 12 },
+  cornerBR: { bottom: 12, right: 12 },
   photo: {
     width: '100%',
     height: 220,
@@ -193,24 +359,25 @@ const s = StyleSheet.create({
     fontFamily: Typography.body,
     fontSize: 16,
     color: Colors.onSurface,
-    lineHeight: 26,
+    lineHeight: 28,
     padding: Spacing.lg,
     paddingTop: Spacing.md,
+    letterSpacing: 0.2,
   },
   signature: {
     paddingHorizontal: Spacing.lg,
-    paddingBottom: Spacing.lg,
+    paddingBottom: Spacing.xl,
+    alignItems: 'flex-end',
   },
   signatureText: {
-    fontFamily: Typography.body,
-    fontSize: 14,
+    fontFamily: Typography.headingItalic,
+    fontSize: 16,
     color: Colors.onSurfaceVariant,
-    fontStyle: 'italic',
   },
   signatureName: {
     fontFamily: Typography.heading,
-    fontSize: 18,
+    fontSize: 20,
     color: Colors.primary,
-    marginTop: 2,
+    marginTop: 4,
   },
 });
