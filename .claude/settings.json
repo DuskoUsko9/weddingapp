@@ -1,0 +1,41 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "powershell",
+            "command": "$data = [Console]::In.ReadToEnd() | ConvertFrom-Json; if ($data.tool_input.file_path -match 'Application.*(Dto|Response|Request|Command|Query).*\\.cs$') { '{\"systemMessage\":\"Backend DTO/Command/Query zmenene — over ci frontend/wedding-app/types/api.ts je synchronizovany\"}' }",
+            "statusMessage": "Kontrolujem DTO sync..."
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "powershell",
+            "command": "$data = [Console]::In.ReadToEnd() | ConvertFrom-Json; $cmd = $data.tool_input.command; if ($cmd -match 'git push.*(--force|\\s-f(\\s|$))') { '{\"continue\":false,\"stopReason\":\"Force push je zablokovany — pouzij feature branch a PR.\"}' }"
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(dotnet:*)",
+      "Bash(git log:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git branch:*)",
+      "Bash(docker:*)",
+      "Bash(npx:*)",
+      "Bash(npm:*)"
+    ]
+  }
+}
